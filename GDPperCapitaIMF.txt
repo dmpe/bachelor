@@ -1,0 +1,192 @@
+Country	Subject Descriptor	Units	Scale	2015	Estimates Start After
+Afghanistan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,051.051	2012
+Albania	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,688.926	2010
+Algeria	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	14,802.350	2013
+Angola	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,573.325	2000
+Antigua and Barbuda	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	23,071.329	2009
+Argentina	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	21,924.287	2010
+Armenia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,748.051	2011
+Australia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	48,288.434	2013
+Austria	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	46,906.123	2013
+Azerbaijan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	18,913.511	2011
+The Bahamas	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,793.621	2013
+Bahrain	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	52,830.013	2012
+Bangladesh	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,631.192	2013
+Barbados	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	16,500.311	2010
+Belarus	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	18,882.480	2013
+Belgium	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	42,923.152	2013
+Belize	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,338.986	2013
+Benin	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,957.781	2011
+Bhutan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,252.828	0
+Bolivia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	6,530.170	2011
+Bosnia and Herzegovina	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	10,359.603	2012
+Botswana	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	16,758.305	2008
+Brazil	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,518.768	2013
+Brunei Darussalam	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	80,335.271	2012
+Bulgaria	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	17,869.224	2012
+Burkina Faso	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,824.616	2011
+Burundi	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	951.098	0
+Cabo Verde	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	6,569.821	2011
+Cambodia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,533.626	2012
+Cameroon	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,116.662	2010
+Canada	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	45,981.989	2013
+Central African Republic	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	639.937	2004
+Chad	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,805.094	2004
+Chile	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	24,170.029	2002
+China	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	13,992.690	2013
+Colombia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	14,164.426	2009
+Comoros	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,735.128	2003
+Democratic Republic of the Congo	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	753.907	1983
+Republic of Congo	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,038.161	2004
+Costa Rica	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,534.031	2011
+Côte d'Ivoire	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,096.649	2009
+Croatia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	20,873.014	2013
+Cyprus	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	28,329.382	2013
+Czech Republic	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	29,658.728	2013
+Denmark	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	45,800.361	2013
+Djibouti	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,181.675	1999
+Dominica	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,029.395	2011
+Dominican Republic	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	13,347.969	2013
+Ecuador	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,839.194	2010
+Egypt	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,443.890	2013
+El Salvador	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,275.839	2007
+Equatorial Guinea	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	29,735.423	2010
+Eritrea	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,210.153	2006
+Estonia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	27,729.440	2013
+Ethiopia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,656.441	2008
+Fiji	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,553.950	2012
+Finland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	41,393.814	2013
+France	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	41,396.014	2013
+Gabon	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	22,878.984	0
+The Gambia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,849.985	2010
+Georgia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,222.767	2013
+Germany	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	46,165.857	2013
+Ghana	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	4,338.272	0
+Greece	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	27,008.050	2013
+Grenada	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	12,091.832	2011
+Guatemala	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,704.200	2010
+Guinea	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,388.737	2009
+Guinea-Bissau	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,491.186	2004
+Guyana	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,279.767	2002
+Haiti	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,846.119	0
+Honduras	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	4,849.300	2001
+Hong Kong SAR	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	57,676.792	2013
+Hungary	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,406.317	2011
+Iceland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	44,575.136	2013
+India	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	6,176.285	2013
+Indonesia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	10,759.175	2010
+Islamic Republic of Iran	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	16,918.275	2012
+Iraq	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	13,817.086	2013
+Ireland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	48,786.905	2013
+Israel	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	34,162.238	2013
+Italy	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	35,228.019	2013
+Jamaica	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,941.650	2013
+Japan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	38,797.388	2013
+Jordan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	12,397.900	2010
+Kazakhstan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,367.272	2013
+Kenya	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,304.482	2013
+Kiribati	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,640.755	2009
+Korea	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	37,413.012	2013
+Kosovo	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units		
+Kuwait	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	71,600.961	2013
+Kyrgyz Republic	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,581.331	2012
+Lao P.D.R.	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,357.174	2012
+Latvia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,195.472	2013
+Lebanon	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	18,358.022	2011
+Lesotho	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,110.643	2006
+Liberia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	934.095	2009
+Libya	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	19,182.461	2012
+Lithuania	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	28,245.316	2013
+Luxembourg	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	94,167.010	2013
+FYR Macedonia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	13,901.126	2013
+Madagascar	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,477.778	2006
+Malawi	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	819.688	2009
+Malaysia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,833.204	2013
+Maldives	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	12,987.707	2006
+Mali	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,614.099	2010
+Malta	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	32,977.117	2013
+Marshall Islands	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,292.473	2012
+Mauritania	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,587.922	2009
+Mauritius	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	18,836.435	2012
+Mexico	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	18,714.052	2013
+Micronesia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,285.138	2012
+Moldova	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,091.045	2013
+Mongolia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,051.667	2013
+Montenegro	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,996.005	2011
+Morocco	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,097.225	2013
+Mozambique	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,208.614	2013
+Myanmar	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,207.682	2006
+Namibia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,361.116	2008
+Nepal	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,516.944	2012
+Netherlands	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	48,797.888	2013
+New Zealand	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	36,342.722	2013
+Nicaragua	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,018.763	2013
+Niger	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,069.592	2009
+Nigeria	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	6,467.229	2012
+Norway	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	67,619.102	2013
+Oman	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	44,903.662	2013
+Pakistan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	4,943.262	2013
+Palau	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,839.596	2012
+Panama	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	21,634.562	2010
+Papua New Guinea	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,856.665	2011
+Paraguay	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,776.298	2013
+Peru	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	12,638.839	2010
+Philippines	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,412.236	2013
+Poland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,703.479	2013
+Portugal	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	27,180.222	2013
+Qatar	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	146,011.849	2013
+Romania	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	20,355.716	2013
+Russia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,350.855	2013
+Rwanda	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,782.458	2012
+Samoa	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,355.841	2011
+San Marino	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units		
+São Tomé and Príncipe	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,306.661	2010
+Saudi Arabia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	56,253.425	2010
+Senegal	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,398.261	2011
+Serbia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	12,971.489	2012
+Seychelles	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	25,624.017	2011
+Sierra Leone	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,284.058	2012
+Singapore	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	84,821.401	2013
+Slovak Republic	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	28,887.722	2013
+Slovenia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	30,266.444	2013
+Solomon Islands	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,877.205	2010
+South Africa	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	13,077.997	2011
+South Sudan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,374.364	2008
+Spain	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	34,228.870	2013
+Sri Lanka	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,155.844	2011
+St. Kitts and Nevis	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	21,073.336	2003
+St. Lucia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,432.502	2012
+St. Vincent and the Grenadines	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,380.197	2001
+Sudan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	4,655.056	2006
+Suriname	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	17,502.961	2011
+Swaziland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,053.698	2008
+Sweden	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	46,386.418	2013
+Switzerland	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	56,815.625	2011
+Syria	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	n/a	2010
+Taiwan Province of China	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	45,996.568	2013
+Tajikistan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,830.139	2011
+Tanzania	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,054.324	2012
+Thailand	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,319.514	2013
+Timor-Leste	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	7,388.455	2011
+Togo	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,525.636	2010
+Tonga	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,274.120	2012
+Trinidad and Tobago	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	32,346.411	2012
+Tunisia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	11,896.987	2010
+Turkey	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	20,299.392	2013
+Turkmenistan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	15,837.260	2004
+Tuvalu	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,410.266	2012
+Uganda	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	1,836.017	2013
+Ukraine	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	8,493.564	2013
+United Arab Emirates	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	67,201.880	2010
+United Kingdom	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	39,224.917	2010
+United States	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	57,045.456	2012
+Uruguay	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	21,387.305	2005
+Uzbekistan	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,963.769	2010
+Vanuatu	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,609.127	2009
+Venezuela	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	17,787.386	2010
+Vietnam	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	5,983.238	2012
+Yemen	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	3,992.868	2008
+Zambia	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	4,345.330	2010
+Zimbabwe	Gross domestic product based on purchasing-power-parity (PPP) per capita GDP	Current international dollar	Units	2,106.830	2012
+
+International Monetary Fund, World Economic Outlook Database, October 2014
