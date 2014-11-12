@@ -24,6 +24,3 @@ GDPperCapitaIMF$X2015 = suppressWarnings(as.numeric(GDPperCapitaIMF$X2015))
 TigersGDP = subset(GDPperCapitaIMF, Country %in% 
                c('Korea','Singapore','Hong Kong SAR','Taiwan Province of China'),
              select=c(Country, X2015))
-
-
-

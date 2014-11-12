@@ -5,13 +5,14 @@
 source("GDPdata.R")
 source("Quandl.R")
 
-edb = c(1,3,5,19)
-pst = c(2,3,5,4)
-pupilPerTeachers = c(13.2,13.5,16,18)
-avarageClassSize = c(35.9,31,38.6,40)
+EDB = c(1,3,5,19)
+PST = c(2,3,5,4)
+PupilPerTeachersRatio = c(13.2,13.5,16,18)
+AvarageClassSize = c(35.9,31,38.6,40)
 
 # muzu to ale illustrovat 
-expenditurePerStudent = c(23.4,17.3,23.6, 4.62 )
+ExpenditurePerStudentInGDP = c(23.4,17.3,23.6, 4.62 )
 
-df = data.frame(TigersGDP, edb, pst, pupilPerTeachers, avarageClassSize, expenditurePerStudent)
+df = data.frame(TigersGDP, EDB, PST, PupilPerTeachersRatio, 
+                AvarageClassSize, ExpenditurePerStudentInGDP, PMIData)
 df
