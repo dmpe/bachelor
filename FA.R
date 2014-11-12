@@ -10,4 +10,5 @@ novydf = df[,3:4]
 corelation = cor(novydf)
 solution <- fa(r = corelation, nfactors = 2, rotate = "oblimin", fm = "minres", SMC=FALSE) 
 solution
+scree(corelation)
 
