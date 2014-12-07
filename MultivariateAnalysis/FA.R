@@ -1,6 +1,4 @@
 #Some small analysis using Factor analysis
-if (!require(psych)) install.packages('psych')
-if (!require(GPArotation)) install.packages('GPArotation')
 library(psych)
 library(GPArotation)
 source("DataFrame.R")

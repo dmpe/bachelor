@@ -9,5 +9,5 @@ ipak <- function(pkg){
 
 # usage
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", 
-              "RColorBrewer", "scales", "grid", "mclust", "cluster")
+              "RColorBrewer", "scales", "grid", "mclust","psych","GPArotation", "cluster")
 ipak(packages) 
