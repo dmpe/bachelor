@@ -13,7 +13,7 @@ PaidDataOnSG
 PaidDataOnTW
 
 
-# We take the mean (avarage)
+# We take the mean (avarage) over the whole year
 
 meanPMIHG = mean(PaidDataOnHG$Value)
 meanPMISK = mean(PaidDataOnSK$Value)
@@ -22,4 +22,4 @@ meanPMITW = mean(PaidDataOnTW$Value)
 
 
 PMIData = data.frame(PMI=c(meanPMIHG, meanPMISG, meanPMISK, meanPMITW))
-PMIData
+View(PMIData)
