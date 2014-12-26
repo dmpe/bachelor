@@ -1,0 +1,181 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF8
+
+
+@Article{Chernyak2014,
+  Title                    = {The Analysis Of Methods For Constructing Composite Indicators},
+  Author                   = {OLEKSANDR Chernyak and MARINA Shumayeva},
+  Journal                  = {Revista Economica},
+  Year                     = {2014},
+  Number                   = {2},
+  Pages                    = {75-82},
+  Volume                   = {66},
+
+  Url                      = {http://ideas.repec.org/a/blg/reveco/v66y2014i2p75-82.html}
+}
+
+@Book{Dodge2008,
+  Title                    = {The Concise Encyclopedia of Statistics},
+  Author                   = {Dodge, Y.},
+  Publisher                = {Springer},
+  Year                     = {2008},
+  Series                   = {Springer reference},
+
+  ISBN                     = {9780387317427},
+  Lccn                     = {2009941851},
+  Timestamp                = {26.12.2014},
+  Url                      = {http://link.springer.com/referencework/10.1007%2F978-0-387-32833-1}
+}
+
+@Article{Ertl2006,
+  Title                    = {Educational standards and the changing discourse on education: The reception and consequences of the PISA study in Germany},
+  Author                   = {Ertl, Hubert},
+  Journal                  = {Oxford Review of Education},
+  Year                     = {2006},
+  Number                   = {5},
+  Pages                    = {619--634},
+  Volume                   = {32},
+
+  Publisher                = {Taylor \& Francis},
+  Timestamp                = {26.12.2014},
+  Url                      = {http://www.tandfonline.com/doi/abs/10.1080/03054980600976320}
+}
+
+@TechReport{Freudenberg2003,
+  Title                    = {Composite Indicators of Country Performance: A Critical Assessment},
+  Author                   = {Michael Freudenberg},
+  Institution              = {OECD Publishing},
+  Year                     = {2003},
+  Month                    = {Nov.},
+  Number                   = {2003/16},
+  Type                     = {OECD Science, Technology and Industry Working Papers},
+
+  Url                      = {http://ideas.repec.org/p/oec/stiaaa/2003-16-en.html}
+}
+
+@Article{Garcia-Sanchez2015,
+  Title                    = {A proposal for a Composite Index of Environmental Performance (CIEP) for countries },
+  Author                   = {Isabel-María García-Sánchez and Thiago Alexandre das Neves Almeida and Renata Paes de Barros Camara},
+  Journal                  = {Ecological Indicators},
+  Year                     = {2015},
+  Number                   = {0},
+  Pages                    = {171 - 188},
+  Volume                   = {48},
+
+  Doi                      = {http://dx.doi.org/10.1016/j.ecolind.2014.08.004},
+  ISSN                     = {1470-160X},
+  Keywords                 = {Environmental performance},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S1470160X14003598}
+}
+
+@Article{Heink2010,
+  Title                    = {What are indicators? On the definition of indicators in ecology and environmental planning },
+  Author                   = {Ulrich Heink and Ingo Kowarik},
+  Journal                  = {Ecological Indicators },
+  Year                     = {2010},
+  Number                   = {3},
+  Pages                    = {584 - 593},
+  Volume                   = {10},
+
+  Doi                      = {http://dx.doi.org/10.1016/j.ecolind.2009.09.009},
+  ISSN                     = {1470-160X},
+  Keywords                 = {Indication},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S1470160X09001575}
+}
+
+@Book{Jacobs2004,
+  Title                    = {Measuring performance: an examination of composite performance indicators: a report for the Department of Health},
+  Author                   = {Jacobs, Rowena and Peter (Peter C.) Smith and Goddard, Maria K},
+  Publisher                = {Centre of Health Economics, University of York},
+  Year                     = {2004},
+
+  Timestamp                = {26.12.2014},
+  Url                      = {http://www.york.ac.uk/che/pdf/tp29.pdf}
+}
+
+@TechReport{Nardo2005,
+  Title                    = {Tools for Composite Indicators Building},
+  Author                   = {Michela Nardo and Michaela Saisana and Andrea Saltelli and Stefano Tarantola},
+  Institution              = {European Commission, EUR 21682 EN, Institute for the Protection and Security of the Citizen, JRC Ispra, Italy},
+  Year                     = {2005},
+
+  Pages                    = {131},
+  Timestamp                = {26.12.2014},
+  Url                      = {http://publications.jrc.ec.europa.eu/repository/bitstream/JRC31473/EUR%2021682%20EN.pdf}
+}
+
+@Article{Saisana2005,
+  Title                    = {Uncertainty and sensitivity analysis techniques as tools for the quality assessment of composite indicators},
+  Author                   = {Saisana, M. and Saltelli, A. and Tarantola, S.},
+  Journal                  = {Journal of the Royal Statistical Society: Series A (Statistics in Society)},
+  Year                     = {2005},
+  Number                   = {2},
+  Pages                    = {307--323},
+  Volume                   = {168},
+
+  Doi                      = {10.1111/j.1467-985X.2005.00350.x},
+  ISSN                     = {1467-985X},
+  Keywords                 = {Composite indicators, Robustness assessment, Sensitivity analysis, Uncertainty},
+  Publisher                = {Blackwell Publishing Ltd},
+  Url                      = {http://dx.doi.org/10.1111/j.1467-985X.2005.00350.x}
+}
+
+@Book{Saisana2002,
+  Title                    = {State-of-the-art report on current methodologies and practices for composite indicator development},
+  Author                   = {Saisana, Michaela and Tarantola, Stefano},
+  Publisher                = {Citeseer},
+  Year                     = {2002},
+
+  Timestamp                = {26.12.2014},
+  Url                      = {http://bookshop.europa.eu/en/state-of-the-art-report-on-current-methodologies-and-practices-for-composite-indicator-development-pbEUNA20408/}
+}
+
+@Article{Tangi2007,
+  Title                    = {Analysis of the third European survey on working conditions with composite indicators },
+  Author                   = {Andranik Tangian},
+  Journal                  = {European Journal of Operational Research },
+  Year                     = {2007},
+  Number                   = {1},
+  Pages                    = {468 - 499},
+  Volume                   = {181},
+
+  Doi                      = {http://dx.doi.org/10.1016/j.ejor.2006.05.038},
+  ISSN                     = {0377-2217},
+  Keywords                 = {Human resources},
+  Url                      = {http://www.sciencedirect.com/science/article/pii/S0377221706004243}
+}
+
+@Article{Walz2000,
+  Title                    = {Development of environmental indicator systems: experiences from Germany},
+  Author                   = {Walz, Rainer},
+  Journal                  = {Environmental Management},
+  Year                     = {2000},
+  Number                   = {6},
+  Pages                    = {613--623},
+  Volume                   = {25},
+
+  Publisher                = {Springer},
+  Timestamp                = {26.12.2014},
+  Url                      = {http://link.springer.com/article/10.1007%2Fs002670010048?LI=true}
+}
+
+@Article{Wickham2011,
+  Title                    = {The Split-Apply-Combine Strategy for Data Analysis},
+  Author                   = {Hadley Wickham},
+  Journal                  = {Journal of Statistical Software},
+  Year                     = {2011},
+
+  Month                    = {4},
+  Number                   = {1},
+  Pages                    = {1--29},
+  Volume                   = {40},
+
+  Accepted                 = {2010-12-27},
+  Bibdate                  = {2010-12-27},
+  Coden                    = {JSSOBK},
+  Day                      = {7},
+  ISSN                     = {1548-7660},
+  Submitted                = {2009-09-24},
+  Url                      = {http://www.jstatsoft.org/v40/i01}
+}
+
