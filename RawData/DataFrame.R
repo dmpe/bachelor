@@ -26,7 +26,6 @@ df = data.frame(TigersGDP, EasyBusiness, Pisa, PupilPerTeachersRatio,
                 AvarageClassSize, ExpenditurePerStudent, PMIData)
 
 rownames(df) = 1:nrow(df)
-
 df
 
 # Check that all var. in df are numeric
