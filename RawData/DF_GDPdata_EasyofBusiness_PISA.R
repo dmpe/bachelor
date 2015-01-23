@@ -46,6 +46,8 @@ TigersGDP = subset(GDPperCapitaIMF, Country %in%
                      c('Korea','Singapore','Hong Kong SAR','Taiwan Province of China'),
                    select=c(Country, GDPinDollars))
 
+# ----------------------------------------
+
 TigersGD2 = subset(GDPperCapitaIMF, select=c(Country, GDPinDollars))
 TigersGD2$Country <- str_trim(TigersGD2$Country, side="both")
 TigersGD2$Country[TigersGD2$Country=="Taiwan Province of China"] <- "Taiwan"
