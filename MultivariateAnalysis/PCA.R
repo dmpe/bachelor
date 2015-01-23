@@ -4,6 +4,8 @@ plot(pc.cr)
 
 summary(df)
 corelationMat <- cor(df[2:8])
+as.matrix(corelationMat)
+
 
 summary(pc.cr <-prcomp(df[2:8],scale=TRUE))
 plot(pc.cr)
@@ -12,8 +14,6 @@ pc.cr$sdev
 screeplot(pc.cr, type="line")
 biplot(pc.cr)
 
-
-as.matrix(corelationMat)
 
 
 
