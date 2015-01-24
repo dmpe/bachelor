@@ -20,7 +20,6 @@ if(!file.exists("GDPperCapitaIMF.txt")) {
 }
 
 GDPperCapitaIMF <- read.delim("/srv/shiny-server/RealBachelor/RawData/GDPperCapitaIMF.txt")
-# summary(GDPperCapitaIMF)
 
 # what kind of data type is X2015
 # http://www.statmethods.net/input/datatypes.html
@@ -82,10 +81,32 @@ joinedDB.3 <- subset(joinedDB.3, select=c(Country, GDPinDollars, Ranking_EDB, Ra
 joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 
 
-joinedDB.4 = subset(joinedDB.3, Country %in% 
-                     c("France","Malaysia",  "Indonesia" "Canada",'Korea','Singapore',"Germany", "Brasil",'Hong Kong SAR','Taiwan', "United States", "Czech Republic"))
+singgpd <-Quandl("UN/UIS_CURRENTEDUCATIONALEXPENDITUREINPOSTSECONDARYASOFTOTALCURRENTEDUCATIONALEXPENDITURE__ALLGENDERS_SGP")
 
+
+
+
+
+
+
+joinedDB.4 = subset(joinedDB.3, Country %in% 
+                     c("France","Malaysia",  "Indonesia",
+                       "Canada",'Korea','Singapore',
+                       "Germany", "Brasil",'Hong Kong SAR',
+                       'Taiwan', "United States", "Czech Republic", 
+                       "Australia", "Estonia", "Finland",
+                       "Iceland", "Hungary", "Israel", 
+                       "Italy", "Luxembourg", "Mexico", 
+                       "Netherlands", "New Zealand", "Poland", 
+                       "Serbia"))
+
+joinedDB.asia = subset(joinedDB.3, Country %in% 
+                      c("Malaysia",  "Indonesia",
+                        'Korea','Singapore','Hong Kong SAR',
+                        'Taiwan',"Australia", "New Zealand"))
 corelationMat.joined <- cor(joinedDB.4[2:4])
+corelationMat.joined.asia <- cor(joinedDB.asia[2:4])
+
 as.matrix(corelationMat.joined)
 #http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 corrplot(corelationMat.joined, method = "circle", type = "lower")
