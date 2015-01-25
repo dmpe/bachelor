@@ -25,3 +25,13 @@ plotcorr(corelationMat, col=rgb(colorfun((corelationMat+1)/2), maxColorValue=255
 #http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 corrplot(corelationMat, method = "circle", type = "lower")
 corrplot(corelationMat, method = "number",  order = "hclust", addrect = 2)
+
+
+
+# for deletion
+corelationMat.joined <- cor(joinedDB.3[2:4], use="complete.obs")
+
+cormat <- as.matrix(corelationMat.joined)
+#http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
+corrplot(cormat, method = "circle", type = "lower")
+corrplot(cormat, method = "number",  order = "hclust", addrect = 2)
