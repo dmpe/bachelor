@@ -80,15 +80,6 @@ joinedDB.3$Country <- str_trim(joinedDB.3$Country, side="both")
 joinedDB.3 <- subset(joinedDB.3, select=c(Country, GDPinDollars, Ranking_EDB, Ranking_PISA))
 joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 
-
-singgpd <-Quandl("UN/UIS_CURRENTEDUCATIONALEXPENDITUREINPOSTSECONDARYASOFTOTALCURRENTEDUCATIONALEXPENDITURE__ALLGENDERS_SGP")
-
-
-
-
-
-
-
 joinedDB.4 = subset(joinedDB.3, Country %in% 
                      c("France","Malaysia",  "Indonesia",
                        "Canada",'Korea','Singapore',
