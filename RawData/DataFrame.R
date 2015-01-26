@@ -9,7 +9,7 @@ source("RawData/Quandl.R")
 source("RawData/Pisa.R")
 source("RawData/WEF.R")
 source("RawData/EasyOfDoingBusiness.R")
-
+source("RawData/TSR.R")
 # For their sources see my thesis, and corresponding table
 
 joinedDF <- dplyr::left_join(TigersGDP, pisa, by= "Country")
@@ -23,6 +23,9 @@ joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 # wef+gdp+pisa+edb
 joinedDB.6 <- dplyr::left_join(joinedDB.3, wefGCI, by = "Country")
 joinedDB.6 <- plyr::arrange(joinedDB.6,joinedDB.6$Country)
+
+joinedDB.7 <- dplyr::left_join(joinedDB.6, df_education, by = "Country")
+joinedDB.7 <- plyr::arrange(joinedDB.7,joinedDB.6$Country)
 
 
 # wide format
