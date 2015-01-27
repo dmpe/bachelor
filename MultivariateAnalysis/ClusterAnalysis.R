@@ -1,10 +1,8 @@
-
-
 library(fpc)
 library(mclust)
 library(cluster)
 
-dfa = df[2:8]
+dfa <- na.omit(joinedDB.8[2:7])
 dfa <- scale(dfa)
 
 pamk(dfa)
@@ -28,18 +26,16 @@ mydata <- data.frame(dfa, fit$cluster)
 
 
 fit <- Mclust(dfa)
-plot(fit) # plot results
-summary(fit) # display the best model 
+# plot(fit) # plot results
+# summary(fit) # display the best model 
 
 
-clusplot(dfa, fit$cluster, color=TRUE, shade=TRUE,
-         labels=2, lines=0)
-
+clusplot(pam(dfa,4))
          
 
 # Hierarchical Clustering
-euroclust<-hclust(dist(df[2:8]))
-plot(euroclust, labels=df$Country)
+euroclust<-hclust(dist(joinedDB.8[2:7]))
+plot(euroclust,hang = -1,  labels=joinedDB.8$Country)
 
 # Centroid Plot against 1st 2 discriminant functions
 plotcluster(dfa, fit$centers) 

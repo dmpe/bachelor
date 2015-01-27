@@ -1,14 +1,24 @@
 #Some small analysis using Factor analysis
 library(psych)
 library(GPArotation)
-source("DataFrame.R")
+source("http://www.tcnj.edu/~ruscio/EFA%20Comparison%20Data.R")
 # http://rtutorialseries.blogspot.de/2011/10/r-tutorial-series-exploratory-factor.html
-novydf = df[,3:4]
 
-#class(df)
-
-corelation = cor(novydf)
-solution <- fa(r = corelation, nfactors = 2, rotate = "oblimin", fm = "minres", SMC=FALSE) 
+solution <- fa(r = corelationMat, nfactors = 6, rotate = "oblimin", fm = "minres", SMC=FALSE) 
 solution
-scree(corelation)
+scree(corelationMat, factors=TRUE,pc=TRUE)
+# http://personality-project.org/r/vss.html
+# my.vss <- VSS(na.omit(joinedDB.8[2:7]),n=6, rotate="none",diagonal=FALSE)
+# VSS.plot(my.vss)
+VSS.scree(corelationMat, main ="scree plot")
+#https://stats.stackexchange.com/questions/32669/vss-criterion-for-the-number-of-factors-in-rs-psych-package
+#https://stats.stackexchange.com/questions/31948/looking-for-a-step-through-an-example-of-a-factor-analysis-on-dichotomous-data/32136#32136
+faPCdirect <- fa.poly(corelationMat, nfactors=2, rotate="varimax")    # polychoric FA
+factor.plot(faPCdirect$fa, cut=0.5)
+fa.diagram(faPCdirect)
+
+
+EFA.Comp.Data(Data=na.omit(joinedDB.8[2:7]), F.Max=6, Graph=T)
+vss(na.omit(joinedDB.8[2:7]), n=1)
+fa.parallel(na.omit(joinedDB.8[2:7]))
 

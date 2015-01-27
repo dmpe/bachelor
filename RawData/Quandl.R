@@ -29,4 +29,4 @@ meanPMITW = mean(PaidDataOnTW$Value)
 # Create data frame
 
 PMIData = data.frame(PMI=c(meanPMIHG, meanPMISG, meanPMISK, meanPMITW))
-View(PMIData)
+# View(PMIData)
