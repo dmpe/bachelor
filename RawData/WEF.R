@@ -4,7 +4,7 @@ library(dplyr)
 library(rJava)
 library(xlsx)
 
-wefexcel.notcleaned <-read.xlsx("RawData/GCR_Rankings_2014-2015.xlsx", sheetName = "GCI 2013-2014")
+wefexcel.notcleaned <-read.xlsx("RawData/DataSources/GCR_Rankings_2014-2015.xlsx", sheetName = "GCI 2013-2014")
 
 wef <- wefexcel.notcleaned[4:147,1:3]
 

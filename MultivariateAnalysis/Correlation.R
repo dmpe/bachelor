@@ -1,6 +1,7 @@
 # Correlation
 
 library(corrplot)
+library(ellipse)
 
 
 summary(joinedDB.8)
@@ -15,7 +16,7 @@ plotcorr(corelationMat, col=rgb(colorfun((corelationMat+1)/2), maxColorValue=255
 
 #http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 corrplot(corelationMat, method = "circle", type = "lower")
-corrplot(corelationMat, method = "number",  order = "hclust", addrect = 3)
+corrplot(corelationMat, method = "number",  order = "hclust", addrect = 3, type = "lower")
 
 
 

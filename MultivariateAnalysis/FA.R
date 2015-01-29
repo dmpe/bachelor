@@ -19,6 +19,6 @@ fa.diagram(faPCdirect)
 
 
 EFA.Comp.Data(Data=na.omit(joinedDB.8[2:7]), F.Max=6, Graph=T)
-vss(na.omit(joinedDB.8[2:7]), n=1)
+vss(na.omit(joinedDB.8[2:7]), n=2)
 fa.parallel(na.omit(joinedDB.8[2:7]))
 

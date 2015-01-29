@@ -2,7 +2,7 @@ library(stringr)
 library(plyr)
 library(dplyr)
 
-pisa <- read.csv("RawData/PISAsummary-2012.csv", header=FALSE)
+pisa <- read.csv("RawData/DataSources/PISAsummary-2012.csv", header=FALSE)
 
 pisa <- plyr::rename(pisa, c("V1"="Ranking_PISA", "V2"="Country"))
 pisa$Country <- str_trim(pisa$Country, side="both")
