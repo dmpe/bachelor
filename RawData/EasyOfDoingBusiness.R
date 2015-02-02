@@ -1,8 +1,6 @@
-library(corrplot)
 library(stringr)
 library(plyr)
 library(rvest)
-library(dplyr)
 
 
 EDB <- html("http://www.doingbusiness.org/rankings")
@@ -17,3 +15,4 @@ easydb$Country[easydb$Country=="Hong Kong SAR, China"] <-  "Hong Kong SAR"
 easydb$Country[easydb$Country=="Taiwan, China"] <-  "Taiwan"
 easydb$Country[easydb$Country=="Korea, Rep."] <-  "Korea"
 easydb$Country[easydb$Country=="Russian Federation"] <- "Russia"
+

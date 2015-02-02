@@ -5,7 +5,6 @@
 # Input is read and parsed from that file until the end of the file is reached, then the 
 # parsed expressions are evaluated sequentially in the chosen environment. 
 source("RawData/DF_ImprovedGDP.R")
-source("RawData/Quandl.R")
 source("RawData/Pisa.R")
 source("RawData/WEF.R")
 source("RawData/EasyOfDoingBusiness.R")

@@ -3,8 +3,7 @@ library("Quandl")
 library(plyr)
 library(dplyr)
 
-Country =  c('Korea','Singapore','China', "Germany", "France", "Mexico", "Brazil", "Russia", 
-             "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya", "Finland", "Canada", "Israel", "New Zealand")
+Country =  c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 
 Korea <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__KOR", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Singapore <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__SGP", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
@@ -13,7 +12,7 @@ Singapore <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__SGP", authcode=
 # germany manula 
 # https://www.destatis.de/EN/FactsFigures/SocietyState/EducationResearchCulture/EducationalCulturalFinance/Tables/Budget.html
 # Germany <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__DEU", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-France <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__FRA", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
+Switzerland <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__SWZ", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Mexico <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__MEX", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Brazil <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__BRA", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Russia <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__RUS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
@@ -31,13 +30,23 @@ Canada <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__CAN", authcode="Gg
 # Israel <- Quandl("UN/UIS_PUBLICEXPENDITUREONexpendituresASOFGDP__ISR", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 NewZeland <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__NZL", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 
-df_expenditures <- data.frame(Country = Country, Expenditures = seq(1,18), stringsAsFactors=FALSE)
+Japan <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__JPN", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
+Czech <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__CZE", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
+Chile <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__CHL", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
+# manual entry http://www.scielo.org.pe/scielo.php?pid=S2077-18862011000200002&script=sci_arttext
+Nigeria <- Quandl("UN/UIS_PUBLICEXPENDITUREONEDUCATIONASOFGDP__NGA", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
+
+# Jordan  > http://www.frp2.org/english/Portals/0/PDFs/Education%20PEP%20Working%20Paper.pdf
+
+
+
+df_expenditures <- data.frame(Country = Country, Expenditures = seq(1,23), stringsAsFactors=FALSE)
 
 df_expenditures$Expenditures[df_expenditures$Country == "Korea"] <- Korea
 df_expenditures$Expenditures[df_expenditures$Country == "Singapore"] <- Singapore #extra
 df_expenditures$Expenditures[df_expenditures$Country == "China"] <- 3.93
 df_expenditures$Expenditures[df_expenditures$Country == "Germany"] <- 6.5
-df_expenditures$Expenditures[df_expenditures$Country == "France"] <- France
+df_expenditures$Expenditures[df_expenditures$Country == "Switzerland"] <- Switzerland
 df_expenditures$Expenditures[df_expenditures$Country == "Mexico"] <- Mexico
 df_expenditures$Expenditures[df_expenditures$Country == "Brazil"] <- Brazil
 df_expenditures$Expenditures[df_expenditures$Country == "Russia"] <- Russia
@@ -50,4 +59,13 @@ df_expenditures$Expenditures[df_expenditures$Country == "Kenya"] <- Kenya
 df_expenditures$Expenditures[df_expenditures$Country == "Finland"] <- Finland
 df_expenditures$Expenditures[df_expenditures$Country == "Canada"] <- Canada
 df_expenditures$Expenditures[df_expenditures$Country == "Israel"] <- 7.3
-df_expenditures$Expenditures[df_expenditures$Country == "New Zeland"] <- NewZeland
+df_expenditures$Expenditures[df_expenditures$Country == "New Zealand"] <- NewZeland
+
+
+df_expenditures$Expenditures[df_expenditures$Country == "Jordan"] <- 3.8
+df_expenditures$Expenditures[df_expenditures$Country == "Czech Republic"] <- Czech
+df_expenditures$Expenditures[df_expenditures$Country == "Chile"] <- Chile
+df_expenditures$Expenditures[df_expenditures$Country == "Japan"] <- Japan
+df_expenditures$Expenditures[df_expenditures$Country == "Nigeria"] <- 1.62
+
+
