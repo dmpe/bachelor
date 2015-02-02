@@ -10,6 +10,7 @@ source("RawData/WEF.R")
 source("RawData/EasyOfDoingBusiness.R")
 source("RawData/TSR.R")
 source("RawData/Expend.R")
+source("RawData/Unemplo.R")
 # For their sources see my thesis, and corresponding table
 
 joinedDF <- dplyr::left_join(TigersGDP, pisa, by= "Country")
@@ -30,6 +31,10 @@ joinedDB.7 <- plyr::arrange(joinedDB.7,joinedDB.7$Country)
 joinedDB.8 <- dplyr::left_join(joinedDB.7, df_expenditures, by = "Country")
 joinedDB.8 <- plyr::arrange(joinedDB.8,joinedDB.8$Country)
 
+joinedDB.9 <- dplyr::left_join(joinedDB.8, df_unemp, by = "Country")
+joinedDB.9 <- plyr::arrange(joinedDB.9,joinedDB.9$Country)
+
+
 # wide format
 #df = data.frame(TigersGDP, EasyBusiness, Pisa, PupilPerTeachersRatio, AvarageClassSize, ExpenditurePerStudent, PMIData)
 # 
@@ -38,6 +43,6 @@ joinedDB.8 <- plyr::arrange(joinedDB.8,joinedDB.8$Country)
 
 # Check that all var. in df are numeric
 # http://stackoverflow.com/a/10661161
-lapply(joinedDB.8, class)
+lapply(joinedDB.9, class)
 
 

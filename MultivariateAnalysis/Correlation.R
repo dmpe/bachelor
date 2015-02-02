@@ -4,8 +4,8 @@ library(corrplot)
 library(ellipse)
 
 
-summary(joinedDB.8)
-corelationMat <- cor(joinedDB.8[2:7], use="complete.obs")
+summary(joinedDB.9)
+corelationMat <- cor(joinedDB.9[2:8], use="complete.obs")
 corelationMat <- as.matrix(corelationMat)
 
 
