@@ -6,19 +6,17 @@
 # parsed expressions are evaluated sequentially in the chosen environment. 
 source("RawData/DF_ImprovedGDP.R")
 source("RawData/Pisa.R")
-source("RawData/WEF.R")
 source("RawData/EasyOfDoingBusiness.R")
+source("RawData/WEF.R")
 source("RawData/TSR.R")
 source("RawData/Expend.R")
 source("RawData/Unemplo.R")
 # For their sources see my thesis, and corresponding table
 
-joinedDF <- dplyr::left_join(TigersGDP, pisa, by= "Country")
-joinedDF <- subset(joinedDF, select=c(Country, GDPinDollars, Ranking_PISA))
+joinedDF <- dplyr::left_join(TigersGDP, learningCurveData, by= "Country")
 
 joinedDB.3 <- dplyr::left_join(joinedDF, easydb, by= "Country")
-joinedDB.3$Country <- str_trim(joinedDB.3$Country, side="both")
-joinedDB.3 <- subset(joinedDB.3, select=c(Country, GDPinDollars, Ranking_EDB, Ranking_PISA))
+joinedDB.3 <- subset(joinedDB.3, select=c(Country, GDPinDollars, Ranking_EDB, LearningCurveRanking))
 joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 
 # wef+gdp+pisa+edb

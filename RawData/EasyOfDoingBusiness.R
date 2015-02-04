@@ -16,3 +16,6 @@ easydb$Country[easydb$Country=="Taiwan, China"] <-  "Taiwan"
 easydb$Country[easydb$Country=="Korea, Rep."] <-  "Korea"
 easydb$Country[easydb$Country=="Russian Federation"] <- "Russia"
 
+dew <- list('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
+easydb <- subset(easydb, Country %in% dew )
+easydb <- easydb[,1:2]
