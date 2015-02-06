@@ -8,7 +8,7 @@ source("RawData/Unemplo.R")
 source("RawData/EasyOfDoingBusiness.R")
 source("RawData/WEF.R")
 source("RawData/LearningCurve.R")
-# source("RawData/TSR.R")
+source("RawData/CompletionRate.R")
 # source("RawData/Expend.R")
 
 # For their sources see my thesis, and corresponding table
@@ -23,11 +23,11 @@ joinedDB.3 <- dplyr::left_join(joinedDB.2, learningCurveData, by = "Country")
 joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 joinedDB.3 <- subset(joinedDB.3, select=c(Country, Unemployment, Ranking_EDB, Ranking_WEF, LearningCurveRanking))
 
-joinedDB.3 <- dplyr::left_join(joinedDB.3, df_dropout, by = "Country")
-joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
-
-joinedDB.4 <- dplyr::left_join(joinedDB.3, df_expenditures, by = "Country")
+joinedDB.4 <- dplyr::left_join(joinedDB.3, CompletionRate, by = "Country")
 joinedDB.4 <- plyr::arrange(joinedDB.4,joinedDB.4$Country)
+
+joinedDB.5 <- dplyr::left_join(joinedDB.4, , by = "Country")
+joinedDB.5 <- plyr::arrange(joinedDB.5,joinedDB.5$Country)
 
 
 # wide format
