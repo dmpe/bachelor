@@ -11,7 +11,6 @@ source("RawData/LearningCurve.R")
 source("RawData/CompletionRate.R")
 source("RawData/JournalArticles.R")
 
-# For their sources see my thesis, and corresponding table
 
 joinedDF <- dplyr::left_join(df_unemp, easydb, by= "Country")
 
@@ -31,6 +30,6 @@ joinedDB.5 <- plyr::arrange(joinedDB.5,joinedDB.5$Country)
 
 # Check that all var. in df are numeric
 # http://stackoverflow.com/a/10331131
-lapply(joinedDB.4, class)
+lapply(joinedDB.5, class)
 
 
