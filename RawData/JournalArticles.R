@@ -50,7 +50,6 @@ Journals$JournalArticles[Journals$Country == "Finland"] <- Finland
 Journals$JournalArticles[Journals$Country == "Canada"] <- Canada
 Journals$JournalArticles[Journals$Country == "Israel"] <- Israel
 Journals$JournalArticles[Journals$Country == "New Zealand"] <- NewZeland
-
 Journals$JournalArticles[Journals$Country == "Jordan"] <- Jordan
 Journals$JournalArticles[Journals$Country == "Czech Republic"] <- Czech
 Journals$JournalArticles[Journals$Country == "Chile"] <- Chile

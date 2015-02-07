@@ -27,8 +27,6 @@ learningCurveData <- learningCurveData[, !(colnames(learningCurveData)
                   %in% c("Cognitive.Skills", "Educational.Attainment" ,"Notes","NA..1","NA..2"))]
 
 learningCurveData$LearningCurveRanking <- seq(1,40) 
-# dew <- list('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
-# learningCurveData <- subset(learningCurveData, Country %in% dew )
 
 # plot(lm(joinedDB.3$LearningCurveRanking ~ easydb$Ranking_EDB + wefGCI$Ranking_WEF))
 
