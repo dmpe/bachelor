@@ -1,15 +1,11 @@
-library(stringr)
 library("Quandl")
-library(plyr)
-library(dplyr)
 
 Country =  c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 
 
 Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-# http://www.cnbc.com/id/101433696
 # China <- Quandl("WORLDBANK/CHN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-China <- 9.6
+China <- 10.10
 Germany <- Quandl("WORLDBANK/DEU_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Switzerland <- Quandl("WORLDBANK/CHE_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Mexico <- Quandl("WORLDBANK/MEX_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
@@ -17,9 +13,9 @@ Brazil <- Quandl("WORLDBANK/BRA_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY"
 Russia <- Quandl("WORLDBANK/RUS_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 USA <-  Quandl("WORLDBANK/USA_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 UAE <- Quandl("WORLDBANK/ARE_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-# http://www.brookings.edu/blogs/africa-in-focus/posts/2014/08/21-state-of-youth-unemployment-kenya-munga
 # Kenya <- Quandl("WORLDBANK/KEN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-Kenya <- (15.8+13.1)/2
+# see Quandl emails
+Kenya <- 17.10
 Finland <- Quandl("WORLDBANK/FIN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 NewZeland <- Quandl("WORLDBANK/NZL_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Czech <- Quandl("WORLDBANK/CZE_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
