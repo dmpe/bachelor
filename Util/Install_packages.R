@@ -9,5 +9,15 @@ ipak <- function(pkg){
 
 # usage
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", 
-              "RColorBrewer", "scales", "grid", "mclust","psych","GPArotation", "cluster")
+              "RColorBrewer", "scales", "grid", "mclust", "psych", "GPArotation",
+              "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot"
+              "xlsx", "RCurl")
+
+# Because rJava may print error messages (during or after installation), it is still necessary load 
+# it correctly. For solutions look here: 
+# http://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/
+# https://stackoverflow.com/questions/3311940/r-rjava-package-install-failing
+
+# Or (it may help) use just < R CMD javareconf >
+
 ipak(packages) 
