@@ -12,9 +12,9 @@ source("RawData/CompletionRate.R")
 source("RawData/JournalArticles.R")
 
 
-joinedDF <- dplyr::left_join(df_unemp, easydb, by= "Country")
+joinedDF <- dplyr::left_join(df_unemp, easydb, by = "Country")
 
-joinedDB.2 <- dplyr::left_join(joinedDF, wefGCI, by= "Country")
+joinedDB.2 <- dplyr::left_join(joinedDF, wefGCI, by = "Country")
 joinedDB.2 <- plyr::arrange(joinedDB.2,joinedDB.2$Country)
 
 joinedDB.3 <- dplyr::left_join(joinedDB.2, learningCurveData, by = "Country")
