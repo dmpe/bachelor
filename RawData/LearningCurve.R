@@ -1,6 +1,5 @@
 library(stringr)
 library(plyr)
-library(dplyr)
 library(xlsx)
 
 # https://stackoverflow.com/questions/4605206/drop-columns-r-data-frame
@@ -22,7 +21,10 @@ learningCurveData <- plyr::rename(learningCurveData,
                                   c("NA."="Country","Overall.Index" = "LearningCurveIndex"))
 sapply(learningCurveData, class) # factors -> to char
 learningCurveData$Country <- as.character(learningCurveData$Country)
+
 learningCurveData$Country[learningCurveData$Country=="South Korea"] <- "Korea"
+learningCurveData$Country[learningCurveData$Country=="Hong Kong-China"] <- "China"
+
 learningCurveData <- learningCurveData[, !(colnames(learningCurveData)
                   %in% c("Cognitive.Skills", "Educational.Attainment" ,"Notes","NA..1","NA..2"))]
 
