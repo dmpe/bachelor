@@ -14,7 +14,7 @@ hindex_orig$Country <- str_trim(hindex_orig$Country, side="both")
 hindex_orig$Country[hindex_orig$Country=="South Korea"] <-  "Korea"
 hindex_orig$Country[hindex_orig$Country=="Russian Federation"] <- "Russia"
 
-hindex_orig <- hindex_orig[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
+hindex_orig <- hindex_orig[, !(colnames(hindex_orig) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
 
 hindex <- subset(hindex_orig, Country %in% c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand"),
                  select = c(Country, Rank, H.index))
