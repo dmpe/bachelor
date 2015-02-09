@@ -21,11 +21,14 @@ joinedDB.3 <- dplyr::left_join(joinedDB.2, learningCurveData, by = "Country")
 joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
 joinedDB.3 <- subset(joinedDB.3, select=c(Country, Unemployment, Ranking_EDB, Ranking_WEF, Ranking_LearningCurve))
 
+# Score, LearningCurveIndex , H.index
+
 joinedDB.4 <- dplyr::left_join(joinedDB.3, CompletionRate, by = "Country")
 joinedDB.4 <- plyr::arrange(joinedDB.4,joinedDB.4$Country)
 
 joinedDB.5 <- dplyr::left_join(joinedDB.4, hindex, by = "Country")
 joinedDB.5 <- plyr::arrange(joinedDB.5,joinedDB.5$Country)
+joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Ranking_EDB, Ranking_WEF, Ranking_LearningCurve,CompletionRate, Ranking_HIndex))
 
 
 # Check that all var. in df are numeric

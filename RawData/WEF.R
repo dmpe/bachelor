@@ -16,4 +16,4 @@ wef$Ranking_WEF <- as.integer(wef$Ranking_WEF)
 
 
 wefGCI = subset(wef, 
-         Country %in% c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand"), select=c(Country, Ranking_WEF))
+         Country %in% c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand"), select=c(Country, Ranking_WEF,Score))
