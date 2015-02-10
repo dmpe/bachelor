@@ -16,3 +16,9 @@ aregImpute(joinedDB.4$Ranking_LearningCurve ~ joinedDB.4$Ranking_WEF + joinedDB.
 names(joinedDB.5)
 
 mi.binary(joinedDB.5$Ranking_LearningCurve ~ joinedDB.5$Ranking_HIndex + joinedDB.5$CompletionRate, data = joinedDB.5)
+
+
+fit1 <- with(data=joinedDB.5,exp=lm(Ranking_LearningCurve~Ranking_HIndex+CompletionRate))
+summary(fit1)
+
+
