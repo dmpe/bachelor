@@ -9,7 +9,7 @@ learningCurveData <- read.xlsx("RawData/DataSources/learningcurve.xlsx", sheetIn
 learningCurveData <- plyr::rename(learningCurveData, c("NA."="Country","Overall.Index" = "LearningCurveIndex"))
 # sapply(learningCurveData, class) # factors -> to char
 
-learningCurveData$Country <- as.character(learningCurveData$Country)
+learningCurveData$Country <- str_trim(learningCurveData$Country, side="both")
 
 learningCurveData$Country[learningCurveData$Country=="South Korea"] <- "Korea"
 learningCurveData$Country[learningCurveData$Country=="Hong Kong-China"] <- "China"

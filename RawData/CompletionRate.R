@@ -1,7 +1,7 @@
 library(stringr)
 library("Quandl")
 library(plyr)
-library(dplyr)
+
 # 
 # Country =  c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 
@@ -98,6 +98,6 @@ CompletionRate$CompletionRate[CompletionRate$Country == "Australia"] <- 99
 CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 99
 CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99
 
-dew <- list('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 
-CompletionRate <- subset(CompletionRate, Country %in% dew, select=c(Country, CompletionRate))
+
+CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select=c(Country, CompletionRate))
