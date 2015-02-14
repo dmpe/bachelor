@@ -94,10 +94,14 @@ CompletionRate$CompletionRate[CompletionRate$Country == "Chile"] <- CompletionRa
 CompletionRate$CompletionRate[CompletionRate$Country == "Japan"] <- CompletionRate$X2012[CompletionRate$Country == "Japan"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Nigeria"] <- CompletionRate$X2010[CompletionRate$Country == "Nigeria"]
 
-CompletionRate$CompletionRate[CompletionRate$Country == "Australia"] <- 99
-CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 99
-CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99
+# http://www.adb.org/sites/default/files/publication/43030/ki2014-mdg2.pdf
+CompletionRate$CompletionRate[CompletionRate$Country == "Australia"] <- 96.9
+CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 98.5
 
+# http://mdgs.un.org/unsd/mdg/Data.aspx
+# http://mdgs.un.org/unsd/mdg/Handlers/ExportHandler.ashx?Type=Xml&Series=589
+# http://data.worldbank.org/indicator/SE.PRM.NENR/countries
+CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99.8
 
 
 CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select=c(Country, CompletionRate))
