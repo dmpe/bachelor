@@ -35,7 +35,9 @@ joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Ranking_EDB,
                                           Ranking_WEF, Ranking_LearningCurve, CompletionRate, Ranking_HIndex))
 
 
-# Check that all var. in df are numeric
+# To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'
+
+
 # http://stackoverflow.com/a/10331131
 lapply(joinedDB.5, class)
 

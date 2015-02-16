@@ -35,6 +35,8 @@ plot(sd)
 plot(as.bugs.array(sd@mcmc))
 
 
-
-
-
+# Amelia
+a.out <- amelia(x = joinedDB.5[2:7], m = 10, boot.type = "none")
+summary(a.out)
+plot(a.out)
+write.amelia( a.out, file.stem = 'train_and_test_imp')
