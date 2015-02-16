@@ -7,8 +7,8 @@ library(ggplot2)
 # http://thomasleeper.com/Rcourse/Tutorials/mi.html
 
 # GENERALLy, wrong. Because Predict with case deletion
-summary(joinedDB.5)
-lm <- lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex + CompletionRate + Unemployment,data=joinedDB.5 )
+#summary(joinedDB.5)
+lm <- lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate, data=joinedDB.5[2:7] )
 #summary(lm)
 
 # p <- qplot(Ranking_LearningCurve, Ranking_HIndex, data = joinedDB.5)
@@ -18,42 +18,29 @@ s.orig <- coef(summary(lm))[, 1:2]  # original results
 s.orig
 
 # MI
-
-#mp.plot(joinedDB.5)
-mi.info(joinedDB.5)
-imputMI <- mi(joinedDB.5, mi.info(joinedDB.5), n.imp = 30, n.iter = 30, seed =5154)
+# mp.plot(joinedDB.5)
+mi.info(joinedDB.5[2:7])
+imputMI <- mi(joinedDB.5[2:7], mi.info(joinedDB.5[2:7]), n.imp = 30, n.iter = 6, seed =5154)
 convergence.plot(imputMI)
 input.mi.df <- mi.data.frame(imputMI)
-input.mi.df$Ranking_LearningCurve <- round(input.mi.df$Ranking_LearningCurve,0)
-input.mi.out <- lm.mi(RRanking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex + CompletionRate + Unemployment, imputMI)
-display(input.mi.out)
-
-s.mi <- cbind(coefficients = coef(input.mi.out), standError = se.coef(input.mi.out))
-s.mi
-
+input.mi.out <- lm.mi(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate, imputMI)
+# display(input.mi.out)
+coef.mi <- input.mi.out@mi.pooled
+s.mi <- do.call(cbind, coef.mi)  
 
 # MICE
-print(imputMICE <- mice(joinedDB.5[2:7],  m=30, seed=5154, maxit = 30))
+print(imputMICE <- mice(joinedDB.5[2:7],  m=30, seed=5154, maxit = 6))
 # stripplot(imputMICE, pch = 20, cex = 1.2)
-input.mice.out <- with(imputMICE, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex + CompletionRate + Unemployment))
+input.mice.out <- with(imputMICE, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate))
 summary(input.mice.out)
 input.mice.pool <- pool(input.mice.out)
-s.mice <- round(summary(input.mice.pool), 2)[, 1:2]
+s.mice <- summary(input.mice.pool)[, 1:2]
 s.mice
 # densityplot(imputMICE, scales = list(x = list(relation = "free")))
 joinedDB.6 <- complete(imputMICE)
 
-allout <- cbind(s.mi[, 1], s.mice[, 1], s.orig[,1])
-colnames(allout) <- c("MI", "mice", "Original")
-allout
-
-# different
-# coef(lm(joinedDB.6$Ranking_HIndex ~ joinedDB.6$Ranking_LearningCurve)) 
-
-# p <- qplot(Ranking_LearningCurve, Ranking_HIndex, data = joinedDB.6)
-# p + geom_abline(intercept = 37228.77   , slope = -714.56 )
-# 
-# r <- qplot(Ranking_LearningCurve, Ranking_HIndex, data = input.mi.df)
-# r + geom_abline(intercept =34715.4501   , slope = 472.7491 )
+compareThemAll <- cbind(s.mi[, 1], s.mice[, 1], s.orig[,1])
+colnames(compareThemAll) <- c("MI", "mice", "Original")
+compareThemAll
 
 
