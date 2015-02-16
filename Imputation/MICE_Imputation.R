@@ -14,8 +14,10 @@ library(lattice)
 
 qwr <- joinedDB.5[2:7]
 
+# First, I will analyse my complete data frame, which I build in previously described ch. 6.3. 
+# As a result, we see no surprises here. Five values are missing in the Learning Curve Index.
 # "The number of the missing values can be counted and visualized as follows:" (p. 8)
-md.pattern(joinedDB.5[2:7])
+md.pattern(joinedDB.5[2:7]) # ‘country’ should be excluded for the analysis
 
 # "Another way to study the pattern involves calculating the number of observations per patterns
 # for all pairs of variables."
