@@ -33,7 +33,7 @@ s.mi
 
 
 # MICE
-print(imputMICE <- mice(joinedDB.5, m = 10, maxit = 10))
+print(imputMICE <- mice(joinedDB.5[2:7], m = 10, maxit = 10))
 # stripplot(imputMICE, pch = 20, cex = 1.2)
 input.mice.out <- with(imputMICE, lm(Ranking_LearningCurve ~ Ranking_HIndex))
 summary(input.mice.out)

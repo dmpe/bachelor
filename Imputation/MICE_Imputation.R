@@ -2,6 +2,7 @@ library(mice)
 library(VIM)
 library(mi)
 library(R2WinBUGS)
+library(lattice)
 # Ressources:
 
 # https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
@@ -11,7 +12,7 @@ library(R2WinBUGS)
 # http://thomasleeper.com/Rcourse/Tutorials/mi.html
 # http://pj.freefaculty.org/guides/Rcourse/multipleImputation/multipleImputation-1-lecture.pdf
 # http://www.stefvanbuuren.nl/mi/docs/Utrecht-15MayCourse%20handout.pdf
-joinedDB.5$Country <- factor(joinedDB.5$Country)
+# joinedDB.5$Country <- factor(joinedDB.5$Country)
 
 qwr <- joinedDB.5[2:7]
 # "The number of the missing values can be counted and visualized as follows:" (p. 8)
@@ -22,32 +23,27 @@ md.pattern(joinedDB.5[2:7])
 
 marginplot(qwr[4:5], col = mdc(1:2), cex = 1.2, cex.lab = 1.2, cex.numbers = 1.3, pch = 19)
 
-# mi
-# miinfo <- mi.info(joinedDB.5)
-# miinfo$imp.formula
-# sd<-mi(joinedDB.5, miinfo, n.iter = 100)
-# f<-mi.data.frame(sd)
-# converged(joinedDB.5, check = "data")
-# f$Ranking_LearningCurve <- round(f$Ranking_LearningCurve,0)
-# mi.continuous(Ranking_LearningCurve ~ Ranking_HIndex, data = joinedDB.5)
-# plot(sd)
-# plot(as.bugs.array(sd@mcmc))
-
-# mice
+# mice [mice]
 print(imp <- mice(joinedDB.5[2:7], m=20))
 imp$predictorMatrix
 imp$loggedEvents
 imp$iteration
 imp$imp$Ranking_LearningCurve
 imp$visitSequence
-stripplot(imp, pch = 20, cex = 1.2)
-#fit <- with(imp, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex))
-#print(pool(fit))
-#round(summary(pool(fit)), 2)
-densityplot(imp, scales = list(x = list(relation = "free")))
+# The column fmi contains the
+# fraction of missing information as defined in Rubin (1987), and the column lambda is the
+# proportion of the total variance that is attributable to the missing data (....; p. 14).
+fit <- with(imp, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex + CompletionRate + Unemployment))
+print(pool(fit))
+round(summary(pool(fit)), 2)
 joinedDB.6 <- complete(imp)
 
+# Graphical analysis
 plot(imp, c("Ranking_LearningCurve"))
+stripplot(imp, pch = 20, cex = 1.2)
+xyplot(imp, Ranking_LearningCurve ~  Unemployment | .imp, pch = 20, cex = 1.4)
+densityplot(imp, scales = list(x = list(relation = "free")))
+
 
 
 
