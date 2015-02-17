@@ -1,10 +1,8 @@
 library(fpc)
-library(mclust)
 library(cluster)
 library(NbClust)
+library(clustrd)
 
-# library(clustrd)
-# library(flexclust)
 
 # Use when new data frame is needed
 # source("RawData/DataFrame.R")
@@ -23,8 +21,8 @@ nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
 
 barplot(table(nc$Best.n[1,]),
         xlab="Numer of Clusters", ylab="Number of Criteria",
-        main="Number of Clusters according to 24 Criteria")
-
+        main="Number of Clusters according to 23 Criteria")
+# library(flexclust)
 # http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
 # Not possible in my case, because of non-existent type (e.g. default data would need have already some kind of Type/"Cluster" which we could then compare with the new cluster "quantify the agreement between type and cluster")
 # fit.km <- kmeans(scale(joinedDB.6), 2, nstart=25)
@@ -43,17 +41,6 @@ barplot(table(nc$Best.n[1,]),
 # }
 # plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares") 
 
-# 
-# klust <- kmeans(joinedDB.6, 2) # 2 cluster solution
-# # klust$cluster
-# aggregate(dfa,by=list(klust$cluster),FUN=mean) # get cluster means
-# mydata <- data.frame(dfa, klust$cluster) # append cluster assignment
-
-# Centroid Plot against 1st 2 discriminant functions
-# plotcluster(joinedDB.6, klust$centers, clnum=7) 
-
-# Some clusters
-# clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
 
 # produces same results, just different package. 
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
@@ -63,45 +50,45 @@ barplot(table(nc$Best.n[1,]),
 
 
 # Hierarchical Clustering
-euroclust <- hclust(dist(joinedDB.6), "ward.D2")
-plot(euroclust,hang = -1, labels=joinedDB.6$Country)
+euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
+plot(euroclust, hang = -1)
 rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
-# groups <- cutree(euroclust, k=2)
+groupsTree <- cutree(euroclust, k=2)
 
+
+# http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
+# K Means
+klust <- kmeans(dist(joinedDB.6), 2, nstart=25, iter.max=100) # 2 cluster solution
+aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
+mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
+
+# Some clusters
+# clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
+
+pmrt <- pam(dist(joinedDB.6), 2)
+clusplot(pmrt, klust$cluster, color=TRUE, shade=TRUE, labels=2)
+
+table(groupsTree,pmrt$clustering)
+plot(pmrt)
+joinedDB.5$Country[ groupsTree != klust$cluster]
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
-km    <- kmeans(joinedDB.6[2:7],2)
-dissE <- daisy(joinedDB.6[2:7]) 
-dE2   <- dissE^2
-sk2   <- silhouette(km$cl, dE2)
-plot(sk2)
+# Solhouette plot
+#  dissE <- daisy(scale(joinedDB.6)) 
+# dE2 <- dissE^2
+# sk2 <- silhouette(klust$cl, dE2)
+# plot(sk2)
 
-# Model Based
-fit <- Mclust(joinedDB.6[2:7], modelNames=c("VEV"))
-fit$bic
-plot(fit) # plot results
-summary(fit) # display the best model 
-
-
-# "A method that combines k-means cluster analysis with
-# aspects of Factor Analysis and PCA is offered by Vichi & Kiers (2001)" [p. 81].
-outf <- FactorialKM(joinedDB.6[2:7], nclus = 3, ndim = 2, nstart=1, smartStart=TRUE)
-# outr <- ReducedKM(joinedDB.6[2:7], nclus = 3, 2, nstart=1, smartStart=TRUE)
-plotrd(outf,what=c("all","none"),obslabel=rownames(joinedDB.6), density=TRUE)
+sort(table(klust$clust))
+clust <- names(sort(table(klust$clust)))
+clust
+row.names(mydata[klust$clust==clust[1],])
+row.names(mydata[klust$clust==clust[2],])
 
 
-km.boot <- clusterboot(joinedDB.6[2:7], B=20, bootmethod="boot",
-                       clustermethod=kmeansCBI,
-                       krange=3, seed=15555)
-plot(km.boot, xlim=c(0,1),breaks=seq(0,1,by=0.05))
-print(km.boot)
-
-
-
-
-
-
-
-
-
+# An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
+# and PCA is offered by Vichi & Kiers (2001)" [p. 81].
+outf <- FactorialKM(scale(joinedDB.6), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
+# outr <- ReducedKM(joinedDB.6, nclus = 2, 2, nstart=1, smartStart=TRUE)
+plotrd(outf,what=c("all","none"),obslabel=rownames(joinedDB.6), density=FALSE)
 
