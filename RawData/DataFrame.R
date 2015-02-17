@@ -39,6 +39,6 @@ joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Ranking_EDB,
 
 
 # http://stackoverflow.com/a/10331131
-lapply(joinedDB.5, class)
+lapply(joinedDB.6, class)
 
 
