@@ -1,73 +1,72 @@
 library(fpc)
 library(mclust)
 library(cluster)
-library(clustrd)
 library(NbClust)
-library(flexclust)
 
-# Use when required complete
+# library(clustrd)
+# library(flexclust)
+
+# Use when new data frame is needed
 # source("RawData/DataFrame.R")
 # source("Imputation/MICE_Imputation.R")
 set.seed(5154)
+
 # Fix for the plot, using agnes; Later
 # https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 # How many clusters ? My choice of 2
-# NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
-# NbClust(joinedDB.6, distance = "manhattan", method="ward.D2", index="all")
-nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
+# nc <- NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
+nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
+# nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
 barplot(table(nc$Best.n[1,]),
         xlab="Numer of Clusters", ylab="Number of Criteria",
-        main="Number of Clusters according to 23 Criteria (sum)")
+        main="Number of Clusters according to 24 Criteria")
 
 # http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
-# Not Possible in my case, because of non-existent type (e.g. default data set would need have already some kind of Type/"Cluster" which we could then compare for the "quantify the agreement between type and cluster")
+# Not possible in my case, because of non-existent type (e.g. default data would need have already some kind of Type/"Cluster" which we could then compare with the new cluster "quantify the agreement between type and cluster")
 # fit.km <- kmeans(scale(joinedDB.6), 2, nstart=25)
 # fit.km
 # ct.km <- table(joinedDB.5$Country, fit.km$cluster)
 # ct.km
 # randIndex(ct.km)
 
-# K mean clustering
-# joinedDB.6$Country <- as.character(joinedDB.6$Country)
 
 # http://www.statmethods.net/advstats/cluster.html
-dfa <- scale(joinedDB.6[2:7])
-pamk(dfa)
-wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var))
-for (i in 2:15) wss[i] <- sum(kmeans(dfa,centers=i)$withinss)
-plot(1:15, wss, type="b", xlab="Number of Clusters",
-     ylab="Within groups sum of squares") 
+# dfa <- scale(joinedDB.6)
+# pamk(dfa)
+# wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var))
+# for (i in 2:15) {
+#   wss[i] <- sum(kmeans(dfa,centers=i)$withinss)
+# }
+# plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares") 
 
-
-klust <- kmeans(joinedDB.6[2:7], 4) # 5 cluster solution
-klust$cluster
-# get cluster means
-aggregate(dfa,by=list(klust$cluster),FUN=mean)
-# append cluster assignment
-mydata <- data.frame(dfa, klust$cluster) 
+# 
+# klust <- kmeans(joinedDB.6, 2) # 2 cluster solution
+# # klust$cluster
+# aggregate(dfa,by=list(klust$cluster),FUN=mean) # get cluster means
+# mydata <- data.frame(dfa, klust$cluster) # append cluster assignment
 
 # Centroid Plot against 1st 2 discriminant functions
-plotcluster(joinedDB.6[2:7], klust$centers, clnum=1) 
+# plotcluster(joinedDB.6, klust$centers, clnum=7) 
 
-# Hierrarchy
-clusplot(pam(joinedDB.6[2:7],3, metric = "euclidean", stand = TRUE))
+# Some clusters
+# clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
 
+# produces same results, just different package. 
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x=joinedDB.6, diss = FALSE, stand = TRUE, method = "single", metric ="euclidean")
-plot(agn)
-plot(as.dendrogram(agn, hang = -1)) 
-
+# agn <- agnes(x=dist(joinedDB.6), diss = TRUE, stand = TRUE, method = "ward", metric ="euclidean")
+# plot(agn)
+# plot(as.dendrogram(agn, hang = -1)) 
 
 
 # Hierarchical Clustering
-euroclust<-hclust(dist(joinedDB.6), "single")
+euroclust <- hclust(dist(joinedDB.6), "ward.D2")
 plot(euroclust,hang = -1, labels=joinedDB.6$Country)
-groups <- cutree(euroclust, k=3)
-rect.hclust(euroclust, k=3, border="red") 
+rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
+# groups <- cutree(euroclust, k=2)
 
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
