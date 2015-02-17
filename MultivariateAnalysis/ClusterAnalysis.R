@@ -15,7 +15,7 @@ joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 # How many clusters ? My choice of 2
 # nc <- NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
-nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
+nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="ward.D2", index="all")
 # nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
@@ -44,41 +44,36 @@ barplot(table(nc$Best.n[1,]),
 
 # produces same results, just different package. 
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-# agn <- agnes(x=dist(joinedDB.6), diss = TRUE, stand = TRUE, method = "ward", metric ="euclidean")
-# plot(agn)
-# plot(as.dendrogram(agn, hang = -1)) 
+agn <- agnes(x=dist(scale(joinedDB.6)), diss = TRUE, method = "ward", metric ="euclidean")
+plot(agn)
+plot(as.dendrogram(agn, hang = -1)) 
 
 
 # Hierarchical Clustering
-euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
+euroclust <- hclust(dist(scale(joinedDB.6), method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
-groupsTree <- cutree(euroclust, k=2)
+# groupsTree <- cutree(euroclust, k=2)
 
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 # K Means
-klust <- kmeans(dist(joinedDB.6), 2, nstart=25, iter.max=100) # 2 cluster solution
-aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
-mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
+klust <- kmeans(dist(scale(joinedDB.6), method = "euclidean"), 2, nstart=25, iter.max=100) # 2 cluster solution
+# aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
+# mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
-# Some clusters
+# Some clusters par. around mean
 # clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
+# clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
 
-pmrt <- pam(dist(joinedDB.6), 2)
-clusplot(pmrt, klust$cluster, color=TRUE, shade=TRUE, labels=2)
-
-table(groupsTree,pmrt$clustering)
-plot(pmrt)
-joinedDB.5$Country[ groupsTree != klust$cluster]
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 # Solhouette plot
-#  dissE <- daisy(scale(joinedDB.6)) 
-# dE2 <- dissE^2
-# sk2 <- silhouette(klust$cl, dE2)
-# plot(sk2)
+sk2 <- silhouette(klust$cl, dist(scale(joinedDB.6), method = "euclidean"))
+plot(sk2)
 
+
+# Who is in, who is out ?
 sort(table(klust$clust))
 clust <- names(sort(table(klust$clust)))
 clust
@@ -88,7 +83,7 @@ row.names(mydata[klust$clust==clust[2],])
 
 # An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
 # and PCA is offered by Vichi & Kiers (2001)" [p. 81].
-outf <- FactorialKM(scale(joinedDB.6), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
+outf <- FactorialKM(dist(joinedDB.6, method = "euclidean"), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
 # outr <- ReducedKM(joinedDB.6, nclus = 2, 2, nstart=1, smartStart=TRUE)
-plotrd(outf,what=c("all","none"),obslabel=rownames(joinedDB.6), density=FALSE)
+plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
 
