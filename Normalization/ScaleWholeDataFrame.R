@@ -1,7 +1,25 @@
 
 
+source("RawData/DataFrame.R")
+source("Imputation/MICE_Imputation.R")
 
-scaledDF = scale(df[2:8]) 
-scaledDF
+
+scaledOnlyThoseNeeded <- scale(joinedDB.6[, c("Unemployment", "Freedom_Index", "WEF_Score", "CompletionRate", "Ranking_HIndex")])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

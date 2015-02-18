@@ -6,17 +6,17 @@ library(xlsx)
 # https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
 # http://www.scimagojr.com/countryrank.php?area=0&category=0&region=all&year=all&order=h&min=0&min_type=it > Download
 
-hindex_orig <- read.xlsx("RawData/DataSources/scimagojr.xlsx", sheetIndex = 1)
+hindex <- read.xlsx("RawData/DataSources/scimagojr.xlsx", sheetIndex = 1)
 
 #sapply(hindex, class) # factors -> to char
 
-hindex_orig$Country <- str_trim(hindex_orig$Country, side="both")
-hindex_orig$Country[hindex_orig$Country=="South Korea"] <- "Korea"
-hindex_orig$Country[hindex_orig$Country=="Russian Federation"] <- "Russia"
+hindex$Country <- str_trim(hindex$Country, side="both")
+hindex$Country[hindex$Country=="South Korea"] <- "Korea"
+hindex$Country[hindex$Country=="Russian Federation"] <- "Russia"
 
-hindex_orig <- hindex_orig[, !(colnames(hindex_orig) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
+hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
 
-hindex <- subset(hindex_orig, Country %in% selectedCountries, select = c(Country, Rank, H.index))
-
+hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H.index))
+hindex$H.index <- scale(hindex$H.index)
 hindex  <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
 

@@ -26,5 +26,4 @@ nor = (q - (max(q)+min(q) /2) ) / ((max(q)-min(q))/2)
 nor
 
 # Quantile normalization
-
 normalize.quantiles(as.matrix(df[2:8]))

@@ -58,3 +58,4 @@ df_unemp$Unemployment[df_unemp$Country == "Chile"] <- Chile
 df_unemp$Unemployment[df_unemp$Country == "Japan"] <- Japan
 df_unemp$Unemployment[df_unemp$Country == "Nigeria"] <- Nigeria
 
+df_unemp$Unemployment <- scale(df_unemp$Unemployment)

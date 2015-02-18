@@ -5,8 +5,8 @@ library(clustrd)
 
 
 # Use when new data frame is needed
-# source("RawData/DataFrame.R")
-# source("Imputation/MICE_Imputation.R")
+source("RawData/DataFrame.R")
+source("Imputation/MICE_Imputation.R")
 set.seed(5154)
 
 # Fix for the plot, using agnes; Later
@@ -50,6 +50,7 @@ plot(as.dendrogram(agn, hang = -1))
 
 
 # Hierarchical Clustering
+# http://rpubs.com/gaston/dendrograms
 euroclust <- hclust(dist(scale(joinedDB.6), method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters

@@ -1,7 +1,7 @@
 
 library(stringr)
 library(plyr)
-library(xlsx)
+# library(xlsx)
 library(rvest)
 
 fred <- html("http://www.heritage.org/index/explore")
@@ -14,6 +14,7 @@ freedom$Country <- str_trim(freedom$Country, side="both")
 freedom$Country[freedom$Country=="South Korea"] <-  "Korea"
 freedom$Freedom_Index <- suppressWarnings(as.numeric(freedom$Freedom_Index))
 freedom <- subset(freedom, Country %in% selectedCountries, select=c(Country, Freedom_Index))
+freedom$Freedom_Index <-scale(freedom$Freedom_Index)
 # sapply(freedom, class)
 
 # Excel Way

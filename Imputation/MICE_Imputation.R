@@ -4,13 +4,12 @@ library(R2WinBUGS)
 library(lattice)
 # Ressources:
 
+# source("RawData/DataFrame.R")
 # https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 # http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value
 # http://www.stat.columbia.edu/~gelman/arm/missing.pdf
 # http://pj.freefaculty.org/guides/Rcourse/multipleImputation/multipleImputation-1-lecture.pdf
 # http://www.stefvanbuuren.nl/mi/docs/Utrecht-15MayCourse%20handout.pdf
-# to "Read the data in as factor variables instead of characters."
-# joinedDB.5$Country <- factor(joinedDB.5$Country)
 
 qwr <- joinedDB.5[2:7]
 
@@ -44,7 +43,7 @@ round(summary(pool(fit)), 2)
 # Post Imputation Graphical analysis
 plot(imp, c("LearningCurve_Index"))
 stripplot(imp, pch = 20, cex = 1.2)
-xyplot(imp, LearningCurve_Index ~  Unemployment | .imp, pch = 20, cex = 1.4)
+# xyplot(imp, LearningCurve_Index ~  Unemployment | .imp, pch = 20, cex = 1.4)
 densityplot(imp, scales = list(x = list(relation = "free")))
 
 # This creates new data frame with "old" column of countries (nat. preserving orders)
