@@ -64,7 +64,7 @@ klust <- kmeans(dist(scale(joinedDB.6), method = "euclidean"), 2, nstart=25, ite
 
 # Some clusters par. around mean
 # clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
-# clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
+ clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
 
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
