@@ -21,8 +21,7 @@ joinedDB.imputed <- rfImpute(CompletionRate ~ ., joinedDB.5)
 print(imp <- mice(iris.na, m=10))
 iris.new <- complete(imp)
 
-mean(na.omit(joinedDB.5$Ranking_LearningCurve))
-summary(joinedDB.5[2:7])
-
-23*6-5
+mean(na.omit(joinedDB.5$LearningCurve_Index))
+summary(joinedDB.5)
+sapply(na.omit(joinedDB.5), mean)
 str(joinedDB.5)

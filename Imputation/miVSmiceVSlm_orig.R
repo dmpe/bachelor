@@ -8,7 +8,7 @@ library(ggplot2)
 
 # GENERALLy, wrong. Because Predict with case deletion
 #summary(joinedDB.5)
-lm <- lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate, data=joinedDB.5[2:7] )
+lm <- lm(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_HIndex + CompletionRate + Unemployment, data=joinedDB.5[2:7] )
 #summary(lm)
 
 # p <- qplot(Ranking_LearningCurve, Ranking_HIndex, data = joinedDB.5)
@@ -23,7 +23,7 @@ mi.info(joinedDB.5[2:7])
 imputMI <- mi(joinedDB.5[2:7], mi.info(joinedDB.5[2:7]), n.imp = 30, n.iter = 6, seed =5154)
 convergence.plot(imputMI)
 input.mi.df <- mi.data.frame(imputMI)
-input.mi.out <- lm.mi(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate, imputMI)
+input.mi.out <- lm.mi(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_HIndex + CompletionRate + Unemployment, imputMI)
 # display(input.mi.out)
 coef.mi <- input.mi.out@mi.pooled
 s.mi <- do.call(cbind, coef.mi)  
@@ -31,7 +31,7 @@ s.mi <- do.call(cbind, coef.mi)
 # MICE
 print(imputMICE <- mice(joinedDB.5[2:7],  m=30, seed=5154, maxit = 6))
 # stripplot(imputMICE, pch = 20, cex = 1.2)
-input.mice.out <- with(imputMICE, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Unemployment + Ranking_HIndex + CompletionRate))
+input.mice.out <- with(imputMICE, lm(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_HIndex + CompletionRate + Unemployment))
 summary(input.mice.out)
 input.mice.pool <- pool(input.mice.out)
 s.mice <- summary(input.mice.pool)[, 1:2]

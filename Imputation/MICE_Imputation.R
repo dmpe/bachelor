@@ -28,23 +28,23 @@ marginplot(qwr[4:5], col = mdc(1:2), cex = 1.2, cex.lab = 1.2, cex.numbers = 1.3
 # mice [mice]
 print(imp <- mice(joinedDB.5[2:7], m=30, seed=5154))
 
-imp$predictorMatrix
-imp$loggedEvents
-imp$iteration
-imp$imp$Ranking_LearningCurve
-imp$visitSequence
+# imp$predictorMatrix
+# imp$loggedEvents
+# imp$iteration
+# imp$imp$LearningCurve_Index
+# imp$visitSequence
 
 # The column fmi contains the
 # fraction of missing information as defined in Rubin (1987), and the column lambda is the
 # proportion of the total variance that is attributable to the missing data (....; p. 14).
-fit <- with(imp, lm(Ranking_LearningCurve ~ Ranking_EDB + Ranking_WEF + Ranking_HIndex + CompletionRate + Unemployment))
+fit <- with(imp, lm(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_HIndex + CompletionRate + Unemployment))
 print(pool(fit))
 round(summary(pool(fit)), 2)
 
 # Post Imputation Graphical analysis
-plot(imp, c("Ranking_LearningCurve"))
+plot(imp, c("LearningCurve_Index"))
 stripplot(imp, pch = 20, cex = 1.2)
-xyplot(imp, Ranking_LearningCurve ~  Unemployment | .imp, pch = 20, cex = 1.4)
+xyplot(imp, LearningCurve_Index ~  Unemployment | .imp, pch = 20, cex = 1.4)
 densityplot(imp, scales = list(x = list(relation = "free")))
 
 # This creates new data frame with "old" column of countries (nat. preserving orders)

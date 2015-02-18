@@ -19,7 +19,7 @@ nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="ward.D2", index
 # nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
-barplot(table(nc$Best.n[1,]),
+barplot(table(nc$Best.n[1,])[1:8],
         xlab="Numer of Clusters", ylab="Number of Criteria",
         main="Number of Clusters according to 23 Criteria")
 # library(flexclust)
@@ -58,9 +58,9 @@ rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 # K Means
-klust <- kmeans(dist(scale(joinedDB.6), method = "euclidean"), 2, nstart=25, iter.max=100) # 2 cluster solution
+klust <- kmeans(dist(scale(joinedDB.6), method = "euclidean"), 2, nstart=25, iter.max=100)
 # aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
-# mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
+mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
 # Some clusters par. around mean
 # clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))

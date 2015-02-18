@@ -2,18 +2,25 @@
 library(stringr)
 library(plyr)
 library(xlsx)
+library(rvest)
 
-# https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
-# http://www.scimagojr.com/countryrank.php?area=0&category=0&region=all&year=all&order=h&min=0&min_type=it > Download
+fred <- html("http://www.heritage.org/index/explore")
+freedom <- fred %>% 
+  html_node("#ctl00_cphContent_ExpMulti_GridView1") %>%
+  html_table()
 
-freedom <- read.xlsx("RawData/DataSources/index2014_data.xls", sheetIndex = 1)
-
-freedom <- plyr::rename(freedom, c("Country.Name"="Country","X2014.Score" = "Freedom_Index"))
-# sapply(freedom, class) # factors -> to char
-
+freedom <- plyr::rename(freedom, c("overall score"="Freedom_Index", "name"="Country"))
 freedom$Country <- str_trim(freedom$Country, side="both")
-freedom$Country[freedom$Country=="Korea, South"] <-  "Korea"
+freedom$Country[freedom$Country=="South Korea"] <-  "Korea"
+freedom$Freedom_Index <- suppressWarnings(as.numeric(freedom$Freedom_Index))
 freedom <- subset(freedom, Country %in% selectedCountries, select=c(Country, Freedom_Index))
+# sapply(freedom, class)
 
-freedom$Freedom_Index <- as.numeric(as.character(freedom$Freedom_Index))
-sapply(freedom, class)
+# Excel Way
+# freedom <- read.xlsx("RawData/DataSources/index2015_data.xlsx", sheetIndex = 1)
+# freedom <- plyr::rename(freedom, c("Country.Name"="Country","X2015.Score" = "Freedom_Index"))
+# freedom$Country <- str_trim(freedom$Country, side="both")
+# freedom$Country[freedom$Country=="Korea, South"] <-  "Korea"
+# freedom <- subset(freedom, Country %in% selectedCountries, select=c(Country, Freedom_Index))
+# freedom$Freedom_Index <- as.numeric(as.character(freedom$Freedom_Index))
+# #sapply(freedom, class)
