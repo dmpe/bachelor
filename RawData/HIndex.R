@@ -18,5 +18,5 @@ hindex_orig <- hindex_orig[, !(colnames(hindex_orig) %in% c("Documents", "Citabl
 
 hindex <- subset(hindex_orig, Country %in% selectedCountries, select = c(Country, Rank, H.index))
 
-hindex  <- plyr::rename(hindex , c("Rank" = "Ranking_HIndex"))
+hindex  <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
 

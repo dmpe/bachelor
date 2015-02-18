@@ -6,7 +6,7 @@ library(xlsx)
 learningCurveData <- read.xlsx("RawData/DataSources/learningcurve.xlsx", sheetIndex = 1, 
                                startRow = 18, endRow = 58)
 
-learningCurveData <- plyr::rename(learningCurveData, c("NA."="Country","Overall.Index" = "LearningCurveIndex"))
+learningCurveData <- plyr::rename(learningCurveData, c("NA."="Country","Overall.Index" = "LearningCurve_Index"))
 # sapply(learningCurveData, class) # factors -> to char
 
 learningCurveData$Country <- str_trim(learningCurveData$Country, side="both")
