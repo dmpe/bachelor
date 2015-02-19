@@ -17,7 +17,7 @@ library(lattice)
 # As a result, we see no surprises here. Five values are missing in the Learning Curve Index.
 # "The number of the missing values can be counted and visualized as follows:" (p. 8)
 md.pattern(joinedDB.5[2:7]) # ‘country’ should be excluded for the analysis
-
+set.seed(5154)
 # "Another way to study the pattern involves calculating the number of observations per patterns
 # for all pairs of variables."
 # md.pairs(joinedDB.5[2:7])
@@ -51,7 +51,7 @@ densityplot(imp, scales = list(x = list(relation = "free")))
 joinedDB.6 <- complete(imp)
 joinedDB.6$Country <- joinedDB.5$Country
 joinedDB.6 <- joinedDB.6[ ,c(7,1,2,3,4,5,6)] # Reorder them
-
+joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 
 

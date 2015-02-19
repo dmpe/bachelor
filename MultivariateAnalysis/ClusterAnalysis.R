@@ -9,9 +9,9 @@ source("RawData/DataFrame.R")
 source("Imputation/MICE_Imputation.R")
 set.seed(5154)
 
-# Fix for the plot, using agnes; Later
+# Fix for the plot, using agnes; Later; moved to MICE
 # https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
-joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
+# joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 # How many clusters ? My choice of 2
 # nc <- NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
@@ -19,9 +19,8 @@ nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
 # nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
-barplot(table(nc$Best.n[1,]),
-        xlab="Numer of Clusters", ylab="Number of Criteria",
-        main="Number of Clusters according to 23 Criteria")
+barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria", main="Number of Clusters according to 23 Criteria")
+
 # library(flexclust)
 # http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
 # Not possible in my case, because of non-existent type (e.g. default data would need have already some kind of Type/"Cluster" which we could then compare with the new cluster "quantify the agreement between type and cluster")
@@ -65,7 +64,7 @@ mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
 # Some clusters par. around mean
 # clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
- clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
+clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
 
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
@@ -84,7 +83,7 @@ row.names(mydata[klust$clust==clust[2],])
 
 # An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
 # and PCA is offered by Vichi & Kiers (2001)" [p. 81].
-outf <- FactorialKM(dist(joinedDB.6, method = "euclidean"), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
-# outr <- ReducedKM(joinedDB.6, nclus = 2, 2, nstart=1, smartStart=TRUE)
-plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
+# outf <- FactorialKM(dist(joinedDB.6, method = "euclidean"), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
+# # outr <- ReducedKM(joinedDB.6, nclus = 2, 2, nstart=1, smartStart=TRUE)
+# plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6$Country), density=FALSE)
 
