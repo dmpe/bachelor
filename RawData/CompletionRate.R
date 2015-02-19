@@ -42,7 +42,7 @@ CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 98.5
 # http://mdgs.un.org/unsd/mdg/Handlers/ExportHandler.ashx?Type=Xml&Series=589
 # http://data.worldbank.org/indicator/SE.PRM.NENR/countries
 CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99.8
-CompletionRate$CompletionRate <- scale(CompletionRate$CompletionRate)
+CompletionRate$CompletionRate <- as.numeric(scale(CompletionRate$CompletionRate))
 
 
 CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select=c(Country, CompletionRate))

@@ -27,6 +27,8 @@ input.mi.out <- lm.mi(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_
 # display(input.mi.out)
 coef.mi <- input.mi.out@mi.pooled
 s.mi <- do.call(cbind, coef.mi)  
+input.mi.df$Country <- joinedDB.5$Country
+input.mi.df <- input.mi.df[,c(7,1,2,3,4,5,6)]
 
 # MICE
 print(imputMICE <- mice(joinedDB.5[2:7],  m=30, seed=5154, maxit = 6))

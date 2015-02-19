@@ -17,6 +17,6 @@ hindex$Country[hindex$Country=="Russian Federation"] <- "Russia"
 hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
 
 hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H.index))
-hindex$H.index <- scale(hindex$H.index)
+hindex$H.index <- as.numeric(scale(hindex$H.index))
 hindex  <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
 

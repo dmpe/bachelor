@@ -11,7 +11,7 @@ library(lattice)
 # http://pj.freefaculty.org/guides/Rcourse/multipleImputation/multipleImputation-1-lecture.pdf
 # http://www.stefvanbuuren.nl/mi/docs/Utrecht-15MayCourse%20handout.pdf
 
-qwr <- joinedDB.5[2:7]
+# qwr <- joinedDB.5[2:7]
 
 # First, I will analyse my complete data frame, which I build in previously described ch. 6.3. 
 # As a result, we see no surprises here. Five values are missing in the Learning Curve Index.
@@ -22,7 +22,7 @@ md.pattern(joinedDB.5[2:7]) # ‘country’ should be excluded for the analysis
 # for all pairs of variables."
 # md.pairs(joinedDB.5[2:7])
 
-marginplot(qwr[4:5], col = mdc(1:2), cex = 1.2, cex.lab = 1.2, cex.numbers = 1.3, pch = 19)
+# marginplot(qwr[4:5], col = mdc(1:2), cex = 1.2, cex.lab = 1.2, cex.numbers = 1.3, pch = 19)
 
 # mice [mice]
 print(imp <- mice(joinedDB.5[2:7], m=30, seed=5154))

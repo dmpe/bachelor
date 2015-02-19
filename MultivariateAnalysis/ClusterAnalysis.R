@@ -15,11 +15,11 @@ joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 # How many clusters ? My choice of 2
 # nc <- NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
-nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="ward.D2", index="all")
+nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
 # nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
-barplot(table(nc$Best.n[1,])[1:8],
+barplot(table(nc$Best.n[1,]),
         xlab="Numer of Clusters", ylab="Number of Criteria",
         main="Number of Clusters according to 23 Criteria")
 # library(flexclust)
@@ -44,14 +44,14 @@ barplot(table(nc$Best.n[1,])[1:8],
 
 # produces same results, just different package. 
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x=dist(scale(joinedDB.6)), diss = TRUE, method = "ward", metric ="euclidean")
+agn <- agnes(x=dist(joinedDB.6), diss = TRUE, method = "ward", metric ="euclidean")
 plot(agn)
 plot(as.dendrogram(agn, hang = -1)) 
 
 
 # Hierarchical Clustering
 # http://rpubs.com/gaston/dendrograms
-euroclust <- hclust(dist(scale(joinedDB.6), method="euclidean"), "ward.D2")
+euroclust <- hclust(dist(joinedDB.6, method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
 # groupsTree <- cutree(euroclust, k=2)
@@ -59,7 +59,7 @@ rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 # K Means
-klust <- kmeans(dist(scale(joinedDB.6), method = "euclidean"), 2, nstart=25, iter.max=100)
+klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart=25, iter.max=100)
 # aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
@@ -70,7 +70,7 @@ mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 # Solhouette plot
-sk2 <- silhouette(klust$cl, dist(scale(joinedDB.6), method = "euclidean"))
+sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = "euclidean"))
 plot(sk2)
 
 

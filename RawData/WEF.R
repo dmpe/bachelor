@@ -15,6 +15,6 @@ wef$Country[wef$Country=="Russian Federation"] <- "Russia"
 wef$WEF_Score <- as.numeric(as.character(wef$WEF_Score))
 
 wef <- subset(wef, Country %in% selectedCountries, select=c(Country, Ranking_WEF, WEF_Score))
-wef$WEF_Score <- scale(wef$WEF_Score)
+wef$WEF_Score <- as.numeric(scale(wef$WEF_Score))
 
 # sapply(wef, class)
