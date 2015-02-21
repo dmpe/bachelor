@@ -13,7 +13,7 @@ summary(dqw)
 
 # https://stats.stackexchange.com/questions/100841/imputation-by-regression-in-r
 # Error: object 'nLev' not found
-ads <- regressionImp(Ranking_LearningCurve ~ Ranking_HIndex + CompletionRate, data = joinedDB.5[2:7])
+ads <- regressionImp(LearningCurve_Index ~ Ranking_HIndex + CompletionRate, data = joinedDB.5)
 
 aregImpute(joinedDB.4$Ranking_LearningCurve ~ joinedDB.4$Ranking_WEF + joinedDB.4$CompletionRate)
 names(joinedDB.5)

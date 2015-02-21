@@ -10,7 +10,7 @@ ipak <- function(pkg){
 # usage
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", 
               "RColorBrewer", "scales", "grid", "mclust", "psych", "GPArotation",
-              "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot"
+              "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot",
               "xlsx", "RCurl", "Rcpp", "VIM", "data.table", "coda")
 ipak(packages) 
 
