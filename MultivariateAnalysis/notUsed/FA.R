@@ -6,7 +6,7 @@ source("http://www.tcnj.edu/~ruscio/EFA%20Comparison%20Data.R")
 
 solution <- fa(r = corelationMat, nfactors = 6, rotate = "oblimin", fm = "minres", SMC=FALSE) 
 solution
-scree(corelationMat, factors=TRUE,pc=TRUE)
+
 # http://personality-project.org/r/vss.html
 # my.vss <- VSS(na.omit(joinedDB.8[2:7]),n=6, rotate="none",diagonal=FALSE)
 # VSS.plot(my.vss)
@@ -21,4 +21,24 @@ fa.diagram(faPCdirect)
 EFA.Comp.Data(Data=na.omit(joinedDB.8[2:7]), F.Max=6, Graph=T)
 vss(na.omit(joinedDB.8[2:7]), n=2)
 fa.parallel(na.omit(joinedDB.8[2:7]))
+
+
+
+
+
+
+
+ev <- eigen(cor(joinedDB.6)) # get eigenvalues
+ap <- parallel(subject=nrow(joinedDB.6),var=ncol(joinedDB.6),rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+nS$Components
+nS$Analysis
+plotnScree(nS) 
+
+
+
+
+
+
+
 
