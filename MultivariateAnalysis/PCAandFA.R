@@ -35,9 +35,10 @@ comp <- data.frame(pcp$x[,1:4])
 plot(comp, pch=16, col=rgb(0,0,0,0.5))
 plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
-factanal(joinedDB.6, rotation = "varimax", factors = 2)
-
-
+factorAn <- factanal(joinedDB.6, rotation = "none",factors =2)
+factorAn$loadings
+communality <- round(cbind(1 - factorAn$uniquenesses), 3)
+sum(communality)/6
 # An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
 # and PCA is offered by Vichi & Kiers (2001)" [p. 81].
 outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
