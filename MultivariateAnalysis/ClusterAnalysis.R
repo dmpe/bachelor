@@ -81,9 +81,3 @@ row.names(mydata[klust$clust==clust[1],])
 row.names(mydata[klust$clust==clust[2],])
 
 
-# An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
-# and PCA is offered by Vichi & Kiers (2001)" [p. 81].
-# outf <- FactorialKM(dist(joinedDB.6, method = "euclidean"), nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
-# # outr <- ReducedKM(joinedDB.6, nclus = 2, 2, nstart=1, smartStart=TRUE)
-# plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6$Country), density=FALSE)
-

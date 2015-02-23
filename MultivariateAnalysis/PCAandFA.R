@@ -1,5 +1,5 @@
 library(psych)
-library(GPArotation)
+library(FactoMineR)
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 set.seed(5154)
 
@@ -35,14 +35,30 @@ comp <- data.frame(pcp$x[,1:4])
 plot(comp, pch=16, col=rgb(0,0,0,0.5))
 plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
+factanal(joinedDB.6, rotation = "varimax", factors = 2)
 
 
+# An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
+# and PCA is offered by Vichi & Kiers (2001)" [p. 81].
+outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
+print(outf)
+plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
+
+
+
+# FactoMineR
+# http://factominer.free.fr/classical-methods/principal-components-analysis.html
 pcaFAS<-PCA(joinedDB.6, scale.unit = FALSE)
 pcaFAS$eig
 plot(pcaFAS, axes=c(1, 2), choix="ind", habillage="ind")
 
 
 
-factanal(joinedDB.6, rotation = "varimax", factors = 2)
+
+
+
+
+
+
 
 
