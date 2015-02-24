@@ -32,7 +32,7 @@ Jordan <- Quandl("WORLDBANK/JOR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY"
 Israel <- Quandl("WORLDBANK/ISR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Singapore <- Quandl("WORLDBANK/SGP_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 
-df_unemp <- data.frame(Country = Country, Unemployment = seq(1,23), stringsAsFactors=FALSE)
+df_unemp <- data.frame(Country = Country, Unemployment = seq(1,23), Unemployment_NonScaled = seq(1,23), stringsAsFactors=FALSE)
 
 df_unemp$Unemployment[df_unemp$Country == "Korea"] <- Korea
 df_unemp$Unemployment[df_unemp$Country == "Singapore"] <- Singapore
@@ -58,5 +58,7 @@ df_unemp$Unemployment[df_unemp$Country == "Chile"] <- Chile
 df_unemp$Unemployment[df_unemp$Country == "Japan"] <- Japan
 df_unemp$Unemployment[df_unemp$Country == "Nigeria"] <- Nigeria
 
+df_unemp$Unemployment_NonScaled <- df_unemp$Unemployment
 df_unemp$Unemployment <- as.numeric(scale(df_unemp$Unemployment))
+
 sapply(df_unemp, class)

@@ -31,6 +31,7 @@ tmp$d
 
 pcp <- prcomp(joinedDB.6)
 summary(pcp)
+round(pcp$rotation, 3)
 comp <- data.frame(pcp$x[,1:4])
 plot(comp, pch=16, col=rgb(0,0,0,0.5))
 plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)

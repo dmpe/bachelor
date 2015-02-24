@@ -1,4 +1,3 @@
-
 library(stringr)
 library(plyr)
 library(xlsx)
@@ -16,7 +15,8 @@ hindex$Country[hindex$Country=="Russian Federation"] <- "Russia"
 
 hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
 
-hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H.index))
-hindex$H.index <- as.numeric(scale(hindex$H.index))
 hindex  <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
+hindex$H.index_NonScaled <- as.numeric(hindex$Ranking_HIndex)
+hindex$H.index <- as.numeric(scale(hindex$Ranking_HIndex))
 
+hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H.index, H.index_NonScaled))
