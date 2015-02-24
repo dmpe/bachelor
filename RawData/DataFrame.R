@@ -15,20 +15,20 @@ source("RawData/CompletionRate.R")
 source("RawData/HIndex.R")
 
 
-joinedDF <- dplyr::left_join(df_unemp, freedom, by = "Country")
+joinedDB.5 <- dplyr::left_join(df_unemp, freedom, by = "Country")
 
-joinedDB.2 <- dplyr::left_join(joinedDF, wef, by = "Country")
-joinedDB.2 <- plyr::arrange(joinedDB.2,joinedDB.2$Country)
+joinedDB.5 <- dplyr::left_join(joinedDB.5, wef, by = "Country")
+joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
 
-joinedDB.3 <- dplyr::left_join(joinedDB.2, learningCurveData, by = "Country")
-joinedDB.3 <- plyr::arrange(joinedDB.3,joinedDB.3$Country)
-joinedDB.3 <- subset(joinedDB.3, select=c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index))
+joinedDB.5 <- dplyr::left_join(joinedDB.5, learningCurveData, by = "Country")
+joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
+joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index))
 
-joinedDB.4 <- dplyr::left_join(joinedDB.3, CompletionRate, by = "Country")
-joinedDB.4 <- plyr::arrange(joinedDB.4,joinedDB.4$Country)
+joinedDB.5 <- dplyr::left_join(joinedDB.5, CompletionRate, by = "Country")
+joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
 
-joinedDB.5 <- dplyr::left_join(joinedDB.4, hindex, by = "Country")
-joinedDB.5 <- plyr::arrange(joinedDB.5,joinedDB.5$Country)
+joinedDB.5 <- dplyr::left_join(joinedDB.5, hindex, by = "Country")
+joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
 joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Freedom_Index,
                                           WEF_Score, LearningCurve_Index, CompletionRate, Ranking_HIndex))
 

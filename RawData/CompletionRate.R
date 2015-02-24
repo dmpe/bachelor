@@ -11,7 +11,6 @@ CompletionRate$Country[CompletionRate$Country=="Taiwan, China"] <-  "Taiwan"
 CompletionRate$Country[CompletionRate$Country=="Korea, Rep."] <-  "Korea"
 CompletionRate$Country[CompletionRate$Country=="Russian Federation"] <- "Russia"
 
-
 CompletionRate$CompletionRate[CompletionRate$Country == "Korea"] <- CompletionRate$X2012[CompletionRate$Country == "Korea"]
 # Proxy https://www.seab.gov.sg/content/pressReleases/Release_of_2014_PSLE_Results_21112014.pdf
 CompletionRate$CompletionRate[CompletionRate$Country == "Singapore"] <- 97.6
@@ -42,12 +41,13 @@ CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 98.5
 # http://mdgs.un.org/unsd/mdg/Handlers/ExportHandler.ashx?Type=Xml&Series=589
 # http://data.worldbank.org/indicator/SE.PRM.NENR/countries
 CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99.8
-CompletionRate$CompletionRate_NonScaled <- as.numeric(CompletionRate$CompletionRate)
-CompletionRate$CompletionRate <- as.numeric(scale(CompletionRate$CompletionRate))
 
+CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select=c(Country, CompletionRate))
 
-CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select=c(Country, CompletionRate, CompletionRate_NonScaled))
+CompletionRate$CompletionRate_NonScaled <- CompletionRate$CompletionRate
+CompletionRate$CompletionRate <- as.numeric(scale(CompletionRate$CompletionRate_NonScaled))
 
+sapply(CompletionRate, class)
 # CompletionRate$CompletionRate_Scaled <- scale(CompletionRate$CompletionRate)
 
 

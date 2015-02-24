@@ -14,9 +14,11 @@ hindex$Country[hindex$Country=="South Korea"] <- "Korea"
 hindex$Country[hindex$Country=="Russian Federation"] <- "Russia"
 
 hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
+hindex <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
 
-hindex  <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
-hindex$H.index_NonScaled <- as.numeric(hindex$Ranking_HIndex)
-hindex$H.index <- as.numeric(scale(hindex$Ranking_HIndex))
+hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, Ranking_HIndex))
 
-hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H.index, H.index_NonScaled))
+hindex$Ranking_HIndex_NonScaled <- hindex$Ranking_HIndex
+hindex$Ranking_HIndex <- as.numeric(scale(hindex$Ranking_HIndex_NonScaled))
+
+sapply(hindex, class)

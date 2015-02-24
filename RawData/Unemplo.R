@@ -34,31 +34,30 @@ Singapore <- Quandl("WORLDBANK/SGP_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67
 
 df_unemp <- data.frame(Country = Country, Unemployment = seq(1,23), Unemployment_NonScaled = seq(1,23), stringsAsFactors=FALSE)
 
-df_unemp$Unemployment[df_unemp$Country == "Korea"] <- Korea
-df_unemp$Unemployment[df_unemp$Country == "Singapore"] <- Singapore
-df_unemp$Unemployment[df_unemp$Country == "China"] <- China
-df_unemp$Unemployment[df_unemp$Country == "Germany"] <- Germany
-df_unemp$Unemployment[df_unemp$Country == "Switzerland"] <- Switzerland
-df_unemp$Unemployment[df_unemp$Country == "Mexico"] <- Mexico
-df_unemp$Unemployment[df_unemp$Country == "Brazil"] <- Brazil
-df_unemp$Unemployment[df_unemp$Country == "Russia"] <- Russia
-df_unemp$Unemployment[df_unemp$Country == "United States"] <- USA
-df_unemp$Unemployment[df_unemp$Country == "United Kingdom"] <- UK
-df_unemp$Unemployment[df_unemp$Country == "United Arab Emirates"] <- UAE
-df_unemp$Unemployment[df_unemp$Country == "Australia"] <- Australia
-df_unemp$Unemployment[df_unemp$Country == "South Africa"] <- SA
-df_unemp$Unemployment[df_unemp$Country == "Kenya"] <- Kenya 
-df_unemp$Unemployment[df_unemp$Country == "Finland"] <- Finland
-df_unemp$Unemployment[df_unemp$Country == "Canada"] <- Canada
-df_unemp$Unemployment[df_unemp$Country == "Israel"] <- Israel
-df_unemp$Unemployment[df_unemp$Country == "New Zealand"] <- NewZeland
-df_unemp$Unemployment[df_unemp$Country == "Jordan"] <- Jordan
-df_unemp$Unemployment[df_unemp$Country == "Czech Republic"] <- Czech
-df_unemp$Unemployment[df_unemp$Country == "Chile"] <- Chile
-df_unemp$Unemployment[df_unemp$Country == "Japan"] <- Japan
-df_unemp$Unemployment[df_unemp$Country == "Nigeria"] <- Nigeria
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Korea"] <- Korea
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Singapore"] <- Singapore
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "China"] <- China
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Germany"] <- Germany
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Switzerland"] <- Switzerland
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Mexico"] <- Mexico
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Brazil"] <- Brazil
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Russia"] <- Russia
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "United States"] <- USA
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "United Kingdom"] <- UK
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "United Arab Emirates"] <- UAE
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Australia"] <- Australia
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "South Africa"] <- SA
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Kenya"] <- Kenya 
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Finland"] <- Finland
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Canada"] <- Canada
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Israel"] <- Israel
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "New Zealand"] <- NewZeland
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Jordan"] <- Jordan
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Czech Republic"] <- Czech
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Chile"] <- Chile
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Japan"] <- Japan
+df_unemp$Unemployment_NonScaled[df_unemp$Country == "Nigeria"] <- Nigeria
 
-df_unemp$Unemployment_NonScaled <- df_unemp$Unemployment
-df_unemp$Unemployment <- as.numeric(scale(df_unemp$Unemployment))
+df_unemp$Unemployment <- as.numeric(scale(df_unemp$Unemployment_NonScaled))
 
 sapply(df_unemp, class)

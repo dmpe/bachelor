@@ -2,7 +2,6 @@ library(stringr)
 library(plyr)
 library(xlsx)
 
-
 learningCurveData <- read.xlsx("RawData/DataSources/learningcurve.xlsx", sheetIndex = 1, 
                                startRow = 18, endRow = 58)
 
