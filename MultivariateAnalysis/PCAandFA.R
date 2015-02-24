@@ -4,7 +4,7 @@ library(FactoMineR)
 set.seed(5154)
 
 source("RawData/DataFrame.R")
-source("RawData/DataFrame_NonScaled.R")
+# source("RawData/DataFrame_NonScaled.R")
 source("Imputation/MICE_Imputation.R")
 # http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
@@ -26,24 +26,24 @@ round(pc$scores,3)
 
 
 
-(pc$sdev)^2
-sum((pc$loading[,1])^2)
-# http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis
-#eigenvalues
-tmp <- svd(joinedDB.6)
-tmp$d
+# (pc$sdev)^2
+# sum((pc$loading[,1])^2)
+# # http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis
+# #eigenvalues
+# tmp <- svd(joinedDB.6)
+# tmp$d
 
 
-pcp <- prcomp(joinedDB.6)
-summary(pcp)
-round(pcp$rotation, 3)
-comp <- data.frame(pcp$x[,1:4])
-plot(comp, pch=16, col=rgb(0,0,0,0.5))
-plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
+# pcp <- prcomp(joinedDB.6)
+# summary(pcp)
+# round(pcp$rotation, 3)
+# comp <- data.frame(pcp$x[,1:4])
+# plot(comp, pch=16, col=rgb(0,0,0,0.5))
+# plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =2)
-factorAn$loadings
+factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =3)
+factorAn$factors
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 sum(communality)/6
 # An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
@@ -51,7 +51,7 @@ sum(communality)/6
 outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
 print(outf)
 plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
-
+# http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 
 
 # FactoMineR
@@ -59,14 +59,5 @@ plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
 pcaFAS <- PCA(joinedDB.6, scale.unit = FALSE)
 pcaFAS$eig
 plot(pcaFAS, axes=c(1, 2), choix="ind", habillage="ind")
-
-
-
-
-
-
-
-
-
 
 
