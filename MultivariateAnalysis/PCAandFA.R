@@ -19,9 +19,10 @@ plot(pc)
 summary(pc)
 screeplot(pc, type='lines')
 scree(joinedDB.6, factors=TRUE, pc=TRUE)
-biplot(pc, var.axes =TRUE, cex = 0.8, main="(PCA) Biplot of Countries Data", xlim=c(-0.5, 0.6), ylim=c(-0.3, 0.7))
+biplot(pc, var.axes =TRUE, cex = 0.8, main="(PCA) Biplot of Countries Data", xlim=c(-0.5, 0.6), ylim=c(-0.3, 0.7), arrow.len = 0.15)
 round(pc$loading,3)
 round(pc$sdev,3)
+round(pc$scores,3)
 
 
 
@@ -40,7 +41,8 @@ comp <- data.frame(pcp$x[,1:4])
 plot(comp, pch=16, col=rgb(0,0,0,0.5))
 plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
-factorAn <- factanal(joinedDB.6, rotation = "none", factors =2)
+
+factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =2)
 factorAn$loadings
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 sum(communality)/6
