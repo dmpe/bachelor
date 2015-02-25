@@ -4,7 +4,7 @@ library(NbClust)
 library(clustrd)
 library(ggplot2)
 library(reshape2)
-
+library("ggthemes")
 
 # Use when new data frame is needed
 source("RawData/DataFrame.R")
