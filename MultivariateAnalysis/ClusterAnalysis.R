@@ -2,12 +2,15 @@ library(fpc)
 library(cluster)
 library(NbClust)
 library(clustrd)
+library(ggplot2)
+library(reshape2)
 
 
 # Use when new data frame is needed
 source("RawData/DataFrame.R")
-source("Imputation/MICE_Imputation.R")
 set.seed(5154)
+source("Imputation/MICE_Imputation.R")
+
 
 # Fix for the plot, using agnes; Later; moved to MICE
 # https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
@@ -79,5 +82,21 @@ clust <- names(sort(table(klust$clust)))
 clust
 row.names(mydata[klust$clust==clust[1],])
 row.names(mydata[klust$clust==clust[2],])
+
+Developing <- sapply(mydata[klust$clust==clust[1],], mean)
+Advanced <- sapply(mydata[klust$clust==clust[2],], mean)
+dfClustMeans <- data.frame(Developing, Advanced)
+dfClustMeans <- dfClustMeans[1:6,]
+dfClustMeans$vars <- rownames(dfClustMeans)
+dfClustMeans
+sapply(dfClustMeans, class)
+
+test_data_long <- melt(dfClustMeans)  # convert to long format
+
+# http://www.cookbook-r.com/Graphs/Shapes_and_line_types/
+# http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
+ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable)) +
+  geom_line() + geom_point() + coord_cartesian(ylim=c(-1.2, 1)) + scale_y_continuous(breaks=seq(-1.2, 1, 0.25)) + theme_gdocs() + ggtitle("Means plot for clusters") + scale_color_gdocs() + ylab("Mean") + xlab("Indicator") 
+
 
 
