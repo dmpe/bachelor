@@ -43,9 +43,12 @@ round(pc$scores,3)
 
 
 factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =3)
+factorAn
 factorAn$factors
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 sum(communality)/6
+
+
 # An advanced method that "combines k-means cluster analysis with aspects of Factor Analysis 
 # and PCA is offered by Vichi & Kiers (2001)" [p. 81].
 outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart=25, smartStart=TRUE)
