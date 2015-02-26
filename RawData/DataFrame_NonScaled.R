@@ -7,12 +7,12 @@ library(dplyr)
 # source() causes R to accept its input from the named file or URL or connection.
 # Input is read and parsed from that file until the end of the file is reached, then the 
 # parsed expressions are evaluated sequentially in the chosen environment. 
-# source("RawData/Unemplo.R")
-# source("RawData/FreedomIndex.R")
-# source("RawData/WEF.R")
-# source("RawData/LearningCurve.R")
-# source("RawData/CompletionRate.R")
-# source("RawData/HIndex.R")
+source("RawData/Unemplo.R")
+source("RawData/FreedomIndex.R")
+source("RawData/WEF.R")
+source("RawData/LearningCurve.R")
+source("RawData/CompletionRate.R")
+source("RawData/HIndex.R")
 
 
 nonScaledDataFrame <- dplyr::left_join(df_unemp, freedom, by = "Country")

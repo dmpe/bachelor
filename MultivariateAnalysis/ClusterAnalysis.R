@@ -56,18 +56,17 @@ plot(as.dendrogram(agn, hang = -1))
 euroclust <- hclust(dist(joinedDB.6, method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
-# groupsTree <- cutree(euroclust, k=2)
 
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
+# https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
 # K Means
 klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart=25, iter.max=100)
 # aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
 # Some clusters par. around mean
-# clusplot(pam(joinedDB.6,2, metric = "euclidean", stand = TRUE))
-clusplot(pam(dist(joinedDB.6, method = "euclidean"), 2), color=TRUE, shade=TRUE, labels=2)
+clusplot(pam(dist(joinedDB.6), 2), color=TRUE, shade=TRUE, labels=2)
 
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
@@ -77,11 +76,11 @@ plot(sk2)
 
 
 # Who is in, who is out ?
-sort(table(klust$clust))
-clust <- names(sort(table(klust$clust)))
-clust
-row.names(mydata[klust$clust==clust[1],])
-row.names(mydata[klust$clust==clust[2],])
+# sort(table(klust$clust))
+# clust <- names(sort(table(klust$clust)))
+# clust
+# row.names(mydata[klust$clust==clust[1],])
+# row.names(mydata[klust$clust==clust[2],])
 
 Developing <- sapply(mydata[klust$clust==clust[1],], mean)
 Advanced <- sapply(mydata[klust$clust==clust[2],], mean)
@@ -95,8 +94,7 @@ test_data_long <- melt(dfClustMeans)  # convert to long format
 
 # http://www.cookbook-r.com/Graphs/Shapes_and_line_types/
 # http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
-ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable)) +
-  geom_line() + geom_point() + coord_cartesian(ylim=c(-1.2, 1)) + scale_y_continuous(breaks=seq(-1.2, 1, 0.25)) + theme_gdocs() + ggtitle("Means plot for clusters") + scale_color_gdocs() + ylab("Mean") + xlab("Indicator") 
+ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable)) + geom_line() + geom_point() + coord_cartesian(ylim=c(-1.2, 1)) + scale_y_continuous(breaks=seq(-1.2, 1, 0.25)) + theme_gdocs() + ggtitle("Means plot for clusters") + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
 
 
 
