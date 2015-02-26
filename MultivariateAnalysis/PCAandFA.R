@@ -1,15 +1,19 @@
 library(psych)
 library(FactoMineR)
+library(clustrd)
+library(rgl)
+
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
+# http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
+# http://www.iiap.res.in/astrostat/School08/tuts/clus.html
+# http://planspace.org/2013/02/03/pca-3d-visualization-and-clustering-in-r/
+
 set.seed(5154)
 
 source("RawData/DataFrame.R")
-# source("RawData/DataFrame_NonScaled.R")
+source("RawData/DataFrame_NonScaled.R")
 source("Imputation/MICE_Imputation.R")
-# http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
-# http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
-# http://www.iiap.res.in/astrostat/School08/tuts/clus.html
-# http://planspace.org/2013/02/03/pca-3d-visualization-and-clustering-in-r/
+
 
 # Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using the correlation matrix.
 # http://sites.stat.psu.edu/~ajw13/stat505/fa06/16_princomp/07_princomp_alternative.html
@@ -42,7 +46,7 @@ round(pc$scores,3)
 # plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =3)
+factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =2)
 factorAn
 factorAn$factors
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
