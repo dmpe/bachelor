@@ -48,13 +48,16 @@ densityplot(imp, scales = list(x = list(relation = "free")))
 
 # This creates new data frame with "old" column of countries (nat. preserving orders)
 # Necessary
-joinedDB.6 <- complete(imp)
+joinedDB.6 <- complete(imp, 15)
 joinedDB.6$Country <- joinedDB.5$Country
 joinedDB.6 <- joinedDB.6[ ,c(7,1,2,3,4,5,6)] # Reorder them
 joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 
-
-
-
-
+# Only for non scaled values, needs to be applied for later normalization
+print(imp.nonScaled <- mice(nonScaledDataFrame[2:7], m=30, seed=5154))
+plot(imp.nonScaled , c("LearningCurve_Index"))
+densityplot(imp.nonScaled , scales = list(x = list(relation = "free")))
+nonScaledDataFrame.complete <- complete(imp.nonScaled)
+nonScaledDataFrame.complete$Country <- joinedDB.5$Country
+nonScaledDataFrame.complete <- nonScaledDataFrame.complete[ , c(7,1,2,3,4,5,6)] # Reorder them

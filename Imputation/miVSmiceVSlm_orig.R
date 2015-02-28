@@ -21,7 +21,7 @@ s.orig
 # mp.plot(joinedDB.5)
 mi.info(joinedDB.5[2:7])
 imputMI <- mi(joinedDB.5[2:7], mi.info(joinedDB.5[2:7]), n.imp = 30, n.iter = 6, seed =5154)
-convergence.plot(imputMI)
+# convergence.plot(imputMI)
 input.mi.df <- mi.data.frame(imputMI)
 input.mi.out <- lm.mi(LearningCurve_Index ~ Freedom_Index + WEF_Score + Ranking_HIndex + CompletionRate + Unemployment, imputMI)
 # display(input.mi.out)
@@ -39,10 +39,35 @@ input.mice.pool <- pool(input.mice.out)
 s.mice <- summary(input.mice.pool)[, 1:2]
 s.mice
 # densityplot(imputMICE, scales = list(x = list(relation = "free")))
-joinedDB.6 <- complete(imputMICE)
+joinedDB.6 <- complete(imputMICE,25)
 
 compareThemAll <- cbind(s.mi[, 1], s.mice[, 1], s.orig[,1])
 colnames(compareThemAll) <- c("MI", "mice", "Original")
 compareThemAll
+
+
+
+
+
+
+
+
+
+imputMI <- mi(nonScaledDataFrame[2:7], mi.info(nonScaledDataFrame[2:7]), n.imp = 30, n.iter = 6, seed =5154)
+input.mi.df <- mi.data.frame(imputMI)
+input.mi.df$Country <- joinedDB.5$Country
+input.mi.df <- input.mi.df[,c(7,1,2,3,4,5,6)]
+
+
+
+
+
+
+
+
+
+
+
+
 
 

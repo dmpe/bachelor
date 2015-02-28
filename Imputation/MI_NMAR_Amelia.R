@@ -1,4 +1,6 @@
-
+library(mi)
+library(Amelia)
+library(R2WinBUGS)
 
 # NMAR Try
 
@@ -26,11 +28,12 @@ joinedDB.6 <- complete(imp)
 
 miinfo <- mi.info(joinedDB.5)
 miinfo$imp.formula
-sd<-mi(joinedDB.5, miinfo, n.iter = 100)
-f<-mi.data.frame(sd)
-converged(joinedDB.5, check = "data")
-f$Ranking_LearningCurve <- round(f$Ranking_LearningCurve,0)
-mi.continuous(Ranking_LearningCurve ~ Ranking_HIndex, data = joinedDB.5)
+sd <- mi(joinedDB.5, miinfo, n.iter = 100, seed = 5154)
+sd
+f <- mi.data.frame(sd)
+converged(sd, check = "coefs")
+f$LearningCurve_Index <- round(f$LearningCurve_Index,3)
+mi.continuous(LearningCurve_Index ~ Ranking_HIndex , data = joinedDB.5)
 plot(sd)
 plot(as.bugs.array(sd@mcmc))
 
