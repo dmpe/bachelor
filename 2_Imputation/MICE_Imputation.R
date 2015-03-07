@@ -2,8 +2,7 @@ library(mice)
 library(VIM)
 library(R2WinBUGS)
 library(lattice)
-# Ressources:
-
+set.seed(5154)
 # source("RawData/DataFrame.R")
 # https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 # http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value
@@ -17,7 +16,6 @@ library(lattice)
 # As a result, we see no surprises here. Five values are missing in the Learning Curve Index.
 # "The number of the missing values can be counted and visualized as follows:" (p. 8)
 md.pattern(joinedDB.5[2:7]) # ‘country’ should be excluded for the analysis
-set.seed(5154)
 # "Another way to study the pattern involves calculating the number of observations per patterns
 # for all pairs of variables."
 # md.pairs(joinedDB.5[2:7])

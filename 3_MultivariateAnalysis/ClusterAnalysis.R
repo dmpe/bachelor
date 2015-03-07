@@ -77,7 +77,7 @@ plot(sk2)
 
 # Who is in, who is out ?
 # sort(table(klust$clust))
-# clust <- names(sort(table(klust$clust)))
+clust <- names(sort(table(klust$clust)))
 # clust
 # row.names(mydata[klust$clust==clust[1],])
 # row.names(mydata[klust$clust==clust[2],])

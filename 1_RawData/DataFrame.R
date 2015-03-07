@@ -33,12 +33,13 @@ joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Freedom_Index,
                                           WEF_Score, LearningCurve_Index, CompletionRate, Ranking_HIndex))
 
 
-# To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'
-
-
 # http://stackoverflow.com/a/10331131
 sapply(joinedDB.5, class)
 
+
+
+
+# Data here are non scaled, they contain "the real values".
 
 nonScaledDataFrame <- dplyr::left_join(df_unemp, freedom, by = "Country")
 
