@@ -1,7 +1,7 @@
 library(stringr)
 library(plyr)
 library(xlsx)
-library(rvest)
+# library(rvest)
 # 
 # fred <- html("http://www.heritage.org/index/explore")
 # freedom <- fred %>% 

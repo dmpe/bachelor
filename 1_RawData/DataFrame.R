@@ -40,3 +40,30 @@ joinedDB.5 <- subset(joinedDB.5, select=c(Country, Unemployment, Freedom_Index,
 sapply(joinedDB.5, class)
 
 
+nonScaledDataFrame <- dplyr::left_join(df_unemp, freedom, by = "Country")
+
+nonScaledDataFrame <- dplyr::left_join(nonScaledDataFrame, wef, by = "Country")
+nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Country)
+
+nonScaledDataFrame <- dplyr::left_join(nonScaledDataFrame, learningCurveData, by = "Country")
+nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Country)
+nonScaledDataFrame <- subset(nonScaledDataFrame, 
+                             select=c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled,
+                                      WEF_Score_NonScaled, LearningCurve_Index))
+
+nonScaledDataFrame <- dplyr::left_join(nonScaledDataFrame, CompletionRate, by = "Country")
+nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Country)
+
+nonScaledDataFrame <- dplyr::left_join(nonScaledDataFrame, hindex, by = "Country")
+nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Country)
+nonScaledDataFrame <- subset(nonScaledDataFrame, 
+                             select=c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled,
+                                      WEF_Score_NonScaled, LearningCurve_Index, CompletionRate_NonScaled, Ranking_HIndex_NonScaled))
+
+
+# To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'
+
+
+# http://stackoverflow.com/a/10331131
+sapply(nonScaledDataFrame, class)
+
