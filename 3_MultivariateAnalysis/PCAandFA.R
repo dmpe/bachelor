@@ -1,7 +1,7 @@
 library(psych)
 library(FactoMineR)
 library(clustrd)
-library(rgl)
+# library(rgl)
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 # http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
@@ -11,7 +11,6 @@ library(rgl)
 set.seed(5154)
 
 source("1_RawData/DataFrame.R")
-source("1_RawData/DataFrame_NonScaled.R")
 source("2_Imputation/MICE_Imputation.R")
 
 
@@ -26,7 +25,7 @@ scree(joinedDB.6, factors=TRUE, pc=TRUE)
 biplot(pc, var.axes =TRUE, cex = 0.8, main="(PCA) Biplot of Countries Data", xlim=c(-0.5, 0.6), ylim=c(-0.3, 0.7), arrow.len = 0.15)
 round(pc$loading,3)
 round(pc$sdev,3)
-round(pc$scores,3)
+round(pc$scores, 3)
 
 
 
@@ -64,7 +63,7 @@ plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
 # FactoMineR
 # http://factominer.free.fr/classical-methods/principal-components-analysis.html
 pcaFAS <- PCA(joinedDB.6, scale.unit = FALSE)
-pcaFAS$eig
+round(pcaFAS$eig,3)
 plot(pcaFAS, axes=c(1, 2), choix="ind", habillage="ind")
 
 
