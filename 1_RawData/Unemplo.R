@@ -3,7 +3,7 @@ library("Quandl")
 Country =  c('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 selectedCountries <- list('Korea','Singapore', 'Japan', 'Chile', 'Czech Republic', 'Nigeria','China', "Germany", "Switzerland", "Mexico", 'Jordan', "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya","Finland", "Canada", "Israel", "New Zealand")
 
-
+# see Quandl emails
 Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 # China <- Quandl("WORLDBANK/CHN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 China <- 10.10
@@ -15,7 +15,6 @@ Russia <- Quandl("WORLDBANK/RUS_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY"
 USA <-  Quandl("WORLDBANK/USA_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 UAE <- Quandl("WORLDBANK/ARE_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 # Kenya <- Quandl("WORLDBANK/KEN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
-# see Quandl emails
 Kenya <- 17.10
 Finland <- Quandl("WORLDBANK/FIN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 NewZeland <- Quandl("WORLDBANK/NZL_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1,2]

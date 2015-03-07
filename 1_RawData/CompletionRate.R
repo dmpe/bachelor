@@ -3,7 +3,7 @@ library("Quandl")
 library(plyr)
 
 
-CompletionRate <- read.csv("RawData/DataSources/CompletionRate.csv")
+CompletionRate <- read.csv("1_RawData/DataSources/CompletionRate.csv")
 CompletionRate <- plyr::rename(CompletionRate, c("Country.Name"="Country"))
 CompletionRate$Country <- str_trim(CompletionRate$Country, side="both")
 CompletionRate$Country[CompletionRate$Country=="Hong Kong SAR, China"] <-  "Hong Kong SAR"

@@ -7,9 +7,9 @@ library(reshape2)
 library("ggthemes")
 
 # Use when new data frame is needed
-source("RawData/DataFrame.R")
+source("1_RawData/DataFrame.R")
 set.seed(5154)
-source("Imputation/MICE_Imputation.R")
+source("2_Imputation/MICE_Imputation.R")
 
 
 # Fix for the plot, using agnes; Later; moved to MICE

@@ -25,7 +25,7 @@ library(rvest)
 
 
 # Excel Way
-freedom <- read.xlsx("RawData/DataSources/index2015_data.xlsx", sheetIndex = 1,  endRow = 187)
+freedom <- read.xlsx("1_RawData/DataSources/index2015_data.xlsx", sheetIndex = 1,  endRow = 187)
 freedom <- plyr::rename(freedom, c("Country.Name"="Country","X2015.Score" = "Freedom_Index", "World.Rank" = "RankOverall"))
 freedom$Country <- str_trim(freedom$Country, side="both")
 freedom$Country[freedom$Country == "Korea, South"] <- "Korea"

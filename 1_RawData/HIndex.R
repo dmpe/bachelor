@@ -5,7 +5,7 @@ library(xlsx)
 # https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns-in-r
 # http://www.scimagojr.com/countryrank.php?area=0&category=0&region=all&year=all&order=h&min=0&min_type=it > Download
 
-hindex <- read.xlsx("RawData/DataSources/scimagojr.xlsx", sheetIndex = 1)
+hindex <- read.xlsx("1_RawData/DataSources/scimagojr.xlsx", sheetIndex = 1)
 
 #sapply(hindex, class) # factors -> to char
 

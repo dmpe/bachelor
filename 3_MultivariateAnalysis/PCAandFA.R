@@ -10,9 +10,9 @@ library(rgl)
 
 set.seed(5154)
 
-source("RawData/DataFrame.R")
-source("RawData/DataFrame_NonScaled.R")
-source("Imputation/MICE_Imputation.R")
+source("1_RawData/DataFrame.R")
+source("1_RawData/DataFrame_NonScaled.R")
+source("2_Imputation/MICE_Imputation.R")
 
 
 # Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using the correlation matrix.

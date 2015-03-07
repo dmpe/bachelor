@@ -20,9 +20,6 @@ corrplot(corelationMat, method = "number", type = "lower")
 corrplot(corelationMat, method = "number", type = "lower", order = "FPC", col =colorfun2(100))
 
 
-# 
-
-
 
 
 
