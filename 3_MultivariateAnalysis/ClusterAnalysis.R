@@ -3,8 +3,10 @@ library(cluster)
 library(NbClust)
 library(clustrd)
 library(ggplot2)
+library(pvclust)
 library(reshape2)
 library("ggthemes")
+library(flexclust)
 
 # Use when new data frame is needed
 source("1_RawData/DataFrame.R")
@@ -24,14 +26,14 @@ nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
 
 barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria", main="Number of Clusters according to 23 Criteria")
 
-# library(flexclust)
 # http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
-# Not possible in my case, because of non-existent type (e.g. default data would need have already some kind of Type/"Cluster" which we could then compare with the new cluster "quantify the agreement between type and cluster")
-# fit.km <- kmeans(scale(joinedDB.6), 2, nstart=25)
-# fit.km
-# ct.km <- table(joinedDB.5$Country, fit.km$cluster)
-# ct.km
-# randIndex(ct.km)
+# Not possible in my case, because of non-existent type (e.g. default data would need have already some 
+# kind of Type/"Cluster" which we could then compare with the new cluster "quantify the agreement 
+# between type and cluster")
+fit.km <- kmeans(joinedDB.6, 2, nstart=25)
+fit.km
+ct.km <- table(joinedDB.5$Country, fit.km$cluster)
+ct.km
 
 
 # http://www.statmethods.net/advstats/cluster.html
@@ -44,7 +46,7 @@ barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria
 # plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares") 
 
 
-# produces same results, just different package. , diss = TRUE,
+# produces same results, just different package
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes 
 agn <- agnes(x=dist(joinedDB.6), method = "ward", metric ="euclidean")
 agn
@@ -58,23 +60,24 @@ euroclust <- hclust(dist(joinedDB.6, method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border="red") # create border for 2 clusters
 
-
+# K Means
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 # https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
-# K Means
 klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart=25, iter.max=100)
 # aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 
-# Some clusters par. around mean
+# K-menas clusters; should be with "dist"
 clusplot(pam(dist(joinedDB.6), 2), color=TRUE, shade=TRUE, labels=2)
 
 
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 # Solhouette plot
-sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = "euclidean"))
-plot(sk2)
+# sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = "euclidean"))
+# plot(sk2)
 
+sk3 <- silhouette(pam(joinedDB.6, 2))
+plot(sk3)
 
 # Who is in, who is out ?
 # sort(table(klust$clust))
@@ -101,4 +104,6 @@ ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable))
   xlab("Indicators") + labs(color = "Types of Countries")
 
 
-
+cluster.bootstrap <- pvclust(joinedDB.6, nboot=1000, method.dist="correlation", method.hclust = "ward.D2")
+plot(cluster.bootstrap)
+pvrect(cluster.bootstrap) 
