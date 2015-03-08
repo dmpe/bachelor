@@ -9,8 +9,8 @@ library("ggthemes")
 library(flexclust)
 
 # Use when new data frame is needed
-source("1_RawData/DataFrame.R")
 set.seed(5154)
+source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
 
 
@@ -20,11 +20,12 @@ source("2_Imputation/MICE_Imputation.R")
 
 # How many clusters ? My choice of 2
 # nc <- NbClust(joinedDB.6, distance = "euclidean", method="single", index="all")
-nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
-# nc <- NbClust(scale(joinedDB.6), distance = "euclidean", method="kmeans", index="all")
+# nc <- NbClust(joinedDB.6, distance = "euclidean", method="kmeans", index="all")
 # NbClust(joinedDB.6, distance = "euclidean", method="ward.D", index="all")
 
-barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria", main="Number of Clusters according to 23 Criteria")
+nc <- NbClust(joinedDB.6, distance = "euclidean", method="ward.D2", index="all")
+barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria", 
+        main="Number of Clusters according to 23 Criteria")
 
 # http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/
 # Not possible in my case, because of non-existent type (e.g. default data would need have already some 
@@ -50,8 +51,8 @@ ct.km
 # https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes 
 agn <- agnes(x=dist(joinedDB.6), method = "ward", metric ="euclidean")
 agn
-plot(agn)
-plot(as.dendrogram(agn, hang = -1)) 
+# plot(agn)
+# plot(as.dendrogram(agn, hang = -1)) 
 
 
 # Hierarchical Clustering
@@ -70,14 +71,16 @@ mydata <- data.frame(joinedDB.6, klust$cluster) # append cluster assignment
 # K-menas clusters; should be with "dist"
 clusplot(pam(dist(joinedDB.6), 2), color=TRUE, shade=TRUE, labels=2)
 
-
+# Silhouette plot
+# http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
 # https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
-# Solhouette plot
+# that's fucking silly
+
 # sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = "euclidean"))
 # plot(sk2)
-
+par(mar=c(5,10,3,2)+0.1)
 sk3 <- silhouette(pam(joinedDB.6, 2))
-plot(sk3)
+plot(sk3, max.strlen=30)
 
 # Who is in, who is out ?
 # sort(table(klust$clust))
@@ -87,7 +90,7 @@ clust <- names(sort(table(klust$clust)))
 # row.names(mydata[klust$clust==clust[2],])
 
 Developing <- sapply(mydata[klust$clust == clust[1],], mean)
-Advanced <-   sapply(mydata[klust$clust == clust[2],], mean)
+Advanced   <- sapply(mydata[klust$clust == clust[2],], mean)
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6,]
 dfClustMeans$vars <- rownames(dfClustMeans)
