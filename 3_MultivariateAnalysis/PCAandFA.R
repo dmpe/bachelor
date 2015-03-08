@@ -45,7 +45,7 @@ round(pc$scores, 3)
 # plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(joinedDB.6, rotation = "varimax", factors =2)
+factorAn <- factanal(joinedDB.6, rotation = "varimax", factors = 2)
 factorAn
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
@@ -62,7 +62,7 @@ plotrd(outf,what=c("all","none"), obslabel=rownames(joinedDB.6), density=FALSE)
 
 # FactoMineR
 # http://factominer.free.fr/classical-methods/principal-components-analysis.html
-pcaFAS <- PCA(joinedDB.6, scale.unit = FALSE)
+pcaFAS <- PCA(joinedDB.6, scale.unit = TRUE)
 round(pcaFAS$eig,3)
 plot(pcaFAS, axes=c(1, 2), choix="ind", habillage="ind")
 

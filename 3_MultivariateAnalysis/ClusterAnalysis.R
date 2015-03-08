@@ -44,9 +44,10 @@ barplot(table(nc$Best.n[1,]), xlab="Numer of Clusters", ylab="Number of Criteria
 # plot(1:15, wss, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares") 
 
 
-# produces same results, just different package. 
-# https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x=dist(joinedDB.6), diss = TRUE, method = "ward", metric ="euclidean")
+# produces same results, just different package. , diss = TRUE,
+# https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes 
+agn <- agnes(x=dist(joinedDB.6), method = "ward", metric ="euclidean")
+agn
 plot(agn)
 plot(as.dendrogram(agn, hang = -1)) 
 
@@ -55,7 +56,7 @@ plot(as.dendrogram(agn, hang = -1))
 # http://rpubs.com/gaston/dendrograms
 euroclust <- hclust(dist(joinedDB.6, method="euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
-rect.hclust(euroclust, k=2, border="red") # create border for 2 clusters
+rect.hclust(euroclust, k = 2, border="red") # create border for 2 clusters
 
 
 # http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
@@ -82,8 +83,8 @@ clust <- names(sort(table(klust$clust)))
 # row.names(mydata[klust$clust==clust[1],])
 # row.names(mydata[klust$clust==clust[2],])
 
-Developing <- sapply(mydata[klust$clust==clust[1],], mean)
-Advanced <- sapply(mydata[klust$clust==clust[2],], mean)
+Developing <- sapply(mydata[klust$clust == clust[1],], mean)
+Advanced <-   sapply(mydata[klust$clust == clust[2],], mean)
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6,]
 dfClustMeans$vars <- rownames(dfClustMeans)
@@ -94,7 +95,10 @@ test_data_long <- melt(dfClustMeans)  # convert to long format
 
 # http://www.cookbook-r.com/Graphs/Shapes_and_line_types/
 # http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
-ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable)) + geom_line() + geom_point() + coord_cartesian(ylim=c(-1.2, 1)) + scale_y_continuous(breaks=seq(-1.2, 1, 0.25)) + theme_gdocs() + ggtitle("Means plot for clusters") + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
+ggplot(test_data_long, aes(x=vars, y=value, group = variable, color = variable)) + geom_line() + 
+  geom_point() + coord_cartesian(ylim=c(-1.2, 1)) + scale_y_continuous(breaks=seq(-1.2, 1, 0.25)) + 
+  theme_gdocs() + ggtitle("Means plot for clusters") + scale_color_gdocs() + ylab("Mean") + 
+  xlab("Indicators") + labs(color = "Types of Countries")
 
 
 
