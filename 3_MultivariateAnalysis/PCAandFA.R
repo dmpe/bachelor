@@ -46,7 +46,7 @@ round(pc$scores, 3)
 
 
 factorAn <- factanal(joinedDB.6, rotation = "varimax", factors = 2)
-factorAn
+factorAn # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
 sum(communality)/6
