@@ -13,8 +13,9 @@ source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
 
 
-# Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
-# the correlation matrix.  http://sites.stat.psu.edu/~ajw13/stat505/fa06/16_princomp/07_princomp_alternative.html
+#' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
+#' the correlation matrix.  
+#' http://sites.stat.psu.edu/~ajw13/stat505/fa06/16_princomp/07_princomp_alternative.html
 
 pc <- princomp(joinedDB.6, cor = FALSE, scores = TRUE)
 plot(pc)
@@ -28,13 +29,20 @@ round(pc$scores, 3)
 
 
 
-# (pc$sdev)^2 sum((pc$loading[,1])^2) #
-# http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis #eigenvalues tmp <-
-# svd(joinedDB.6) tmp$d
+#' (pc$sdev)^2 
+#' sum((pc$loading[,1])^2) 
+#' http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis 
+#' eigenvalues 
+#' tmp <- svd(joinedDB.6) 
+#' tmp$d
 
 
-# pcp <- prcomp(joinedDB.6) summary(pcp) round(pcp$rotation, 3) comp <- data.frame(pcp$x[,1:4]) plot(comp, pch=16,
-# col=rgb(0,0,0,0.5)) plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
+#' pcp <- prcomp(joinedDB.6)
+#' summary(pcp) 
+#' round(pcp$rotation, 3) 
+#' comp <- data.frame(pcp$x[,1:4]) 
+#' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
+#' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
 factorAn <- factanal(joinedDB.6, rotation = "varimax", factors = 2)

@@ -26,9 +26,5 @@ summary(joinedDB.5)
 sapply(na.omit(joinedDB.5), mean)
 str(joinedDB.5)
 
-
-
-path = tempdir()
-
-file.copy(system.file("demo", package = "base"), path, recursive = TRUE)
+# Format everything
 tidy_dir(getwd(), recursive = TRUE) 

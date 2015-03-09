@@ -14,22 +14,27 @@ source("2_Imputation/MICE_Imputation.R")
 # https://stackoverflow.com/questions/7303322/apply-function-to-each-column-in-a-data-frame-observing-each-columns-existing-da
 # https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 
-# # MIN MAX # 0 a 1 normalized = (q-min(q))/(max(q)-min(q)) normalized #mezi -1 and 1 nor = (q - (max(q)+min(q) /2) ) /
-# ((max(q)-min(q))/2) nor
+#' MIN MAX mezi 0 a 1 
+#' normalized = (q-min(q))/(max(q)-min(q)) 
+#' normalized 
+#' mezi -1 and 1 
+#' nor = (q - (max(q)+min(q) /2) ) /((max(q)-min(q))/2) 
+#' nor
 
 
-# This is non scaled data frame, containing same values in the joinedDB.6$LearningCurveIndex (only) From column country to
-# row.names
+#' This is non scaled data frame, containing same values in the joinedDB.6$LearningCurveIndex (only) 
+#'From column country to row.names
 
 nonScaledCompleteDF <- nonScaledDataFrame
 nonScaledCompleteDF$LearningCurve_Index <- joinedDB.6$LearningCurve_Index
 nonScaledCompleteDF <- data.frame(nonScaledCompleteDF[, -1], row.names = nonScaledCompleteDF[, 1])
 
-# For testing rescale(nonScaledDataFrame$Unemployment_NonScaled, to = c(0,3))
-# rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
+#' For testing 
+#' rescale(nonScaledDataFrame$Unemployment_NonScaled, to = c(0,3))
+#' rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
 
-# Now scale columns to 0 to 3. Don't apply to data frame !!!  joinedDB.7 <- rescale(nonScaledCompleteDF, to = c(0,3)) #
-# Wrong
+#' Now scale columns to 0 to 3. Don't apply to data frame !!!  
+#' joinedDB.7 <- rescale(nonScaledCompleteDF, to = c(0,3)) # Wrong
 
 rescaleColumns <- function(x) {
     rescale(x, to = c(0, 3))

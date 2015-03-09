@@ -9,9 +9,9 @@ round(covMat, 2)
 corelationMat <- cor(joinedDB.6)
 round(corelationMat, 2)
 
-# http://www.cookbook-r.com/Graphs/Correlation_matrix/
-# http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html Do the same, but with colors corresponding
-# to value
+#' http://www.cookbook-r.com/Graphs/Correlation_matrix/
+#' http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html 
+#' Do the same, but with colors corresponding to value
 colorfun <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000")
 plotcorr(corelationMat, col = colorfun)
 
