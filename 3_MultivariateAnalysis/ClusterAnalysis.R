@@ -13,7 +13,6 @@ set.seed(5154)
 source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
 
-
 #' Fix for the plot, using agnes; Later; moved to MICE
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 #' joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
@@ -24,7 +23,8 @@ source("2_Imputation/MICE_Imputation.R")
 #' NbClust(joinedDB.6, distance = 'euclidean', method='ward.D', index='all')
 
 nc <- NbClust(joinedDB.6, distance = "euclidean", method = "ward.D2", index = "all")
-barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria", main = "Number of Clusters according to 23 Criteria")
+barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
+        main = "Number of Clusters according to 23 Criteria")
 
 #' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' Not possible in my case, because of non-existent
@@ -38,13 +38,10 @@ ct.km
 
 #' http://www.statmethods.net/advstats/cluster.html 
 dfa <- scale(joinedDB.6) 
-
 pamk(dfa) wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var)) 
-
 for (i in 2:15) { 
   wss[i] <- sum(kmeans(dfa,centers=i)$withinss) 
 } 
-
 plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
 
 
