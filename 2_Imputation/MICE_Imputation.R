@@ -4,7 +4,8 @@ library(R2WinBUGS)
 library(lattice)
 
 set.seed(5154)
-# source("1_RawData/DataFrame.R")
+source("1_RawData/DataFrame.R")
+source("2_Imputation/UnsuperRF.R")
 
 # https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 # http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value
@@ -55,9 +56,12 @@ joinedDB.6 <- data.frame(joinedDB.6[,-1], row.names=joinedDB.6[,1])
 
 
 # Only for non scaled values, needs to be applied for later normalization
-print(imp.nonScaled <- mice(nonScaledDataFrame[2:7], m=30, seed=5154))
+print(imp.nonScaled <- mice(nonScaledDataFrame[2:7], m = 30, seed = 5154))
 plot(imp.nonScaled , c("LearningCurve_Index"))
 densityplot(imp.nonScaled , scales = list(x = list(relation = "free")))
 nonScaledDataFrame.complete <- complete(imp.nonScaled)
 nonScaledDataFrame.complete$Country <- joinedDB.5$Country
 nonScaledDataFrame.complete <- nonScaledDataFrame.complete[ , c(7,1,2,3,4,5,6)] # Reorder them
+
+
+rfunsuper(joinedDB.5[2:7])

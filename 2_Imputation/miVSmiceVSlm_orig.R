@@ -44,14 +44,6 @@ compareThemAll <- cbind(s.mi[, 1], s.mice[, 1], s.orig[,1])
 colnames(compareThemAll) <- c("MI", "mice", "Original")
 compareThemAll
 
-
-
-
-
-
-
-
-
 imputMI <- mi(nonScaledDataFrame[2:7], mi.info(nonScaledDataFrame[2:7]), n.imp = 30, n.iter = 6, seed =5154)
 input.mi.df <- mi.data.frame(imputMI)
 input.mi.df$Country <- joinedDB.5$Country

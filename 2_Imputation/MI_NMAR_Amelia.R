@@ -43,6 +43,3 @@ a.out <- amelia(x = joinedDB.5[2:7], m = 10, boot.type = "none")
 summary(a.out)
 plot(a.out)
 write.amelia( a.out, file.stem = 'train_and_test_imp')
-
-source("2_Imputation/ra.R")
-rfunsuper(joinedDB.5[2:7])
