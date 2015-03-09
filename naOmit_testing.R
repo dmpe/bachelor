@@ -14,14 +14,14 @@ iris.na <- iris
 for (i in 1:2) iris.na[sample(23, sample(5)), i] <- NA
 
 iris.imputed <- rfImpute(Species ~ ., iris.na)
-iris.imputed <- round(iris.imputed[2:5],1)
+iris.imputed <- round(iris.imputed[2:5], 1)
 
 joinedDB.imputed <- rfImpute(CompletionRate ~ ., joinedDB.5)
 
-print(imp <- mice(iris.na, m=10))
+print(imp <- mice(iris.na, m = 10))
 iris.new <- complete(imp)
 
 mean(na.omit(joinedDB.5$LearningCurve_Index))
 summary(joinedDB.5)
 sapply(na.omit(joinedDB.5), mean)
-str(joinedDB.5)
+str(joinedDB.5) 
