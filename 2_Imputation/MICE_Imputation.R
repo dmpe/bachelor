@@ -58,3 +58,7 @@ nonScaledDataFrame.complete <- nonScaledDataFrame.complete[, c(7, 1, 2, 3, 4, 5,
 
 
 rfunsuper(joinedDB.5[2:7]) 
+
+# To continue look in 'MultivariateAnalysis' folder, ->> and begin with 'Correlation.R', 
+# then 'PCAandFA.R' and lastly with 'ClusterAnalysis.R'. All of them must be run. 
+

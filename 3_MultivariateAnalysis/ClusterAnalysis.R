@@ -105,3 +105,6 @@ ggplot(test_data_long, aes(x = vars, y = value, group = variable, color = variab
 cluster.bootstrap <- pvclust(joinedDB.6, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 plot(cluster.bootstrap)
 pvrect(cluster.bootstrap) 
+
+# To continue look in 'Normalisation' folder, ->> 'Scale.R' is required to run, while 'SampleIOEFreedom.R' may be recommendet
+

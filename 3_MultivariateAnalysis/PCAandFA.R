@@ -9,8 +9,8 @@ library(clustrd)
 # http://planspace.org/2013/02/03/pca-3d-visualization-and-clustering-in-r/
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
 
 
 #' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
@@ -36,7 +36,7 @@ round(pc$scores, 3)
 #' tmp <- svd(joinedDB.6) 
 #' tmp$d
 
-
+#' This is using singular value decomposition
 #' pcp <- prcomp(joinedDB.6)
 #' summary(pcp) 
 #' round(pcp$rotation, 3) 
@@ -56,8 +56,8 @@ sum(communality)/6
 # Kiers (2001)' [p. 81].
 outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart = 25, smartStart = TRUE)
 print(outf)
-plotrd(outf, what = c("all", "none"), obslabel = rownames(joinedDB.6), density = FALSE)
-# http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
+#' plotrd(outf, what = c("all", "none"), obslabel = rownames(joinedDB.6), density = FALSE)
+#' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 
 
 # FactoMineR http://factominer.free.fr/classical-methods/principal-components-analysis.html

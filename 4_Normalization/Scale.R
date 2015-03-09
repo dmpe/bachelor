@@ -1,8 +1,8 @@
 library(scales)
 library(plyr)
 
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
 
 # https://stats.stackexchange.com/questions/70801/how-to-normalize-data-to-0-1-range that is the best
 # https://stackoverflow.com/questions/5294955/how-to-scale-down-a-range-of-numbers-with-a-known-min-and-max-value
@@ -46,14 +46,7 @@ rownames(joinedDB.7) <- row.names(nonScaledCompleteDF)  # who created such a shi
 
 sapply(joinedDB.7, class)
 
-
-
-
-
-
-
-
-
+# To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
 
 
 
