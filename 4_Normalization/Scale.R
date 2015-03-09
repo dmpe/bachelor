@@ -1,10 +1,8 @@
 library(scales)
-library(preprocessCore)
+library(plyr)
 
 source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
-
-
 
 # normalize
 normalized = (x-min(x))/(max(x)-min(x))
@@ -35,18 +33,23 @@ nonScaledDataFrame.complete.test <- nonScaledDataFrame
 nonScaledDataFrame.complete.test$LearningCurve_Index <- joinedDB.6$LearningCurve_Index 
 nonScaledDataFrame.complete.test <- data.frame(nonScaledDataFrame.complete.test[,-1], 
                                                row.names=nonScaledDataFrame.complete.test[,1])
+
+# https://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation-in-r
+# https://stackoverflow.com/questions/7303322/apply-function-to-each-column-in-a-data-frame-observing-each-columns-existing-da
+# rescale(nonScaledDataFrame$Unemployment_NonScaled, to = c(0,3))
+# rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
+
 # Now scale them to 0 to 3
-joinedDB.7 <- rescale(nonScaledDataFrame.complete.test, to = c(0,3))
+# joinedDB.7 <- rescale(nonScaledDataFrame.complete.test, to = c(0,3))
+fun <- function(x){
+  rescale(x, to = c(0,3))
+}   
 
-# joinedDB.7 <- joinedDB.7[, c(7,1,2,3,4,5,6)] # Reorder them
+#Use colwise from plyr package
+joinedDB.7 <- colwise(fun)(nonScaledDataFrame.complete.test)
 
-# nonScaledDataFrame.complete.minmaxscaled <- rescale(as.factor(input.mi.df))
 
 sapply(joinedDB.7, class)
-
-
-
-
 
 
 
