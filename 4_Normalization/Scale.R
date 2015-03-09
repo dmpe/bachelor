@@ -35,7 +35,6 @@ nonScaledCompleteDF <- data.frame(nonScaledCompleteDF[,-1], row.names = nonScale
 # rescale(nonScaledDataFrame$Unemployment_NonScaled, to = c(0,3))
 # rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
 
-
 # Now scale columns to 0 to 3. Don't apply to data frame !!!
 # joinedDB.7 <- rescale(nonScaledCompleteDF, to = c(0,3)) # Wrong
 
