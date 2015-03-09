@@ -24,4 +24,11 @@ iris.new <- complete(imp)
 mean(na.omit(joinedDB.5$LearningCurve_Index))
 summary(joinedDB.5)
 sapply(na.omit(joinedDB.5), mean)
-str(joinedDB.5) 
+str(joinedDB.5)
+
+
+
+path = tempdir()
+
+file.copy(system.file("demo", package = "base"), path, recursive = TRUE)
+tidy_dir(getwd(), recursive = TRUE) 

@@ -4,4 +4,4 @@ library(GPArotation)
 
 psych::alpha(joinedDB.6[2:7])
 
-coefficientalpha::alpha(joinedDB.6, varphi=.01)
+coefficientalpha::alpha(joinedDB.6, varphi = 0.01) 

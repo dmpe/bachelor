@@ -7,18 +7,18 @@ library(xlsx)
 
 hindex <- read.xlsx("1_RawData/DataSources/scimagojr.xlsx", sheetIndex = 1)
 
-#sapply(hindex, class) # factors -> to char
+# sapply(hindex, class) # factors -> to char
 
-hindex$Country <- str_trim(hindex$Country, side="both")
-hindex$Country[hindex$Country=="South Korea"] <- "Korea"
-hindex$Country[hindex$Country=="Russian Federation"] <- "Russia"
+hindex$Country <- str_trim(hindex$Country, side = "both")
+hindex$Country[hindex$Country == "South Korea"] <- "Korea"
+hindex$Country[hindex$Country == "Russian Federation"] <- "Russia"
 
-hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents" ,"Citations","Self.Citations","Citations.per.Document"))]
-hindex <- plyr::rename(hindex , c("H.index" = "Ranking_HIndex"))
+hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents", "Citations", "Self.Citations", "Citations.per.Document"))]
+hindex <- plyr::rename(hindex, c(H.index = "Ranking_HIndex"))
 
 hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, Ranking_HIndex))
 
 hindex$Ranking_HIndex_NonScaled <- hindex$Ranking_HIndex
 hindex$Ranking_HIndex <- as.numeric(scale(hindex$Ranking_HIndex_NonScaled))
 
-sapply(hindex, class)
+sapply(hindex, class) 
