@@ -28,3 +28,11 @@ str(joinedDB.5)
 
 # Format everything
 tidy_dir(getwd(), recursive = TRUE) 
+
+
+
+library(conjoint)
+data(czekolada)
+simutil<-caBTL(csimp,cpref,cprof)
+print("Percentage participation of profiles:", quote=FALSE)
+print(simutil)

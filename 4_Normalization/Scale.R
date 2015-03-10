@@ -1,5 +1,6 @@
 library(scales)
 library(plyr)
+library("Compind")
 
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/MICE_Imputation.R")
@@ -48,7 +49,7 @@ sapply(joinedDB.7, class)
 
 # To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
 
-
+normalise_ci(nonScaledCompleteDF,c(1:3),c("NEG","POS", "POS"), method=2)
 
 
 

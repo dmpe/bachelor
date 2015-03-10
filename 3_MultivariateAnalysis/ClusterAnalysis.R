@@ -1,4 +1,3 @@
-library(fpc)
 library(cluster)
 library(NbClust)
 library(clustrd)
@@ -7,6 +6,7 @@ library(pvclust)
 library(reshape2)
 library("ggthemes")
 library(flexclust)
+library(fpc)
 
 # Use when new data frame is needed
 set.seed(5154)
@@ -87,7 +87,7 @@ clust <- names(sort(table(klust$clust)))
 #' row.names(mydata[klust$clust==clust[2],])
 
 Developing <- sapply(mydata[klust$clust == clust[1], ], mean)
-Advanced <- sapply(mydata[klust$clust == clust[2], ], mean)
+Advanced <- sapply(mydata[klust$clust == clust[2], ], mean) #0.55 mentioned in the text, page 44
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
