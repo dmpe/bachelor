@@ -1,6 +1,7 @@
 library("Benchmarking")
 library("Compind")
-
+# http://cran.r-project.org/web/packages/Compind/Compind.pdf
+# http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
 # Creates Data Frame of Weights
 set.seed(5154)
 
