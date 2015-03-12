@@ -1,9 +1,9 @@
 library(scales)
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
-
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
+ 
 # Scale IEF's original value for 23 countries
 ief <- nonScaledDataFrame  # this has always 23 obs. 
 ief$MinMax23Sample <- rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0, 1))

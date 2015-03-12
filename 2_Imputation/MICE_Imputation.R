@@ -4,8 +4,10 @@ library(R2WinBUGS)
 library(lattice)
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
+# source("1_RawData/DataFrame.R")
 source("2_Imputation/UnsuperRF.R")
+
+
 
 # https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 # http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value

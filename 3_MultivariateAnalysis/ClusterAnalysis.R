@@ -10,8 +10,8 @@ library(fpc)
 
 # Use when new data frame is needed
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
 
 #' Fix for the plot, using agnes; Later; moved to MICE
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
@@ -37,23 +37,23 @@ ct.km
 
 
 #' http://www.statmethods.net/advstats/cluster.html 
-dfa <- scale(joinedDB.6) 
-pamk(dfa) wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var)) 
-for (i in 2:15) { 
-  wss[i] <- sum(kmeans(dfa,centers=i)$withinss) 
-} 
-plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
+#' dfa <- scale(joinedDB.6) 
+#' pamk(dfa) wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var)) 
+#' for (i in 2:15) { 
+#'   wss[i] <- sum(kmeans(dfa,centers=i)$withinss) 
+#' } 
+#' plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
 
 
-# produces same results, just different package
-# https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
+#' produces same results, just different package
+#' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
 agn
 #' plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
 
 
-# Hierarchical Clustering 
+#' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
@@ -65,10 +65,10 @@ klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart = 25, iter.max
 # aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster)  # append cluster assignment
 
-# K-menas clusters; should be with 'dist'
+#' K-menas clusters; should be with 'dist'
 clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
 
-# Silhouette plot 
+#' Silhouette plot 
 #' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
 #' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 #' that's fucking silly

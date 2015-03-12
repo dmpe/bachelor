@@ -2,6 +2,7 @@ library(scales)
 library(plyr)
 library("Compind")
 
+set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/MICE_Imputation.R")
 

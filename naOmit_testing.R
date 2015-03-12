@@ -26,10 +26,6 @@ summary(joinedDB.5)
 sapply(na.omit(joinedDB.5), mean)
 str(joinedDB.5)
 
-# Format everything
-tidy_dir(getwd(), recursive = TRUE) 
-
-
 
 library(conjoint)
 data(czekolada)
