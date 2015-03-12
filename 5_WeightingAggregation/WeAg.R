@@ -18,6 +18,8 @@ weights.DB7 <- data.frame(Factor1Weight=round(factor1UnitNormalisation / sum(fac
                           Factor2Weight=round(factor2UnitNormalisation / sum(factorAn$loadings[,2]^2),3))
 
 
+
+
 ci_bod(joinedDB.7)
 ci_factor(joinedDB.7, method = "ALL")
 ci_mean_geom(joinedDB.7)

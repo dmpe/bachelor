@@ -1,0 +1,47 @@
+---
+title: "ClusterAnalysis"
+author: "DMPE"
+date: "12. 3. 2015"
+output:
+  html_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 8
+    keep_md: yes
+    theme: journal
+---
+
+Fist we load some packages. 
+
+```{r}
+library(cluster)
+library(NbClust)
+library(clustrd)
+library(ggplot2)
+library(pvclust)
+library(reshape2)
+library("ggthemes")
+library(flexclust)
+library(fpc)
+```
+
+Then we set a seed number. 
+
+```{r}
+set.seed(5154)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

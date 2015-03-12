@@ -3,18 +3,18 @@ library(plyr)
 library("Compind")
 
 set.seed(5154)
-# source("1_RawData/DataFrame.R")
-# source("2_Imputation/MICE_Imputation.R")
+#' source("1_RawData/DataFrame.R")
+#' source("2_Imputation/MICE_Imputation.R")
 
-# https://stats.stackexchange.com/questions/70801/how-to-normalize-data-to-0-1-range that is the best
-# https://stackoverflow.com/questions/5294955/how-to-scale-down-a-range-of-numbers-with-a-known-min-and-max-value
-# http://howto.commetrics.com/methodology/statistics/normalization/
-# http://www.benetzkorn.com/2011/11/data-normalization-and-standardization/
-# http://chimera.labs.oreilly.com/books/1230000000345/ch07.html#_incorporating_scaled_values
-# https://composite-indicators.jrc.ec.europa.eu/?q=content/overview
-# https://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation-in-r
-# https://stackoverflow.com/questions/7303322/apply-function-to-each-column-in-a-data-frame-observing-each-columns-existing-da
-# https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
+#' https://stats.stackexchange.com/questions/70801/how-to-normalize-data-to-0-1-range that is the best
+#' https://stackoverflow.com/questions/5294955/how-to-scale-down-a-range-of-numbers-with-a-known-min-and-max-value
+#' http://howto.commetrics.com/methodology/statistics/normalization/
+#' http://www.benetzkorn.com/2011/11/data-normalization-and-standardization/
+#' http://chimera.labs.oreilly.com/books/1230000000345/ch07.html#_incorporating_scaled_values
+#' https://composite-indicators.jrc.ec.europa.eu/?q=content/overview
+#' https://stackoverflow.com/questions/5352099/how-to-disable-scientific-notation-in-r
+#' https://stackoverflow.com/questions/7303322/apply-function-to-each-column-in-a-data-frame-observing-each-columns-existing-da
+#' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 
 #' MIN MAX mezi 0 a 1 
 #' normalized = (q-min(q))/(max(q)-min(q)) 
@@ -25,7 +25,7 @@ set.seed(5154)
 
 
 #' This is non scaled data frame, containing same values in the joinedDB.6$LearningCurveIndex (only) 
-#'From column country to row.names
+#' From column country to row.names
 
 nonScaledCompleteDF <- nonScaledDataFrame
 nonScaledCompleteDF$LearningCurve_Index <- joinedDB.6$LearningCurve_Index
@@ -39,19 +39,18 @@ nonScaledCompleteDF <- data.frame(nonScaledCompleteDF[, -1], row.names = nonScal
 #' joinedDB.7 <- rescale(nonScaledCompleteDF, to = c(0,3)) # Wrong
 
 rescaleColumns <- function(x) {
-    rescale(x, to = c(0, 3))
+    rescale(x, to = c(0, 2))
 }
 
 # Use colwise from plyr package
 joinedDB.7 <- colwise(rescaleColumns)(nonScaledCompleteDF)
 rownames(joinedDB.7) <- row.names(nonScaledCompleteDF)  # who created such a shit with function names ?
 
-sapply(joinedDB.7, class)
-
-# To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
+# sapply(joinedDB.7, class)
 
 normalise_ci(nonScaledCompleteDF,c(1:3),c("NEG","POS", "POS"), method=2)
 
 
+# To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
 
  
