@@ -27,6 +27,9 @@ round(pc$loading, 3)
 round(pc$sdev, 3)
 round(pc$scores, 3)
 
+promax(loadings(pc))
+promax(loadings(factorAn))
+
 
 
 #' (pc$sdev)^2 

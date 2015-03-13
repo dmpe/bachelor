@@ -55,7 +55,9 @@ agn
 
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
+#' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
 euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
+# euroclust
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 
@@ -72,6 +74,8 @@ clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
 #' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
 #' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 #' that's fucking silly
+#' Very good overview of all 8 methods
+#' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 
 #' sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
 #' plot(sk2)
@@ -108,3 +112,6 @@ pvrect(cluster.bootstrap)
 
 # To continue look in 'Normalisation' folder, ->> 'Scale.R' is required to run, while 'SampleIOEFreedom.R' may be recommendet
 
+pamk.best <- pamk(joinedDB.6)
+cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
+plot(pam(joinedDB.6, pamk.best$nc))

@@ -18,7 +18,7 @@ learningCurveData <- learningCurveData[, !(colnames(learningCurveData) %in% c("C
 learningCurveData$Ranking_LearningCurve <- seq(1, 40)
 # learningCurveData$LearningCurve_Index <- scale(learningCurveData$LearningCurve_Index)
 
-# mean of 18 countries z-score
+#' mean of 18 countries z-score
 #' testingEDuOu <- subset(learningCurveData, Country %in% selectedCountries)
 #' mean(testingEDuOu$LearningCurve_Index)
 

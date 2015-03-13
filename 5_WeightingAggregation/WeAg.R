@@ -4,7 +4,10 @@ library("Compind")
 # http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
 # Creates Data Frame of Weights
 set.seed(5154)
-
+#' https://stats.stackexchange.com/questions/63546/comparing-hierarchical-clustering-dendrograms-obtained-by-different-distances/63549#63549
+#' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
+#' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
+#' 
 source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
 source("3_MultivariateAnalysis/PCAandFA.R")
