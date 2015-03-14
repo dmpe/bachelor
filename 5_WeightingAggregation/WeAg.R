@@ -1,25 +1,39 @@
 library("Benchmarking")
 library("Compind")
-# http://cran.r-project.org/web/packages/Compind/Compind.pdf
-# http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
-# Creates Data Frame of Weights
-set.seed(5154)
+
+#' http://cran.r-project.org/web/packages/Compind/Compind.pdf
+#' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
 #' https://stats.stackexchange.com/questions/63546/comparing-hierarchical-clustering-dendrograms-obtained-by-different-distances/63549#63549
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
-#' 
+
+#' Creates Data Frame of Weights
+set.seed(5154)
+
 source("1_RawData/DataFrame.R")
 source("2_Imputation/MICE_Imputation.R")
 source("3_MultivariateAnalysis/PCAandFA.R")
 source("4_Normalization/Scale.R")
 
 factorAn
-factor1UnitNormalisation <- factorAn$loadings[,1]^2
-factor2UnitNormalisation <- factorAn$loadings[,2]^2
+factor1UnitNormalisation <- factorAn$loadings[, 1]^2
+factor2UnitNormalisation <- factorAn$loadings[, 2]^2
 
-weights.DB7 <- data.frame(Factor1Weight=round(factor1UnitNormalisation / sum(factorAn$loadings[,1]^2),3),
-                          Factor2Weight=round(factor2UnitNormalisation / sum(factorAn$loadings[,2]^2),3))
+Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2)
 
+FactorWeight1 <- round(sum(factorAn$loadings[, 1]^2)/Sum_SFL, 4)
+FactorWeight2 <- round(sum(factorAn$loadings[, 2]^2)/Sum_SFL, 4)
+
+weights.DB7 <- data.frame(Factor1Weight = round(factor1UnitNormalisation/sum(factorAn$loadings[, 1]^2), 4), 
+                          Factor2Weight = round(factor2UnitNormalisation/sum(factorAn$loadings[, 2]^2), 4))
+
+
+#' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
+
+weights.DB7$colMax <- apply(weights.DB7, 1, function(x) max(x[]))
+weights.DB7$FactorWeight <- c(FactorWeight1, FactorWeight1, FactorWeight1, FactorWeight2, FactorWeight2, FactorWeight1)
+weights.DB7$Multipl <- round(weights.DB7$colMax * weights.DB7$FactorWeight, 4)
+weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
 
 
 
@@ -29,8 +43,9 @@ ci_mean_geom(joinedDB.7)
 
 
 # DEA
-# http://professorjf.webs.com/DEA%202013.pdf
+#' http://professorjf.webs.com/DEA%202013.pdf
 
-ahp(joinedDB.7[1:6,2:6])
+ahp(joinedDB.7[1:6, 2:6])
+
 
 

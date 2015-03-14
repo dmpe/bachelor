@@ -32,3 +32,6 @@ data(czekolada)
 simutil<-caBTL(csimp,cpref,cprof)
 print("Percentage participation of profiles:", quote=FALSE)
 print(simutil)
+
+
+tidy_source("5_WeightingAggregation/WeAg.R")

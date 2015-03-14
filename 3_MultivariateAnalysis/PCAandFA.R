@@ -20,17 +20,12 @@ set.seed(5154)
 pc <- princomp(joinedDB.6, cor = FALSE, scores = TRUE)
 plot(pc)
 summary(pc)
-screeplot(pc, type = "lines")
-scree(joinedDB.6, factors = TRUE, pc = TRUE)
-biplot(pc, var.axes = TRUE, cex = 0.8, main = "(PCA) Biplot of Countries Data", xlim = c(-0.5, 0.6), ylim = c(-0.3, 0.7), arrow.len = 0.15)
+#' screeplot(pc, type = "lines")
+#' scree(joinedDB.6, factors = TRUE, pc = TRUE)
+#' biplot(pc, var.axes = TRUE, cex = 0.8, main = "(PCA) Biplot of Countries Data", xlim = c(-0.5, 0.6), ylim = c(-0.3, 0.7), arrow.len = 0.15)
 round(pc$loading, 3)
 round(pc$sdev, 3)
 round(pc$scores, 3)
-
-promax(loadings(pc))
-promax(loadings(factorAn))
-
-
 
 #' (pc$sdev)^2 
 #' sum((pc$loading[,1])^2) 
@@ -54,6 +49,9 @@ communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
 sum(communality)/6
 
+
+promax(loadings(pc))
+promax(loadings(factorAn))
 
 # An advanced method that 'combines k-means cluster analysis with aspects of Factor Analysis and PCA is offered by Vichi &
 # Kiers (2001)' [p. 81].
