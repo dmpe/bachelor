@@ -10,7 +10,7 @@ selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republi
 
 # see Quandl emails
 Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
-# China <- Quandl('WORLDBANK/CHN_SL_UEM_1524_ZS', authcode='GgnxpyUBXHsyQxqp67bY')[1,2]
+# China <- Quandl('WORLDBANK/CHN_SL_UEM_1524_ZS', authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 China <- 10.1
 Germany <- Quandl("WORLDBANK/DEU_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 Switzerland <- Quandl("WORLDBANK/CHE_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
@@ -19,7 +19,7 @@ Brazil <- Quandl("WORLDBANK/BRA_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67b
 Russia <- Quandl("WORLDBANK/RUS_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 USA <- Quandl("WORLDBANK/USA_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 UAE <- Quandl("WORLDBANK/ARE_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
-# Kenya <- Quandl('WORLDBANK/KEN_SL_UEM_1524_ZS', authcode='GgnxpyUBXHsyQxqp67bY')[1,2]
+# Kenya <- Quandl('WORLDBANK/KEN_SL_UEM_1524_ZS', authcode="GgnxpyUBXHsyQxqp67bY")[1,2]
 Kenya <- 17.1
 Finland <- Quandl("WORLDBANK/FIN_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 NewZeland <- Quandl("WORLDBANK/NZL_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]

@@ -63,7 +63,7 @@ print(outf)
 #' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 
 
-# FactoMineR http://factominer.free.fr/classical-methods/principal-components-analysis.html
+#' FactoMineR http://factominer.free.fr/classical-methods/principal-components-analysis.html
 pcaFAS <- PCA(joinedDB.6, scale.unit = TRUE)
 round(pcaFAS$eig, 3)
 plot(pcaFAS, axes = c(1, 2), choix = "ind", habillage = "ind")
