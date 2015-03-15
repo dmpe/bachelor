@@ -7,6 +7,7 @@ library(reshape2)
 library("ggthemes")
 library(flexclust)
 library(fpc)
+library(vegan)
 
 # Use when new data frame is needed
 set.seed(5154)
@@ -48,7 +49,7 @@ ct.km
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
-agn
+#' agn
 #' plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
 
@@ -60,6 +61,7 @@ euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
 # euroclust
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
+coef.hclust(euroclust)
 
 #' K Means http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
@@ -96,7 +98,7 @@ dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
 dfClustMeans
-sapply(dfClustMeans, class)
+#' sapply(dfClustMeans, class)
 
 test_data_long <- melt(dfClustMeans)  # convert to long format
 
@@ -115,3 +117,12 @@ pvrect(cluster.bootstrap)
 pamk.best <- pamk(joinedDB.6)
 cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
 plot(pam(joinedDB.6, pamk.best$nc))
+
+
+
+fitcas <- cascadeKM(joinedDB.6, 1, 10, iter = 1000)
+plot(fitcas, sortg = TRUE, grpmts.plot = TRUE)
+calinski.best <- as.numeric(which.max(fitcas$results[2,]))
+cat("Calinski criterion optimal number of clusters:", calinski.best, "\n")
+
+
