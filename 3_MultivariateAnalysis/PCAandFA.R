@@ -17,28 +17,30 @@ set.seed(5154)
 #' the correlation matrix.  
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/16_princomp/07_princomp_alternative.html
 
-pc <- princomp(joinedDB.6, cor = FALSE, scores = TRUE)
-plot(pc)
-summary(pc)
-#' screeplot(pc, type = "lines")
+#' NOT RECOMMENDED
+#' pcaNOT <- princomp(joinedDB.6, cor = FALSE, scores = TRUE)
+#' plot(pcaNOT)
+#' summary(pcaNOT)
+#' screeplot(pcaNOT, type = "lines")
 #' scree(joinedDB.6, factors = TRUE, pc = TRUE)
-#' biplot(pc, var.axes = TRUE, cex = 0.8, main = "(PCA) Biplot of Countries Data", xlim = c(-0.5, 0.6), ylim = c(-0.3, 0.7), arrow.len = 0.15)
-round(pc$loading, 3)
-round(pc$sdev, 3)
-round(pc$scores, 3)
+#' biplot(pcaNOT, var.axes = TRUE, cex = 0.8, main = "(PCA) Biplot of Countries Data", xlim = c(-0.5, 0.6), ylim = c(-0.3, 0.7), arrow.len = 0.15)
+#' round(pcaNOT$loading, 3)
+#' round(pcaNOT$sdev, 3)
+#' round(pcaNOT$scores, 3)
 
-#' (pc$sdev)^2 
-#' sum((pc$loading[,1])^2) 
+#' (pcaNOT$sdev)^2 
+#' sum((pcaNOT$loading[,1])^2) 
 #' http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis 
 #' eigenvalues 
 #' tmp <- svd(joinedDB.6) 
 #' tmp$d
 
 #' This is using singular value decomposition
-#' pcp <- prcomp(joinedDB.6)
-#' summary(pcp) 
-#' round(pcp$rotation, 3) 
-#' comp <- data.frame(pcp$x[,1:4]) 
+pc <- prcomp(joinedDB.6, center = TRUE, scale = FALSE)
+pc
+#' summary(pc) 
+#' round(pc$rotation, 3) 
+#' comp <- data.frame(pc$x[,1:4]) 
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
@@ -50,15 +52,16 @@ communality
 sum(communality)/6
 
 
-promax(loadings(pc))
+#' promax(loadings(pcaNOT))
 promax(loadings(factorAn))
 
-# An advanced method that 'combines k-means cluster analysis with aspects of Factor Analysis and PCA is offered by Vichi &
-# Kiers (2001)' [p. 81].
+#' An advanced method that 'combines k-means cluster analysis with aspects of Factor Analysis and PCA is offered by Vichi &
+#' Kiers (2001)' [p. 81].
+#' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
+
 outf <- FactorialKM(joinedDB.6, nclus = 2, ndim = 2, nstart = 25, smartStart = TRUE)
 print(outf)
 #' plotrd(outf, what = c("all", "none"), obslabel = rownames(joinedDB.6), density = FALSE)
-#' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 
 
 #' FactoMineR http://factominer.free.fr/classical-methods/principal-components-analysis.html
