@@ -1,5 +1,4 @@
 library("Benchmarking")
-library("Compind")
 library("pmr")
 
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
@@ -36,9 +35,18 @@ weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 
 
 
 
+
+
+#' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
+sadawdq <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
+joiend8 <- rowSums(sadawdq)
+
+
+
+cbind(x1 = 3, x2 = c(4:1, 2:5))
+
+
 # DEA
 #' http://professorjf.webs.com/DEA%202013.pdf
 #' ahp(joinedDB.7[1:6, 2:6])
-
-
 
