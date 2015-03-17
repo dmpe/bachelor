@@ -3,8 +3,8 @@ library(plyr)
 library("Compind")
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
 
 #' http://howto.commetrics.com/methodology/statistics/normalization/
 #' http://www.benetzkorn.com/2011/11/data-normalization-and-standardization/
@@ -58,11 +58,12 @@ joinedDB.7$Unemployment_NonScaled = ((2-0)*(nonScaledCompleteDF$Unemployment_Non
 #' "GDP per capita" has 'positive' polarity and "Unemployment rate" has 'negative' polarity).
 #' 
 #' see documentation with precise formulas
-normalise_ci(nonScaledCompleteDF,c(1:3),c("NEG","POS", "POS"), method=2)
+# normalise_ci(nonScaledCompleteDF,c(1:3),c("NEG","POS", "POS"), method=2)
 
 # possible, used but not correct
-test <- max(nonScaledCompleteDF$Unemployment_NonScaled) + min(nonScaledCompleteDF$Unemployment_NonScaled) - nonScaledCompleteDF$Unemployment_NonScaled
-test
+# testJustSo <- max(nonScaledCompleteDF$Unemployment_NonScaled) + 
+#  min(nonScaledCompleteDF$Unemployment_NonScaled) - nonScaledCompleteDF$Unemployment_NonScaled
+# testJustSo
 
 
 # To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
