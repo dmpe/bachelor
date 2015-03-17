@@ -57,8 +57,7 @@ agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2")
-# euroclust
+euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "complete") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust)
