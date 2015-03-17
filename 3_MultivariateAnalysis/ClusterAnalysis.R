@@ -23,7 +23,7 @@ set.seed(5154)
 #' nc <- NbClust(joinedDB.6, distance = 'euclidean', method='kmeans', index='all') 
 #' NbClust(joinedDB.6, distance = 'euclidean', method='ward.D', index='all')
 
-nc <- NbClust(joinedDB.6, distance = "euclidean", method = "ward.D2", index = "all")
+nc <- NbClust(joinedDB.6, distance = "euclidean", method = "complete", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
 
@@ -65,7 +65,7 @@ coef.hclust(euroclust)
 #' K Means http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
 klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart = 25, iter.max = 100)
-# aggregate(joinedDB.6, by=list(klust$cluster), FUN=mean) # get cluster means
+# aggregate(joinedDB.6, by=list(klust$cluster), FUN = mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster)  # append cluster assignment
 
 #' K-menas clusters; should be with 'dist'
