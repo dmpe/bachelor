@@ -35,16 +35,17 @@ weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 
 
 
 
-
+# ci_factor(joinedDB.7, method = "ALL")
+# asd<-ci_mean_geom(joinedDB.7)
+# sort(asd$ci_mean_geom_est)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 sadawdq <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
 joiend8 <- rowSums(sadawdq)
-
+sort(joiend8)
 
 
 cbind(x1 = 3, x2 = c(4:1, 2:5))
-
 
 # DEA
 #' http://professorjf.webs.com/DEA%202013.pdf
