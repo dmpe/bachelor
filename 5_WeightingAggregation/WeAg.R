@@ -19,17 +19,20 @@ source("4_Normalization/Scale.R")
 factorAn
 factor1UnitNormalisation <- factorAn$loadings[, 1]^2
 factor2UnitNormalisation <- factorAn$loadings[, 2]^2
+factor3UnitNormalisation <- factorAn$loadings[, 3]^2
 
-Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2)
+Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2) + sum(factorAn$loadings[, 3]^2)
 
 FactorWeight1 <- sum(factorAn$loadings[, 1]^2)/Sum_SFL
 FactorWeight2 <- sum(factorAn$loadings[, 2]^2)/Sum_SFL
+FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
 
 weights.DB7 <- data.frame(Factor1Weight = factor1UnitNormalisation/sum(factorAn$loadings[, 1]^2), 
-                          Factor2Weight = factor2UnitNormalisation/sum(factorAn$loadings[, 2]^2))
+                          Factor2Weight = factor2UnitNormalisation/sum(factorAn$loadings[, 2]^2),
+                          Factor3Weight = factor3UnitNormalisation/sum(factorAn$loadings[, 3]^2))
 
 weights.DB7$colMax <- apply(weights.DB7, 1, function(x) max(x[]))
-weights.DB7$FactorWeight <- c(FactorWeight1, FactorWeight1, FactorWeight1, FactorWeight2, FactorWeight2, FactorWeight1)
+weights.DB7$FactorWeight <- c(FactorWeight2, FactorWeight3, FactorWeight2, FactorWeight1, FactorWeight1, FactorWeight2)
 weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$FactorWeight
 weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
 
@@ -44,8 +47,6 @@ sadawdq <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
 joinedDB.8 <- rowSums(sadawdq)
 joinedDB.8 <- as.data.frame(sort(joinedDB.8, decreasing = T))
 
-
-cbind(x1 = 3, x2 = c(4:1, 2:5))
 
 # DEA
 #' http://professorjf.webs.com/DEA%202013.pdf
