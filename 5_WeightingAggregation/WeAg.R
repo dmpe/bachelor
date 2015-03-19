@@ -41,8 +41,8 @@ weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 sadawdq <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
-joiend8 <- rowSums(sadawdq)
-sort(joiend8)
+joinedDB.8 <- rowSums(sadawdq)
+joinedDB.8 <- as.data.frame(sort(joinedDB.8, decreasing = T))
 
 
 cbind(x1 = 3, x2 = c(4:1, 2:5))

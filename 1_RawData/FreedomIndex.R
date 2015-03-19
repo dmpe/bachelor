@@ -23,6 +23,8 @@ freedom <- plyr::rename(freedom, c(Country.Name = "Country", X2015.Score = "Free
 freedom$Country <- str_trim(freedom$Country, side = "both")
 freedom$Country[freedom$Country == "Korea, South"] <- "Korea"
 freedom <- subset(freedom, select = c(Country, Freedom_Index, RankOverall))
+
+# convert from factor to numeric
 freedom$Freedom_Index <- as.numeric(as.character(freedom$Freedom_Index))
 freedom$RankOverall <- as.numeric(as.character(freedom$RankOverall))
 

@@ -64,4 +64,4 @@ nonScaledDataFrame <- subset(nonScaledDataFrame, select = c(Country, Unemploymen
 
 # http://stackoverflow.com/a/10331131
 sapply(nonScaledDataFrame, class)
- 
+

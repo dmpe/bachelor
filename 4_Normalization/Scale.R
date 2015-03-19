@@ -42,12 +42,12 @@ rescaleColumns <- function(x, minValue, maxValue) {
 
 #' Use colwise from plyr package to scale columns
 #' Who created such a shit with function names ?
-joinedDB.7 <- plyr::colwise(rescaleColumns)(nonScaledCompleteDF, 0, 2)
+joinedDB.7 <- plyr::colwise(rescaleColumns)(nonScaledCompleteDF, 0, 100)
 rownames(joinedDB.7) <- row.names(nonScaledCompleteDF)  
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not best (e.i. that would be 
 #' logic without this step below). 
-joinedDB.7$Unemployment_NonScaled = ((2-0)*(nonScaledCompleteDF$Unemployment_NonScaled-max(nonScaledCompleteDF$Unemployment_NonScaled))/
+joinedDB.7$Unemployment_NonScaled = ((100-0)*(nonScaledCompleteDF$Unemployment_NonScaled-max(nonScaledCompleteDF$Unemployment_NonScaled))/
                                        (min(nonScaledCompleteDF$Unemployment_NonScaled)-max(nonScaledCompleteDF$Unemployment_NonScaled))) + 0
 
 
