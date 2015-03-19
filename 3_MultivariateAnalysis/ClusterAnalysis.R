@@ -38,12 +38,13 @@ ct.km
 
 
 #' http://www.statmethods.net/advstats/cluster.html 
-#' dfa <- scale(joinedDB.6) 
-#' pamk(dfa) wss <- (nrow(dfa)-1)*sum(apply(dfa,2,var)) 
-#' for (i in 2:15) { 
-#'   wss[i] <- sum(kmeans(dfa,centers=i)$withinss) 
-#' } 
-#' plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
+dfa <- scale(joinedDB.6) 
+pamk(joinedDB.6) 
+wss <- (nrow(joinedDB.6)-1)*sum(apply(joinedDB.6,2,var)) 
+for (i in 2:15) { 
+  wss[i] <- sum(kmeans(joinedDB.6,centers=i)$withinss) 
+} 
+plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
 
 
 #' produces same results, just different package
@@ -81,7 +82,7 @@ clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
 #' sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
 #' plot(sk2)
 par(mar = c(5, 10, 3, 2) + 0.1)
-sk3 <- silhouette(pam(joinedDB.6, 2))
+sk3 <- silhouette(pam(joinedDB.6, 3))
 plot(sk3, max.strlen = 30)
 
 #' Who is in, who is out ?  

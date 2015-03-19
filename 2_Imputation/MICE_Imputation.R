@@ -26,7 +26,7 @@ md.pattern(joinedDB.5[2:7])  # ‘country’ should be excluded for the analysis
 # mice [mice] Beware cannot use, see van Buuren p. 51
 # print(imp <- mice(joinedDB.5[2:7], m = 30, seed = 5154))
 
-imp <- mice(joinedDB.5[2:7], m = 30, print = FALSE, seed = 5154)
+imp <- mice(joinedDB.5[2:7], m = 10, print = FALSE, seed = 5154)
 post <- imp$post
 k <- seq(1, 1.5, 0.1)
 est <- vector("list", length(k))
