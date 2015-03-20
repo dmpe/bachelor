@@ -45,3 +45,18 @@ d <- d + geom_line() + geom_point(size = 4, shape=21, fill="white")  # geom_ribb
 d <- d + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 d <- d + ggtitle("Comparison of different methods") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 d
+
+
+
+what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
+what_long4 <- melt(zscoreMultiFA.Weights, id="Country")  # convert to long format
+what_long5 <- melt(minMaxMultiEqual.Weights, id="Country")  # convert to long format
+what_long6 <- melt(minMaxMultiFA.Weights, id="Country")  # convert to long format
+
+# Var1 is country
+# Var2 is indicator
+
+e <- ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value))
+e <- e + geom_bar() # + facet_wrap(~ Var2)
+e 
+
