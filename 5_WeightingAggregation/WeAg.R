@@ -1,5 +1,5 @@
-library("Benchmarking")
-library("pmr")
+# library("Benchmarking")
+# library("pmr")
 
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
 #' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
@@ -9,26 +9,26 @@ library("pmr")
 #' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
 #' 
 #' Creates Data Frame of Weights
-set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
-source("3_MultivariateAnalysis/PCAandFA.R")
-source("4_Normalization/Scale.R")
+# set.seed(5154)
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/MICE_Imputation.R")
+# source("3_MultivariateAnalysis/PCAandFA.R")
+# source("4_Normalization/Scale.R")
 
-factorAn
+# factorAn
 factor1UnitNormalisation <- factorAn$loadings[, 1]^2
 factor2UnitNormalisation <- factorAn$loadings[, 2]^2
-factor3UnitNormalisation <- factorAn$loadings[, 3]^2
+#factor3UnitNormalisation <- factorAn$loadings[, 3]^2
 
-Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2) + sum(factorAn$loadings[, 3]^2)
+Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2) # + sum(factorAn$loadings[, 3]^2)
 
 FactorWeight1 <- sum(factorAn$loadings[, 1]^2)/Sum_SFL
 FactorWeight2 <- sum(factorAn$loadings[, 2]^2)/Sum_SFL
-FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
+# FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
 
 weights.DB7 <- data.frame(Factor1Weight = factor1UnitNormalisation/sum(factorAn$loadings[, 1]^2), 
                           Factor2Weight = factor2UnitNormalisation/sum(factorAn$loadings[, 2]^2))
-                          Factor3Weight = factor3UnitNormalisation/sum(factorAn$loadings[, 3]^2))
+#                          Factor3Weight = factor3UnitNormalisation/sum(factorAn$loadings[, 3]^2))
 
 weights.DB7$colMax <- apply(weights.DB7, 1, function(x) max(x[]))
 weights.DB7$FactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, FactorWeight2, FactorWeight1, FactorWeight2)
@@ -36,14 +36,31 @@ weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$FactorWeight
 weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
 
 
-
 # ci_factor(joinedDB.7, method = "ALL")
 # asd<-ci_mean_geom(joinedDB.7)
 # sort(asd$ci_mean_geom_est)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
-sadawdq <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
-joinedDB.8 <- rowSums(sadawdq)
-joinedDB.8 <- as.data.frame(sort(joinedDB.8, decreasing = T))
+#' Min-MAX + FA weights.
+minMaxMultiFA.Weights <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
+joinedDB.8 <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
+joinedDB.8 <- data.frame(Value = joinedDB.8, RankMM.FA = seq(1:23))
+
+#' Min-MAX + EW
+minMaxMultiEqual.Weights <- t(t(joinedDB.7) * c(rep(1/6, 6)))
+joinedDB.9 <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
+joinedDB.9 <- data.frame(Value = joinedDB.9, RankMM.EW = seq(1:23))
+
+#' ZSCORE + FA
+zscoreMultiFA.Weights <- t(t(joinedDB.6) * weights.DB7$UnitScaled)
+joinedDB.10 <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
+joinedDB.10 <- data.frame(Value = joinedDB.10, RankZS.FA = seq(1:23))
+
+#' Zscore + EW
+zscoreMultiEqual.Weights <- t(t(joinedDB.6) * c(rep(1/6, 6)))
+joinedDB.11 <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
+joinedDB.11 <- data.frame(Value = joinedDB.11, RankZS.EW = seq(1:23))
+
+
 
 
