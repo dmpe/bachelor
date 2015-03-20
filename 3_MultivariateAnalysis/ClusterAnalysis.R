@@ -58,7 +58,7 @@ agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "complete") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust)
@@ -82,7 +82,7 @@ clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
 #' sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
 #' plot(sk2)
 par(mar = c(5, 10, 3, 2) + 0.1)
-sk3 <- silhouette(pam(joinedDB.6, 3))
+sk3 <- silhouette(pam(joinedDB.6, 2))
 plot(sk3, max.strlen = 30)
 
 #' Who is in, who is out ?  

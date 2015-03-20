@@ -5,7 +5,7 @@ library(lattice)
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
-source("2_Imputation/UnsuperRF.R")
+# source("2_Imputation/notUsed/UnsuperRF.R")
 
 #' https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 #' http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value
@@ -26,23 +26,23 @@ md.pattern(joinedDB.5[2:7])  # ‘country’ should be excluded for the analysis
 # mice [mice] Beware cannot use, see van Buuren p. 51
 # print(imp <- mice(joinedDB.5[2:7], m = 30, seed = 5154))
 
-imp <- mice(joinedDB.5[2:7], m = 10, print = FALSE, seed = 5154)
-post <- imp$post
-k <- seq(1, 1.5, 0.1)
-est <- vector("list", length(k))
-for (i in 1:length(k)) {
-  post["LearningCurve_Index"] <- paste("imp[[j]][,i] <-", k[i], "* imp[[j]][,i]")
-  imp <- mice(joinedDB.5[2:7], post = post, seed = 5154, print = FALSE, maxit = 5, m = 10)
-  fit <- with(imp, lm( CompletionRate ~ Ranking_HIndex + LearningCurve_Index))
-  est[[i]] <- summary(pool(fit))
-}
-print(est)
-#' Post Imputation Graphical analysis
-stripplot(imp, pch = 20, cex = 1.2)
-plot(imp, c("LearningCurve_Index"))
-densityplot(imp, scales = list(x = list(relation = 'free')))
+# imp <- mice(joinedDB.5[2:7], m = 10, print = FALSE, seed = 5154, maxit = 10)
+# post <- imp$post
+# k <- seq(1, 1.5, 0.1)
+# est <- vector("list", length(k))
+# for (i in 1:length(k)) {
+#   post["LearningCurve_Index"] <- paste("imp[[j]][,i] <-", k[i], "* imp[[j]][,i]")
+#   imp <- mice(joinedDB.5[2:7], post = post, seed = 5154, print = FALSE, maxit = 10, m = 10)
+#   fit <- with(imp, lm(CompletionRate ~ Ranking_HIndex + LearningCurve_Index))
+#   est[[i]] <- summary(pool(fit))
+# }
+# print(est)
+# #' Post Imputation Graphical analysis
+# stripplot(imp, pch = 20, cex = 1.2)
+# plot(imp, c("LearningCurve_Index"))
+# densityplot(imp, scales = list(x = list(relation = 'free')))
 
-joinedDB.6 <- complete(imp)
+joinedDB.6 <- complete(imp,9)
 
 
 #' The column fmi contains the fraction of missing information as defined in Rubin (1987), and the column lambda is the
@@ -66,7 +66,7 @@ joinedDB.6 <- data.frame(joinedDB.6[, -1], row.names = joinedDB.6[, 1])
 # nonScaledDataFrame.complete$Country <- joinedDB.5$Country
 # nonScaledDataFrame.complete <- nonScaledDataFrame.complete[, c(7, 1, 2, 3, 4, 5, 6)]  # Reorder them
 
-rfunsuper(joinedDB.5[2:7]) 
+# rfunsuper(joinedDB.5[2:7]) 
 
 # To continue look in 'MultivariateAnalysis' folder, ->> and begin with 'Correlation.R', 
 # then 'PCAandFA.R' and lastly with 'ClusterAnalysis.R'. All of them must be run. 
