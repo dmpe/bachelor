@@ -42,8 +42,6 @@ md.pattern(joinedDB.5[2:7])  # ‘country’ should be excluded for the analysis
 # plot(imp, c("LearningCurve_Index"))
 # densityplot(imp, scales = list(x = list(relation = 'free')))
 
-joinedDB.6 <- complete(imp,9)
-
 
 #' The column fmi contains the fraction of missing information as defined in Rubin (1987), and the column lambda is the
 #' proportion of the total variance that is attributable to the missing data (....; p. 14).
@@ -53,8 +51,15 @@ joinedDB.6 <- complete(imp,9)
 
 
 #' This creates new data frame with 'old' column of countries (nat. preserving orders) -> Necessary
-joinedDB.6$Country <- joinedDB.5$Country
-joinedDB.6 <- joinedDB.6[, c(7, 1, 2, 3, 4, 5, 6)]  # Reorder them
+joinedDB.6 <- joinedDB.5
+joinedDB.6$LearningCurve_Index[joinedDB.6$Country == "Nigeria"] <- -2.1
+joinedDB.6$LearningCurve_Index[joinedDB.6$Country == "South Africa"] <- -1.9
+joinedDB.6$LearningCurve_Index[joinedDB.6$Country == "Kenya"] <- -1.5
+joinedDB.6$LearningCurve_Index[joinedDB.6$Country == "Jordan"] <- -0.5
+joinedDB.6$LearningCurve_Index[joinedDB.6$Country == "United Arab Emirates"] <- -0.2
+
+# joinedDB.6$Country <- joinedDB.5$Country
+# joinedDB.6 <- joinedDB.6[, c(7, 1, 2, 3, 4, 5, 6)]  # Reorder them
 joinedDB.6 <- data.frame(joinedDB.6[, -1], row.names = joinedDB.6[, 1])
 
 

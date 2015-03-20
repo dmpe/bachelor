@@ -31,20 +31,20 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 #' Not possible in my case, because of non-existent
 #' type (e.g. default data would need have already some kind of Type/'Cluster' which we could then compare with the new
 #' cluster 'quantify the agreement between type and cluster')
-fit.km <- kmeans(joinedDB.6, 2, nstart = 25)
-fit.km
-ct.km <- table(joinedDB.5$Country, fit.km$cluster)
-ct.km
+# fit.km <- kmeans(joinedDB.6, 2, nstart = 25)
+# fit.km
+# ct.km <- table(joinedDB.5$Country, fit.km$cluster)
+# ct.km
 
 
 #' http://www.statmethods.net/advstats/cluster.html 
-dfa <- scale(joinedDB.6) 
-pamk(joinedDB.6) 
-wss <- (nrow(joinedDB.6)-1)*sum(apply(joinedDB.6,2,var)) 
-for (i in 2:15) { 
-  wss[i] <- sum(kmeans(joinedDB.6,centers=i)$withinss) 
-} 
-plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
+# dfa <- scale(joinedDB.6) 
+# pamk(joinedDB.6) 
+# wss <- (nrow(joinedDB.6)-1)*sum(apply(joinedDB.6,2,var)) 
+# for (i in 2:15) { 
+#   wss[i] <- sum(kmeans(joinedDB.6,centers=i)$withinss) 
+# } 
+# plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
 
 
 #' produces same results, just different package
