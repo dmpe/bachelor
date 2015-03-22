@@ -49,7 +49,7 @@ scree(joinedDB.6, factors = TRUE, pc = TRUE)
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(joinedDB.6, rotation = "varimax", factors = 2)
+factorAn <- factanal(joinedDB.6, rotation = "none", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality

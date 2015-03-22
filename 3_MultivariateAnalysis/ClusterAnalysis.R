@@ -21,7 +21,7 @@ set.seed(5154)
 #' How many clusters ? My choice of 2 
 #' nc <- NbClust(joinedDB.6, distance = 'euclidean', method='single', index='all') 
 #' nc <- NbClust(joinedDB.6, distance = 'euclidean', method='kmeans', index='all') 
-#' NbClust(joinedDB.6, distance = 'euclidean', method='ward.D', index='all')
+#' NbClust(joinedDB.6, distance = 'euclidean', method='ward.D', index='all') ward.D2
 
 nc <- NbClust(joinedDB.6, distance = "euclidean", method = "complete", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
@@ -49,16 +49,16 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
-#' agn
-#' plot(agn) 
-#' plot(as.dendrogram(agn, hang = -1))
+agn <- agnes(x = dist(joinedDB.6), method = "complete", metric = "euclidean")
+agn
+plot(agn) 
+plot(as.dendrogram(agn, hang = -1))
 
 
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "complete") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust)
@@ -103,10 +103,12 @@ dfClustMeans
 test_data_long <- melt(dfClustMeans)  # convert to long format
 
 # http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
-ggplot(test_data_long, aes(x = vars, y = value, group = variable, color = variable)) + geom_line() + geom_point() +
-  coord_cartesian(ylim = c(-1.2, 1)) + scale_y_continuous(breaks = seq(-1.2, 1, 0.25)) + theme_gdocs() + ggtitle("Means plot for clusters") + 
-  scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
-
+gp <- ggplot(test_data_long, aes(x = vars, y = value, group = variable, color = variable)) 
+gp <- gp + geom_line() + geom_point()
+gp <- gp + coord_cartesian(ylim = c(-1.2, 1)) + scale_y_continuous(breaks = seq(-1.2, 1, 0.25))
+gp <- gp + theme_gdocs() + scale_color_gdocs()
+gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
+gp
 
 cluster.bootstrap <- pvclust(joinedDB.6, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 plot(cluster.bootstrap)
