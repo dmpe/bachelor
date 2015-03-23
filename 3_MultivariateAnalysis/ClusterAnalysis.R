@@ -79,8 +79,8 @@ mydata <- data.frame(joinedDB.6, klust$cluster)  # append cluster assignment
 #' Very good overview of all 8 methods
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 
-sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
-plot(sk2)
+# sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
+# plot(sk2)
 
 # par(mar = c(5, 10, 3, 2) + 0.1)
 # sk3 <- silhouette(pam(joinedDB.6, 2))
