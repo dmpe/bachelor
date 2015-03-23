@@ -23,7 +23,7 @@ set.seed(5154)
 #' nc <- NbClust(joinedDB.6, distance = 'euclidean', method='kmeans', index='all') 
 #' NbClust(joinedDB.6, distance = 'euclidean', method='ward.D', index='all') ward.D2
 
-nc <- NbClust(joinedDB.6, distance = "euclidean", method = "complete", index = "all")
+nc <- NbClust(joinedDB.6, distance = "euclidean", method = "ward.D2", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
 
@@ -49,28 +49,28 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x = dist(joinedDB.6), method = "complete", metric = "euclidean")
+agn <- agnes(x = dist(joinedDB.6), method = "ward", metric = "euclidean")
 agn
 plot(agn) 
-plot(as.dendrogram(agn, hang = -1))
+#' plot(as.dendrogram(agn, hang = -1))
 
 
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "complete") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(joinedDB.6, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust)
 
-#' K Means http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
+#' K Means 
+#' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
 klust <- kmeans(dist(joinedDB.6, method = "euclidean"), 2, nstart = 25, iter.max = 100)
-# aggregate(joinedDB.6, by=list(klust$cluster), FUN = mean) # get cluster means
 mydata <- data.frame(joinedDB.6, klust$cluster)  # append cluster assignment
+# aggregate(joinedDB.6, by=list(klust$cluster), FUN = mean) # get cluster means
 
-#' K-menas clusters; should be with 'dist'
-clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
+
 
 #' Silhouette plot 
 #' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
@@ -79,21 +79,25 @@ clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
 #' Very good overview of all 8 methods
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 
-#' sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
-#' plot(sk2)
-par(mar = c(5, 10, 3, 2) + 0.1)
-sk3 <- silhouette(pam(joinedDB.6, 2))
-plot(sk3, max.strlen = 30)
+sk2 <- silhouette(klust$cl, dist(joinedDB.6, method = 'euclidean')) 
+plot(sk2)
+
+# par(mar = c(5, 10, 3, 2) + 0.1)
+# sk3 <- silhouette(pam(joinedDB.6, 2))
+# plot(sk3, max.strlen = 30)
+#' K-menas clusters; should be with 'dist'
+#' clusplot(pam(dist(joinedDB.6), 2), color = TRUE, shade = TRUE, labels = 2)
+
 
 #' Who is in, who is out ?  
 #' sort(table(klust$clust))
 clust <- names(sort(table(klust$clust)))
-#' clust 
-#' row.names(mydata[klust$clust==clust[1],]) 
-#' row.names(mydata[klust$clust==clust[2],])
+row.names(mydata[klust$clust==clust[1],]) 
+row.names(mydata[klust$clust==clust[2],])
 
 Developing <- sapply(mydata[klust$clust == clust[1], ], mean)
 Advanced <- sapply(mydata[klust$clust == clust[2], ], mean) #0.55 mentioned in the text, page 44
+
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
@@ -102,7 +106,8 @@ dfClustMeans
 
 test_data_long <- melt(dfClustMeans)  # convert to long format
 
-# http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
+#' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
+#' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
 gp <- ggplot(test_data_long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point()
 gp <- gp + coord_cartesian(ylim = c(-1.2, 1)) + scale_y_continuous(breaks = seq(-1.2, 1, 0.25))
@@ -110,16 +115,15 @@ gp <- gp + theme_gdocs() + scale_color_gdocs()
 gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
 gp
 
-cluster.bootstrap <- pvclust(joinedDB.6, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
-plot(cluster.bootstrap)
-pvrect(cluster.bootstrap) 
+# cluster.bootstrap <- pvclust(joinedDB.6, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
+# plot(cluster.bootstrap)
+# pvrect(cluster.bootstrap) 
 
 # To continue look in 'Normalisation' folder, ->> 'Scale.R' is required to run, while 'SampleIOEFreedom.R' may be recommendet
 
 pamk.best <- pamk(joinedDB.6)
 cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
 plot(pam(joinedDB.6, pamk.best$nc))
-
 
 
 fitcas <- cascadeKM(joinedDB.6, 1, 10, iter = 1000)
