@@ -14,6 +14,7 @@ CompletionRate$Country[CompletionRate$Country == "Russian Federation"] <- "Russi
 CompletionRate$CompletionRate[CompletionRate$Country == "Korea"] <- CompletionRate$X2012[CompletionRate$Country == "Korea"]
 # Proxy https://www.seab.gov.sg/content/pressReleases/Release_of_2014_PSLE_Results_21112014.pdf
 CompletionRate$CompletionRate[CompletionRate$Country == "Singapore"] <- 97.6
+
 CompletionRate$CompletionRate[CompletionRate$Country == "China"] <- CompletionRate$X1997[CompletionRate$Country == "China"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Germany"] <- CompletionRate$X2012[CompletionRate$Country == "Germany"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Switzerland"] <- CompletionRate$X2012[CompletionRate$Country == "Switzerland"]
@@ -36,13 +37,16 @@ CompletionRate$CompletionRate[CompletionRate$Country == "Chile"] <- CompletionRa
 CompletionRate$CompletionRate[CompletionRate$Country == "Japan"] <- CompletionRate$X2012[CompletionRate$Country == "Japan"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Nigeria"] <- CompletionRate$X2010[CompletionRate$Country == "Nigeria"]
 
-# http://www.adb.org/sites/default/files/publication/43030/ki2014-mdg2.pdf
-CompletionRate$CompletionRate[CompletionRate$Country == "Australia"] <- 96.9
-CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- 98.5
+#' http://www.adb.org/sites/default/files/publication/43030/ki2014-mdg2.pdf
+#' https://www.quandl.com/c/society/enrolment-rate-primary-by-country
+CompletionRate$CompletionRate[CompletionRate$Country == "Australia"] <- Quandl("WORLDBANK/AUS_SE_PRM_ENRR", authcode = "GgnxpyUBXHsyQxqp67bY")[1,2]
+CompletionRate$CompletionRate[CompletionRate$Country == "New Zealand"] <- Quandl("WORLDBANK/NZL_SE_PRM_ENRR", authcode = "GgnxpyUBXHsyQxqp67bY")[1,2]
 
-# http://mdgs.un.org/unsd/mdg/Data.aspx http://mdgs.un.org/unsd/mdg/Handlers/ExportHandler.ashx?Type=Xml&Series=589
-# http://data.worldbank.org/indicator/SE.PRM.NENR/countries
-CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- 99.8
+#' http://mdgs.un.org/unsd/mdg/Data.aspx 
+#' http://mdgs.un.org/unsd/mdg/Handlers/ExportHandler.ashx?Type=Xml&Series=589
+#' http://data.worldbank.org/indicator/SE.PRM.NENR/countries
+#' https://www.quandl.com/c/society/enrolment-rate-primary-by-country
+CompletionRate$CompletionRate[CompletionRate$Country == "United Kingdom"] <- Quandl("WORLDBANK/GBR_SE_PRM_ENRR", authcode = "GgnxpyUBXHsyQxqp67bY")[1,2]
 
 CompletionRate <- subset(CompletionRate, Country %in% selectedCountries, select = c(Country, CompletionRate))
 
