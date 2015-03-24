@@ -1,5 +1,4 @@
-# library("Benchmarking")
-# library("pmr")
+# library("Compind")
 
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
 #' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
@@ -16,24 +15,31 @@
 # source("4_Normalization/Scale.R")
 
 # factorAn
-factor1UnitNormalisation <- factorAn$loadings[, 1]^2
-factor2UnitNormalisation <- factorAn$loadings[, 2]^2
+factor1SquaredLoadings <- factorAn$loadings[, 1]^2
+factor2SquaredLoadings <- factorAn$loadings[, 2]^2
+
 #' factor3UnitNormalisation <- factorAn$loadings[, 3]^2
 
-Sum_SFL <- sum(factorAn$loadings[, 1]^2) + sum(factorAn$loadings[, 2]^2) # + sum(factorAn$loadings[, 3]^2)
+Sum_SFL <- sum(factor1SquaredLoadings) + sum(factor2SquaredLoadings) # + sum(factorAn$loadings[, 3]^2)
 
-FactorWeight1 <- sum(factorAn$loadings[, 1]^2)/Sum_SFL
-FactorWeight2 <- sum(factorAn$loadings[, 2]^2)/Sum_SFL
+FactorWeight1 <- sum(factor1SquaredLoadings)/Sum_SFL
+FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
+
 #' FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
 
-weights.DB7 <- data.frame(Factor1Weight = factor1UnitNormalisation/sum(factorAn$loadings[, 1]^2), 
-                          Factor2Weight = factor2UnitNormalisation/sum(factorAn$loadings[, 2]^2))
+weights.DB7 <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
+                          Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
 
 weights.DB7$colMax <- apply(weights.DB7, 1, function(x) max(x[]))
-weights.DB7$FactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, FactorWeight2, FactorWeight1, FactorWeight2)
-weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$FactorWeight
+
+weights.DB7$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
+                              FactorWeight2, FactorWeight1, FactorWeight2)
+
+weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$WholeFactorWeight
 weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
 
+# round(weights.DB7,3)
+# sum(weights.DB7$UnitScaled)
 
 # ci_factor(joinedDB.7, method = "ALL")
 # asd<-ci_mean_geom(joinedDB.7)
