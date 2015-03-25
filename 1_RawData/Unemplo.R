@@ -63,4 +63,12 @@ df_unemp$Unemployment_NonScaled[df_unemp$Country == "Nigeria"] <- Nigeria
 
 df_unemp$Unemployment <- as.numeric(scale(df_unemp$Unemployment_NonScaled))
 
+df_unemp$Unemployment_MINMAX = ((100-0)*(df_unemp$Unemployment_NonScaled-max(df_unemp$Unemployment_NonScaled))/
+                                       (min(df_unemp$Unemployment_NonScaled)-max(df_unemp$Unemployment_NonScaled))) + 0
+
+df_unemp$Unemployment_ZscoreNEGATIVE <- as.numeric(-scale(df_unemp$Unemployment_NonScaled))
+
+df_unemp <- df_unemp[, c(1,3,2,5,4)]
+
+
 sapply(df_unemp, class) 

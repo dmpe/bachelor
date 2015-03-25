@@ -38,12 +38,13 @@ weights.DB7$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2,
 weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$WholeFactorWeight
 weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
 
-# round(weights.DB7,3)
-# sum(weights.DB7$UnitScaled)
+# round(weights.DB7$colMax ,3)
+# sum(weights.DB7$colMax)
 
-# ci_factor(joinedDB.7, method = "ALL")
-# asd<-ci_mean_geom(joinedDB.7)
-# sort(asd$ci_mean_geom_est)
+ci_factor(joinedDB.7, method = "ALL")
+asd<-ci_mean_geom(joinedDB.7)
+sort(asd$ci_mean_geom_est)
+normalise_ci(nonScaledCompleteDF,c(1:3),c("NEG", "POS", "POS"),method=1)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 #' Min-MAX + FA weights.
@@ -65,7 +66,4 @@ joinedDB.10 <- data.frame(Value = joinedDB.10, RankZS.FA = seq(1:23))
 zscoreMultiEqual.Weights <- t(t(joinedDB.6) * c(rep(1/6, 6)))
 joinedDB.11 <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
 joinedDB.11 <- data.frame(Value = joinedDB.11, RankZS.EW = seq(1:23))
-
-
-
 
