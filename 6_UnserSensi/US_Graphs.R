@@ -2,8 +2,7 @@
 library("dplyr")
 library("reshape2")
 library("ggplot2")
-library(splines)
-library(MASS)
+library("grid")
 
 set.seed(5154)
 source("1_RawData/DataFrame.R")
@@ -54,8 +53,13 @@ what_long6 <- melt(minMaxMultiFA.Weights, id="Country")  # convert to long forma
 
 # Var1 is country
 # Var2 is indicator
+# source("http://peterhaschke.com/Code/multiplot.R")
+e1 <- ggplot(data=what_long3, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+e2 <- ggplot(data=what_long4, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+e3 <-ggplot(data=what_long5, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+e4 <-ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+grid.arrange(e1, e2,e3,e4, ncol = 2, nrow = 2,  main = "Main title")
 
-e <- ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value))
-e <- e + geom_bar() # + facet_wrap(~ Var2)
-e 
+# multiplot(e1, e2, e3, e4, cols=2)
+# par(mfrow=c(2,2))
 
