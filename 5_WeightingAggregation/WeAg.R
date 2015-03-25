@@ -1,4 +1,4 @@
-# library("Compind")
+library("Compind")
 
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
 #' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
@@ -41,29 +41,26 @@ weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 
 # round(weights.DB7$colMax ,3)
 # sum(weights.DB7$colMax)
 
-# ci_factor(joinedDB.7, method = "ALL")
-# asd<-ci_mean_geom(joinedDB.7)
-# sort(asd$ci_mean_geom_est)
-normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
+# normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 #' Min-MAX + FA weights.
-minMaxMultiFA.Weights <- t(t(joinedDB.7) * weights.DB7$UnitScaled)
-joinedDB.8 <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
-joinedDB.8 <- data.frame(Value = joinedDB.8, RankMM.FA = seq(1:23))
+minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * weights.DB7$UnitScaled)
+df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
+df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:23))
 
 #' Min-MAX + EW
-minMaxMultiEqual.Weights <- t(t(joinedDB.7) * c(rep(1/6, 6)))
-joinedDB.9 <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
-joinedDB.9 <- data.frame(Value = joinedDB.9, RankMM.EW = seq(1:23))
+minMaxMultiEqual.Weights <- t(t(df.Original.MinMax) * c(rep(1/6, 6)))
+df.Original.MM.EW <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
+df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:23))
 
 #' ZSCORE + FA
-zscoreMultiFA.Weights <- t(t(joinedDB.6) * weights.DB7$UnitScaled)
-joinedDB.10 <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
-joinedDB.10 <- data.frame(Value = joinedDB.10, RankZS.FA = seq(1:23))
+zscoreMultiFA.Weights <- t(t(df.Zscore.Imputed) * weights.DB7$UnitScaled)
+df.Zscore.FA <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
+df.Zscore.FA <- data.frame(Value = df.Zscore.FA, RankZS.FA = seq(1:23))
 
 #' Zscore + EW
-zscoreMultiEqual.Weights <- t(t(joinedDB.6) * c(rep(1/6, 6)))
-joinedDB.11 <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
-joinedDB.11 <- data.frame(Value = joinedDB.11, RankZS.EW = seq(1:23))
+zscoreMultiEqual.Weights <- t(t(df.Zscore.Imputed) * c(rep(1/6, 6)))
+df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
+df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
 

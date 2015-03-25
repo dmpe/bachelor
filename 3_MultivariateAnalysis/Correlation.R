@@ -3,10 +3,10 @@ library(ellipse)
 
 set.seed(5154)
 
-# summary(joinedDB.6)
-# covMat <- cov(joinedDB.6)
+# summary(df.Zscore.Imputed)
+# covMat <- cov(df.Zscore.Imputed)
 # round(covMat, 2)
-corelationMat <- cor(joinedDB.6)
+corelationMat <- cor(df.Zscore.Imputed)
 # round(corelationMat, 2)
 
 #' http://www.cookbook-r.com/Graphs/Correlation_matrix/

@@ -63,9 +63,13 @@ df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "United Arab 
 df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[, -1], row.names = df.Zscore.Imputed[, 1])
 
 
+#' This is non scaled data frame, containing same values in the joinedDB.6$LearningCurveIndex (only) 
 #' Only for original non-scaled values
+#' From column country to row.names
 df.Original.Imputed <- df.Original
 df.Original.Imputed$LearningCurve_Index <- df.Zscore.Imputed$LearningCurve_Index
+df.Original.Imputed <- data.frame(df.Original.Imputed[, -1], row.names = df.Original.Imputed[, 1])
+
 
 # rfunsuper(df.Zscore[2:7]) #' for notUsed/UnsuperRF.R. Load first the file !
 

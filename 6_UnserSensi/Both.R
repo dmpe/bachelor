@@ -8,13 +8,14 @@ library(MASS)
 
 set.seed(5154)
 source("1_RawData/DataFrame.R")
-source("2_Imputation/MICE_Imputation.R")
-source("3_MultivariateAnalysis/PCAandFA.R")
+source("2_Imputation/Imputation.R")
 source("4_Normalization/Scale.R")
+source("3_MultivariateAnalysis/PCAandFA.R")
 source("5_WeightingAggregation/WeAg.R")
 
-joinedDB.6
-joinedDB.7
+df.Original.Imputed
+df.Zscore.Imputed
+
 
 joinedDB.8 # Min-MAX + FA weights.
 joinedDB.9 # MIn-MAX + EW
