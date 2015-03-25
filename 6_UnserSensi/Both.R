@@ -17,19 +17,19 @@ df.Original.Imputed
 df.Zscore.Imputed
 
 
-joinedDB.8 # Min-MAX + FA weights.
-joinedDB.9 # MIn-MAX + EW
-joinedDB.10 # ZSCORE + FA
-joinedDB.11 # Zscore EW
+df.Original.MM.FA # Min-MAX + FA weights.
+df.Original.MM.EW # MIn-MAX + EW
+df.Zscore.FA # ZSCORE + FA
+df.Zscore.EW # Zscore EW
 
 
-joinedDB.8$Country <- rownames(joinedDB.8) 
-joinedDB.9$Country <- rownames(joinedDB.9) 
-joinedDB.10$Country <- rownames(joinedDB.10) 
-joinedDB.11$Country <- rownames(joinedDB.11) 
+df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
+df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
+df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
+df.Zscore.EW$Country <- rownames(df.Zscore.EW) 
 
-zdv <- inner_join(joinedDB.8, joinedDB.9, by= "Country")
-zdv2 <- inner_join(joinedDB.10, joinedDB.11, by= "Country")
+zdv <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
+zdv2 <- inner_join(df.Zscore.FA, df.Zscore.EW, by= "Country")
 
 zdvBOTH <- inner_join(zdv, zdv2, by= "Country")
 zdvBOTH <- subset(zdvBOTH, select=c(Country, RankMM.FA, RankMM.EW, RankZS.FA, RankZS.EW))
@@ -46,7 +46,6 @@ d <- d + geom_line() + geom_point(size = 4, shape=21, fill="white")  # geom_ribb
 d <- d + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 d <- d + ggtitle("Comparison of different methods") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 d
-
 
 
 what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
