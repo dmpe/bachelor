@@ -3,9 +3,11 @@
 library("plyr")
 library("dplyr")
 set.seed(5154)
+
 # From R Documentation: source() causes R to accept its input from the named file or URL or connection.  Input is read and
 # parsed from that file until the end of the file is reached, then the parsed expressions are evaluated sequentially in the
 # chosen environment.
+
 source("1_RawData/Unemplo.R")
 source("1_RawData/FreedomIndex.R")
 source("1_RawData/WEF.R")
@@ -28,7 +30,7 @@ joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
 
 joinedDB.5 <- dplyr::left_join(joinedDB.5, hindex, by = "Country")
 joinedDB.5 <- plyr::arrange(joinedDB.5, joinedDB.5$Country)
-joinedDB.5 <- subset(joinedDB.5, select = c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index, CompletionRate, 
+joinedDB.5 <- subset(joinedDB.5, select = c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index, completionRate, 
     Ranking_HIndex))
 
 
@@ -56,7 +58,7 @@ nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Count
 nonScaledDataFrame <- dplyr::left_join(nonScaledDataFrame, hindex, by = "Country")
 nonScaledDataFrame <- plyr::arrange(nonScaledDataFrame, nonScaledDataFrame$Country)
 nonScaledDataFrame <- subset(nonScaledDataFrame, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
-    LearningCurve_Index, CompletionRate_NonScaled, Ranking_HIndex_NonScaled))
+    LearningCurve_Index, completionRate_NonScaled, Ranking_HIndex_NonScaled))
 
 
 # To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'
