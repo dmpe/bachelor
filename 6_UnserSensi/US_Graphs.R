@@ -37,6 +37,8 @@ what_long <- melt(zdvBOTH, id="Country")  # convert to long format
 what_long$Country[what_long$Country == "United States"] <- "USA"
 what_long$Country[what_long$Country == "United Arab Emirates"] <- "UAE"
 what_long$Country[what_long$Country == "United Kingdom"] <- "UK"
+what_long$Country[what_long$Country == "Czech Republic"] <- "Czech Rep."
+what_long$Country[what_long$Country == "South Africa"] <- "S. Africa"
 
 #' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
 d <- ggplot(data=what_long, aes(x=Country, y=value, colour=variable, group = variable))
