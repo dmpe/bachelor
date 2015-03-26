@@ -56,8 +56,8 @@ what_long6 <- melt(minMaxMultiFA.Weights, id="Country")  # convert to long forma
 # source("http://peterhaschke.com/Code/multiplot.R")
 e1 <- ggplot(data=what_long3, aes(Var1, fill=Var2, weight=value)) + geom_bar()
 e2 <- ggplot(data=what_long4, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-e3 <-ggplot(data=what_long5, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-e4 <-ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+e3 <- ggplot(data=what_long5, aes(Var1, fill=Var2, weight=value)) + geom_bar()
+e4 <- ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value)) + geom_bar()
 grid.arrange(e1, e2,e3,e4, ncol = 2, nrow = 2,  main = "Main title")
 
 # multiplot(e1, e2, e3, e4, cols=2)
