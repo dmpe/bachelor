@@ -27,25 +27,25 @@ FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
 
 #' FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
 
-weights.DB7 <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
+df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
                           Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
 
-weights.DB7$colMax <- apply(weights.DB7, 1, function(x) max(x[]))
+df.weights$colMax <- apply(df.weights, 1, function(x) max(x[]))
 
-weights.DB7$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
+df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
                               FactorWeight2, FactorWeight1, FactorWeight2)
 
-weights.DB7$Multipl <- weights.DB7$colMax * weights.DB7$WholeFactorWeight
-weights.DB7$UnitScaled <- round(weights.DB7$Multipl / sum(weights.DB7$Multipl), 4)
+df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
+df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 
-# round(weights.DB7$colMax ,3)
-# sum(weights.DB7$colMax)
+# round(df.weights$colMax ,3)
+# sum(df.weights$colMax)
 
 # normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 #' Min-MAX + FA weights.
-minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * weights.DB7$UnitScaled)
+minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
 df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
 df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:23))
 
@@ -55,12 +55,12 @@ df.Original.MM.EW <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
 df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:23))
 
 #' ZSCORE + FA
-zscoreMultiFA.Weights <- t(t(df.Zscore.Imputed) * weights.DB7$UnitScaled)
+zscoreMultiFA.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * df.weights$UnitScaled)
 df.Zscore.FA <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
 df.Zscore.FA <- data.frame(Value = df.Zscore.FA, RankZS.FA = seq(1:23))
 
 #' Zscore + EW
-zscoreMultiEqual.Weights <- t(t(df.Zscore.Imputed) * c(rep(1/6, 6)))
+zscoreMultiEqual.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * c(rep(1/6, 6)))
 df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
 df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
 

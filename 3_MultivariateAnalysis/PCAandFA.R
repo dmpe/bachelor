@@ -42,7 +42,7 @@ pc <- prcomp(df.Zscore.ImputedUnempCorrect, center = TRUE, scale = FALSE)
 summary(pc)
 round(pc$rotation, 3)
 # screeplot(pc, type = "lines")
-# scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
+scree(df.Zscore.ImputedUnempCorrect, factors = TRUE, pc = TRUE)
 
 #' comp <- data.frame(pc$x[,1:4]) 
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 

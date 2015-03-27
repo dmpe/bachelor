@@ -25,13 +25,13 @@ df.Zscore <- dplyr::left_join(df.Zscore, learningCurveData, by = "Country")
 df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
 df.Zscore <- subset(df.Zscore, select = c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index))
 
-df.Zscore <- dplyr::left_join(df.Zscore, completionRate, by = "Country")
+df.Zscore <- dplyr::left_join(df.Zscore, CompletionRate, by = "Country")
 df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
 
 df.Zscore <- dplyr::left_join(df.Zscore, hindex, by = "Country")
 df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
 df.Zscore <- subset(df.Zscore, select = c(Country, Unemployment, Freedom_Index, WEF_Score, 
-                                            LearningCurve_Index, completionRate, H_Index))
+                                            LearningCurve_Index, CompletionRate, H_Index))
 
 
 # http://stackoverflow.com/a/10331131
@@ -52,13 +52,13 @@ df.Original <- plyr::arrange(df.Original, df.Original$Country)
 df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, 
                                               Freedom_Index_NonScaled, WEF_Score_NonScaled, LearningCurve_Index))
 
-df.Original <- dplyr::left_join(df.Original, completionRate, by = "Country")
+df.Original <- dplyr::left_join(df.Original, CompletionRate, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)
 
 df.Original <- dplyr::left_join(df.Original, hindex, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)
 df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
-                                              LearningCurve_Index, completionRate_NonScaled, H_Index_NonScaled))
+                                              LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))
 
 
 # To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'

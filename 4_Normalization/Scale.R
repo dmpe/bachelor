@@ -5,10 +5,10 @@ library(Compind)
 set.seed(5154)
 
 
-# ###############
-# This is only  #
-# for Min MAX   #
-#################
+# ##########################################
+# This is only                             #
+# for Min MAX but now also for ZSCORE too  #
+############################################
 
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
@@ -29,15 +29,15 @@ set.seed(5154)
 #' rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
 #' Now scale columns to 0 to 3. Don't apply to data frame !!!  
 #' joinedDB.7 <- rescale(df.Original.Imputed, to = c(0,3)) # Wrong
-
-rescaleColumns <- function(x, minValue, maxValue) {
-  scales::rescale(x, to = c(minValue, maxValue))
-}
-
+#' 
 #' newvalue = ((1-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
 #'               (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
 #' newvalueOpposite10 <- (max(df.Original.Imputed$Unemployment_NonScaled)-df.Original.Imputed$Unemployment_NonScaled)/
 #' (max(df.Original.Imputed$Unemployment_NonScaled)-min(df.Original.Imputed$Unemployment_NonScaled))
+
+rescaleColumns <- function(x, minValue, maxValue) {
+  scales::rescale(x, to = c(minValue, maxValue))
+}
 
 
 #' Use colwise from plyr package to scale columns
@@ -49,6 +49,9 @@ rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)
 df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
                                        (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
 
+# copy and create new data set with new polarity of unempl.
+df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
+df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
 # sapply(joinedDB.7, class)
 

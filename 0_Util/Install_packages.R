@@ -12,7 +12,7 @@ ipak <- function(pkg) {
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", "RColorBrewer", "scales", "grid", "mclust", "psych", 
     "GPArotation", "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot", "xlsx", "RCurl", "Rcpp", "VIM", "data.table", 
     "coda", "rgl", "R2WinBUGS", "mice", "mi", "NbClust", "clustrd", "flexclust", "ellipse", "psych", "FactoMineR", "Benchmarking",
-    "pmr", "Compind", "lattice")
+    "pmr", "Compind", "lattice", "gridExtra", "grid")
 ipak(packages)
 
 # Because rJava may print error messages (during or after installation), it is still necessary load it correctly. For

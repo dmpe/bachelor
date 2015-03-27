@@ -4,15 +4,10 @@ library(plyr)
 
 set.seed(5154)
 
-unemplo.arranged <- plyr::arrange(unemplo, unemplo$Country)
-
-df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
-df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo.arranged$Unemployment_ZscoreNEGATIVE
-
 # summary(df.Zscore.Imputed)
 # covMat <- cov(df.Zscore.Imputed)
 # round(covMat, 2)
-corelationMat <- cor(df.Zscore.Imputed)
+# corelationMat <- cor(df.Zscore.Imputed)
 corelationMat2 <- cor(df.Zscore.ImputedUnempCorrect)
 
 # round(corelationMat, 2)
