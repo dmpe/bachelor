@@ -49,7 +49,7 @@ round(pc$rotation, 3)
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
+factorAn <- factanal(df.Zscore.ImputedUnempCorrect, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality

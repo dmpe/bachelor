@@ -4,6 +4,7 @@ library(ggplot2)
 library(clustrd)
 library("ggthemes")
 library(reshape2)
+library(gridExtra)
 # library(fpc)
 # library(vegan)
 # library(pvclust)
@@ -24,7 +25,7 @@ set.seed(5154)
 #' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='kmeans', index='all') 
 #' NbClust(df.Zscore.Imputed, distance = 'euclidean', method='ward.D', index='all') ward.D2
 
-nc <- NbClust(df.Zscore.Imputed, distance = "euclidean", method = "ward.D2", index = "all")
+nc <- NbClust(df.Zscore.ImputedUnempCorrect, distance = "euclidean", method = "ward.D2", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
 
@@ -50,7 +51,7 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x = dist(df.Zscore.Imputed), method = "ward", metric = "euclidean")
+agn <- agnes(x = dist(df.Zscore.ImputedUnempCorrect), method = "ward", metric = "euclidean")
 agn
 plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
@@ -59,7 +60,7 @@ plot(agn)
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(df.Zscore.Imputed, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(df.Zscore.ImputedUnempCorrect, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust)
@@ -67,8 +68,8 @@ coef.hclust(euroclust)
 #' K Means 
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
-klust <- kmeans(dist(df.Zscore.Imputed, method = "euclidean"), 2, nstart = 25, iter.max = 100)
-dataWithCluster <- data.frame(df.Zscore.Imputed, klust$cluster)  # append cluster assignment
+klust <- kmeans(dist(df.Zscore.ImputedUnempCorrect, method = "euclidean"), 2, nstart = 25, iter.max = 100)
+dataWithCluster <- data.frame(df.Zscore.ImputedUnempCorrect, klust$cluster)  # append cluster assignment
 # aggregate(df.Zscore.Imputed, by=list(klust$cluster), FUN = mean) # get cluster means
 
 
@@ -106,15 +107,22 @@ dfClustMeans
 #' sapply(dfClustMeans, class)
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
+dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,3))
 
 #' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
 #' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
+#' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point()
-gp <- gp + coord_cartesian(ylim = c(-1.2, 1)) + scale_y_continuous(breaks = seq(-1.2, 1, 0.25))
+gp <- gp + coord_cartesian(ylim = c(-1.2, 0.70)) + scale_y_continuous(breaks = seq(-2, 1, 0.20))
 gp <- gp + theme_gdocs() + scale_color_gdocs()
 gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
+gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
+                                              gpar.rowtext = gpar(cex = 1.2)), xmin = -Inf, 
+                             xmax = Inf, ymin = -Inf, ymax = Inf)
 gp
+
+
 
 # cluster.bootstrap <- pvclust(df.Zscore.Imputed, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 # plot(cluster.bootstrap)
