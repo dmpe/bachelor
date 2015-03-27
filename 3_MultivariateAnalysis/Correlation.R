@@ -1,12 +1,20 @@
 library(corrplot)
 library(ellipse)
+library(plyr)
 
 set.seed(5154)
+
+unemplo.arranged <- plyr::arrange(unemplo, unemplo$Country)
+
+df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
+df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo.arranged$Unemployment_ZscoreNEGATIVE
 
 # summary(df.Zscore.Imputed)
 # covMat <- cov(df.Zscore.Imputed)
 # round(covMat, 2)
 corelationMat <- cor(df.Zscore.Imputed)
+corelationMat2 <- cor(df.Zscore.ImputedUnempCorrect)
+
 # round(corelationMat, 2)
 
 #' http://www.cookbook-r.com/Graphs/Correlation_matrix/
@@ -18,4 +26,4 @@ corelationMat <- cor(df.Zscore.Imputed)
 # http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 colorfun2 <- colorRampPalette(c("#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"))
 #' corrplot(corelationMat, method = "number", type = "lower")
-corrplot(corelationMat, method = "number", type = "lower", order = "FPC", col = colorfun2(100)) 
+corrplot(corelationMat2, method = "number", type = "lower", order = "FPC", col = colorfun2(100)) 

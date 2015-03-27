@@ -61,14 +61,13 @@ unemplo$Unemployment_NonScaled[unemplo$Country == "Chile"] <- Chile
 unemplo$Unemployment_NonScaled[unemplo$Country == "Japan"] <- Japan
 unemplo$Unemployment_NonScaled[unemplo$Country == "Nigeria"] <- Nigeria
 
-unemplo$Unemployment <- as.numeric(scale(unemplo$Unemployment_NonScaled))
 
 unemplo$Unemployment_MinMax = ((100-0)*(unemplo$Unemployment_NonScaled-max(unemplo$Unemployment_NonScaled))/
                                        (min(unemplo$Unemployment_NonScaled)-max(unemplo$Unemployment_NonScaled))) + 0
-
+unemplo$Unemployment <- as.numeric(scale(unemplo$Unemployment_NonScaled))
 unemplo$Unemployment_ZscoreNEGATIVE <- as.numeric(-scale(unemplo$Unemployment_NonScaled))
 
-unemplo <- unemplo[, c(1,3,2,4,5)]
+# unemplo <- unemplo[, c(1,3,2,4,5)]
 
 
 sapply(unemplo, class) 

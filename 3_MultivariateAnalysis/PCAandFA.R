@@ -38,7 +38,7 @@ set.seed(5154)
 #' tmp
 
 #' This is using singular value decomposition
-pc <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
+pc <- prcomp(df.Zscore.ImputedUnempCorrect, center = TRUE, scale = FALSE)
 summary(pc)
 round(pc$rotation, 3)
 # screeplot(pc, type = "lines")
