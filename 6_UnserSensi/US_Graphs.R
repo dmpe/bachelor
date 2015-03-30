@@ -78,12 +78,15 @@ me2 <- me2 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me2 <- me2 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me2
 
-# me3 <- ggplot(data=meltingZscore.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
-# me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
-# me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
-# me3 <- me3 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") 
-# me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
-# me3
+
+meltingZscore.FAEW.Subset <- plyr::arrange(meltingZscore.FAEW.Subset, meltingZscore.FAEW.Subset$value)
+
+me3 <- ggplot(data=meltingZscore.FAEW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
+me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
+me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
+me3 <- me3 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") 
+me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+me3
 
 
 
