@@ -107,7 +107,7 @@ dfClustMeans
 #' sapply(dfClustMeans, class)
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
-dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,3))
+dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,2))
 
 #' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
 #' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/

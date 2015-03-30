@@ -1,4 +1,7 @@
 #' https://beckmw.wordpress.com/2013/10/07/sensitivity-analysis-for-neural-networks/
+#' http://docs.ggplot2.org/current/scale_discrete.html
+#' http://stackoverflow.com/questions/3253641/how-to-change-the-order-of-a-discrete-x-scale-in-ggplot
+
 library("reshape2")
 library("ggplot2")
 library("grid")
@@ -66,20 +69,18 @@ meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country ==
 
 
 
-me1 <- ggplot(data=meltingOriginal.MM.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
+me1 <- ggplot(data=meltingOriginal.MM.FAEW.Subset, aes(Country, value, colour=variable, group = variable))
 me1 <- me1 + geom_line() + geom_point(size = 4, shape=21, fill="white") 
 me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1
 
-me2 <- ggplot(data=meltingZscore.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
+me2 <- ggplot(data=meltingZscore.FAEW.Subset, aes(Country, value, colour=variable, group = variable))
 me2 <- me2 + geom_line() + geom_point(size = 4, shape=21, fill="white")  
 me2 <- me2 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 me2 <- me2 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me2
 
-
-meltingZscore.FAEW.Subset <- plyr::arrange(meltingZscore.FAEW.Subset, meltingZscore.FAEW.Subset$value)
 
 me3 <- ggplot(data=meltingZscore.FAEW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
 me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
