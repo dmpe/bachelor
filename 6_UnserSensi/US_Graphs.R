@@ -19,7 +19,6 @@ source("5_WeightingAggregation/WeAg.R")
 # df.Zscore.FA # ZSCORE + FA
 # df.Zscore.EW # Zscore EW
 
-
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
 df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
 df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
@@ -49,7 +48,6 @@ d <- d + ggtitle("Comparison of different methods") + ylab("Position in Ranking"
 d
 
 
-
 meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country")  # convert to long format
 meltingZscore.FAEW.Subset <- melt(df.Zscore.FAEW.Subset, id="Country")  # convert to long format
 
@@ -68,21 +66,24 @@ meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country ==
 
 
 
-#' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
 me1 <- ggplot(data=meltingOriginal.MM.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
-me1 <- me1 + geom_line() + geom_point(size = 4, shape=21, fill="white")  # geom_ribbon(aes(ymin=value, ymax=value+1))
+me1 <- me1 + geom_line() + geom_point(size = 4, shape=21, fill="white") 
 me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1
 
-#' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
 me2 <- ggplot(data=meltingZscore.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
-me2 <- me2 + geom_line() + geom_point(size = 4, shape=21, fill="white")  # geom_ribbon(aes(ymin=value, ymax=value+1))
+me2 <- me2 + geom_line() + geom_point(size = 4, shape=21, fill="white")  
 me2 <- me2 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 me2 <- me2 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me2
 
-
+# me3 <- ggplot(data=meltingZscore.FAEW.Subset, aes(x=Country, y=value, colour=variable, group = variable))
+# me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
+# me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
+# me3 <- me3 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") 
+# me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+# me3
 
 
 
