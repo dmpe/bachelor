@@ -64,8 +64,8 @@ print(imp.nonScasfasfaled <- mice(nonScaledDataFrame[2:7], m = 6, seed = 5154))
 plot(imp.nonScasfasfaled, c("LearningCurve_Index"))
 densityplot(imp.nonScasfasfaled, scales = list(x = list(relation = "free")))
 
-
-
+aspd <-dataWithCluster[klust$clust == clust[2], ]
+aspd[!,]
 
 
 

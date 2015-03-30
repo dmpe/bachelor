@@ -71,7 +71,7 @@ df.Original.Imputed$LearningCurve_Index <- df.Zscore.Imputed$LearningCurve_Index
 df.Original.Imputed <- data.frame(df.Original.Imputed[, -1], row.names = df.Original.Imputed[, 1])
 
 
-# rfunsuper(df.Zscore[2:7]) #' for notUsed/UnsuperRF.R. Load first the file !
+# rfunsuper(df.Zscore[2:7]) #' for notUsed/UnsuperRF.R. Load first the source file !
 
 #' To continue look in 'MultivariateAnalysis' folder, ->> and begin with 'Correlation.R', 
 #' then 'PCAandFA.R' and lastly with 'ClusterAnalysis.R'. All of them must be run. 

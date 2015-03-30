@@ -10,9 +10,11 @@ library("Compind")
 #' Creates Data Frame of Weights
 # set.seed(5154)
 # source("1_RawData/DataFrame.R")
-# source("2_Imputation/MICE_Imputation.R")
-# source("3_MultivariateAnalysis/PCAandFA.R")
+# source("2_Imputation/Imputation.R")
 # source("4_Normalization/Scale.R")
+# source("3_MultivariateAnalysis/PCAandFA.R")
+
+set.seed(5154)
 
 # factorAn
 factor1SquaredLoadings <- factorAn$loadings[, 1]^2
@@ -28,12 +30,12 @@ FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
 #' FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
 
 df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
-                          Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
+                         Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
 
 df.weights$colMax <- apply(df.weights, 1, function(x) max(x[]))
 
 df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
-                              FactorWeight2, FactorWeight1, FactorWeight2)
+                                  FactorWeight2, FactorWeight1, FactorWeight2)
 
 df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
 df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
@@ -44,6 +46,7 @@ df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 # normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
+#' 
 #' Min-MAX + FA weights.
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
 df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
@@ -53,6 +56,12 @@ df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:23)
 minMaxMultiEqual.Weights <- t(t(df.Original.MinMax) * c(rep(1/6, 6)))
 df.Original.MM.EW <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
 df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:23))
+
+#' Min-MAX + My own choice
+minMaxMultiMyChoice.Weights <- t(t(df.Original.MinMax) * c(0.140, 0.170, 0.230, 0.220, 0.130, 0.110))
+df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing = T)
+df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:23))
+
 
 #' ZSCORE + FA
 zscoreMultiFA.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * df.weights$UnitScaled)

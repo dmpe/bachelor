@@ -53,7 +53,6 @@ df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unempl
 df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
 df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
-# sapply(joinedDB.7, class)
 
 #' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of the relationship between 
 #' the indicator and the phenomenon to be measured (e.g., in a well-being index, 
@@ -68,6 +67,6 @@ df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo$Unemployment_ZscoreNEGATIV
 # testJustSo
 
 
-# To continue look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
+############# To continue, look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
 
  

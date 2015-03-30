@@ -128,8 +128,7 @@ gp
 # plot(cluster.bootstrap)
 # pvrect(cluster.bootstrap) 
 
-#' To continue look in 'Normalisation' folder, ->> 'Scale.R' is required to run,
-#'  while 'SampleIOEFreedom.R' may be recommendet
+################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
 
 # pamk.best <- pamk(df.Zscore.Imputed)
 # cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
