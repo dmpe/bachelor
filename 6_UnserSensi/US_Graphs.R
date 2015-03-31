@@ -72,6 +72,12 @@ meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country ==
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "Czech Republic"] <- "Czech Rep."
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
 
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "South Africa"] <- "S. Africa"
+
 
 
 me1 <- ggplot(data=meltingOriginal.MM.FAEW.Subset, aes(Country, value, colour=variable, group = variable))
@@ -90,26 +96,9 @@ me2
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
 me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
 me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
-me3 <- me3 + ggtitle("Comparison of MM method with weights based on FA/EW/Self") 
-me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
+me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
 
 
-what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
-what_long4 <- melt(zscoreMultiFA.Weights, id="Country")  # convert to long format
-what_long5 <- melt(minMaxMultiEqual.Weights, id="Country")  # convert to long format
-what_long6 <- melt(minMaxMultiFA.Weights, id="Country")  # convert to long format
-
-
-# Var1 is country
-# Var2 is indicator
-# source("http://peterhaschke.com/Code/multiplot.R")
-e1 <- ggplot(data=what_long3, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-e2 <- ggplot(data=what_long4, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-e3 <- ggplot(data=what_long5, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-e4 <- ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-grid.arrange(e1, e2,e3,e4, ncol = 2, nrow = 2,  main = "Main title")
-
-# multiplot(e1, e2, e3, e4, cols=2)
-# par(mfrow=c(2,2))
 
