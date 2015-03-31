@@ -11,7 +11,7 @@ My website <https://indestat.wordpress.com/contact-me>
 
 The installation process (on Ubuntu) can be quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava>. To make rJava work, use google (and stackoverflow). 
 
-Always install official java 8 from oracle and less official "openjdk-8". Don't forget to run R CMD javareconf (-e). Maybe this will also help <http://stackoverflow.com/a/21504335>
+Always install official java 8 from oracle and less *official* "openjdk-8". Don't forget to run R CMD javareconf (-e). Maybe this will also help <http://stackoverflow.com/a/21504335>
 
 Or, at last use some other package too: <https://github.com/hadley/readxl>
 
@@ -19,7 +19,7 @@ Or, at last use some other package too: <https://github.com/hadley/readxl>
 
 To quote me please consider using :
 
-Dmitrij Petrov (Jun. 2015), <i>Attractiveness Inde of Global Economies</i>, Bachelor Thesis, Reutlingen University
+Dmitrij Petrov (Jun. 2015), *Attractiveness Index of Global Economies*, Bachelor Thesis, Reutlingen University
 
 ** Bibtext **
 

@@ -8,11 +8,11 @@ library("grid")
 library(gridExtra)
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/Imputation.R")
-source("4_Normalization/Scale.R")
-source("3_MultivariateAnalysis/PCAandFA.R")
-source("5_WeightingAggregation/WeAg.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/Imputation.R")
+# source("4_Normalization/Scale.R")
+# source("3_MultivariateAnalysis/PCAandFA.R")
+# source("5_WeightingAggregation/WeAg.R")
 
 #' For printing purposes
 # df.Original.Imputed
