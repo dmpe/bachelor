@@ -25,17 +25,17 @@ set.seed(5154)
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
 df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
 df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
-df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
-df.Zscore.EW$Country <- rownames(df.Zscore.EW) 
+# df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
+# df.Zscore.EW$Country <- rownames(df.Zscore.EW) 
 
 df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
 df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
 
 df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
 df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
-
-df.Zscore.FAEW <- inner_join(df.Zscore.FA, df.Zscore.EW, by= "Country")
-df.Zscore.FAEW.Subset <- subset(df.Zscore.FAEW, select=c(Country, RankZS.FA, RankZS.EW))
+# 
+# df.Zscore.FAEW <- inner_join(df.Zscore.FA, df.Zscore.EW, by= "Country")
+# df.Zscore.FAEW.Subset <- subset(df.Zscore.FAEW, select=c(Country, RankZS.FA, RankZS.EW))
 
 # zdvBOTH <- inner_join(df.Original.MM.FAEW, df.Zscore.FAEW, by= "Country")
 # zdvBOTH <- subset(zdvBOTH, select=c(Country, RankMM.FA, RankMM.EW, RankZS.FA, RankZS.EW))
@@ -57,13 +57,13 @@ df.Zscore.FAEW.Subset <- subset(df.Zscore.FAEW, select=c(Country, RankZS.FA, Ran
 
 meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country") 
 meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Country")
-meltingZscore.FAEW.Subset <- melt(df.Zscore.FAEW.Subset, id="Country")  
+# meltingZscore.FAEW.Subset <- melt(df.Zscore.FAEW.Subset, id="Country")  
 
-meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United States"] <- "USA"
-meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
-meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United Kingdom"] <- "UK"
-meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "Czech Republic"] <- "Czech Rep."
-meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
+# meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United States"] <- "USA"
+# meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
+# meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "United Kingdom"] <- "UK"
+# meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "Czech Republic"] <- "Czech Rep."
+# meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
 
 
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
@@ -86,11 +86,6 @@ me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1
 
-me2 <- ggplot(data=meltingZscore.FAEW.Subset, aes(Country, value, colour=variable, group = variable))
-me2 <- me2 + geom_line() + geom_point(size = 4, shape=21, fill="white")  
-me2 <- me2 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
-me2 <- me2 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
-me2
 
 # meltingZscore.FAEW.Subset
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
@@ -99,6 +94,23 @@ me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
+
+
+
+
+
+
+
+
+
+
+# me2 <- ggplot(data=meltingZscore.FAEW.Subset, aes(Country, value, colour=variable, group = variable))
+# me2 <- me2 + geom_line() + geom_point(size = 4, shape=21, fill="white")  
+# me2 <- me2 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
+# me2 <- me2 + ggtitle("Comparison of Zscore method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+# me2
+
+
 
 
 

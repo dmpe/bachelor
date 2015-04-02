@@ -63,13 +63,13 @@ df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing
 df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:23))
 
 
-#' ZSCORE + FA
-zscoreMultiFA.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * df.weights$UnitScaled)
-df.Zscore.FA <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
-df.Zscore.FA <- data.frame(Value = df.Zscore.FA, RankZS.FA = seq(1:23))
+# #' ZSCORE + FA
+# zscoreMultiFA.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * df.weights$UnitScaled)
+# df.Zscore.FA <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
+# df.Zscore.FA <- data.frame(Value = df.Zscore.FA, RankZS.FA = seq(1:23))
 
-#' Zscore + EW
-zscoreMultiEqual.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * c(rep(1/6, 6)))
-df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
-df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
+# #' Zscore + EW
+# zscoreMultiEqual.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * c(rep(1/6, 6)))
+# df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
+# df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
 
