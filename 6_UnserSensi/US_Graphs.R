@@ -2,6 +2,7 @@
 #' http://docs.ggplot2.org/current/scale_discrete.html
 #' http://stackoverflow.com/questions/3253641/how-to-change-the-order-of-a-discrete-x-scale-in-ggplot
 #' http://blog.mckuhn.de/2011/08/ggplot2-determining-order-in-which.html
+#' http://stackoverflow.com/questions/21192002/how-to-combine-2-plots-ggplot-into-one-plot
 
 library("reshape2")
 library("ggplot2")
@@ -41,7 +42,8 @@ meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Cou
 
 meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA")],  id = "Country")
 meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
-                                   
+meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
+
                                    
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
@@ -55,18 +57,42 @@ meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Countr
 meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "Czech Republic"] <- "Czech Rep."
 meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "South Africa"] <- "S. Africa"
 
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "South Africa"] <- "S. Africa"
+
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "South Africa"] <- "S. Africa"
+
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "South Africa"] <- "S. Africa"
+
 
 me1 <- ggplot()
-# red
+# green
 me1 <- me1 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
 me1 <- me1 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
-# blue
+# red
 me1 <- me1 + geom_line(data=meltingOriginal.MM.EW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
 me1 <- me1 + geom_point(data=meltingOriginal.MM.EW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
+# blue
+me1 <- me1 + geom_line(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
+me1 <- me1 + geom_point(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
 # all together
 me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
 me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1 
+
+
+
 
 # meltingZscore.FAEW.Subset
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
@@ -75,11 +101,6 @@ me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
-
-
-reorder
-
-
 
 
 # df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
