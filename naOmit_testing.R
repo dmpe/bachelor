@@ -69,12 +69,22 @@ aspd[!,]
 
 
 
+library(compare)
+a1 <- data.frame(a = 1:5, b = letters[1:5])
+a2 <- data.frame(a = 1:3, b = letters[1:3])
+comparison <- compare(a1,a2,allowAll=TRUE)
+comparison$tM
 
 
+obj1 <- c("a", "a", "b", "c")
+obj2 <- factor(obj1)
+compare(obj1, obj2, allowAll=TRUE)
 
 
-
-
-
+fun.12 <- function(x.1,x.2,...){
+x.1p <- do.call("paste", x.1)
+x.2p <- do.call("paste", x.2)
+x.1[! x.1p %in% x.2p, ]
+}
 
 

@@ -11,11 +11,12 @@ library(psych)
 #' http://wiki.originlab.com/~originla/howto/index.php?title=Tutorial:Principal_Component_Analysis 
 #' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 #' http://factominer.free.fr/classical-methods/principal-components-analysis.html
+#' http://www.r-bloggers.com/identifying-records-in-data-frame-a-that-are-not-contained-in-data-frame-b-%E2%80%93-a-comparison/
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-# source("4_Normalisation/Scale.R")
+# source("4_Normalization/Scale.R")
 
 #' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
 #' the correlation matrix.  
@@ -34,13 +35,20 @@ set.seed(5154)
 #' (pcaNOT$sdev)^2 
 #' sum((pcaNOT$loading[,1])^2) 
 #' eigenvalues 
-#' tmp <- svd(df.Zscore.Imputed) 
+#' tmp <- svd(df.Zscore.Imputed)  df.Original.MinMax
 #' tmp
-
+pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
+summary(pc2)
 #' This is using singular value decomposition
-pc <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
-summary(pc)
-round(pc$rotation, 3)
+pc1 <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
+summary(pc1)
+t1<-round(pc1$rotation, 3)
+t2<-round(pc2$rotation, 3)
+t1.1 <- as.data.frame(t1)
+t2.1 <- as.data.frame(t2)
+t1.1
+t2.1
+fun.12(t1.1,t2.1)
 # screeplot(pc, type = "lines")
 scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
 
