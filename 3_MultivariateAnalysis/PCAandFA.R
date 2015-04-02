@@ -38,7 +38,7 @@ set.seed(5154)
 #' tmp
 
 #' This is using singular value decomposition
-pc <- prcomp(df.Zscore.ImputedUnempCorrect, center = TRUE, scale = FALSE)
+pc <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
 summary(pc)
 round(pc$rotation, 3)
 # screeplot(pc, type = "lines")
@@ -49,7 +49,7 @@ scree(df.Zscore.ImputedUnempCorrect, factors = TRUE, pc = TRUE)
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(df.Zscore.ImputedUnempCorrect, rotation = "varimax", factors = 2)
+factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality

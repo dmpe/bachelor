@@ -8,7 +8,7 @@ set.seed(5154)
 # covMat <- cov(df.Zscore.Imputed)
 # round(covMat, 2)
 # corelationMat <- cor(df.Zscore.Imputed)
-corelationMat2 <- cor(df.Zscore.ImputedUnempCorrect)
+corelationMat2 <- cor(df.Original.MinMax)
 
 # round(corelationMat, 2)
 
