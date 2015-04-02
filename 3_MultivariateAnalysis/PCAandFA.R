@@ -15,7 +15,7 @@ library(psych)
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-
+# source("4_Normalisation/Scale.R")
 
 #' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
 #' the correlation matrix.  
@@ -38,18 +38,18 @@ set.seed(5154)
 #' tmp
 
 #' This is using singular value decomposition
-pc <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
+pc <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
 summary(pc)
 round(pc$rotation, 3)
 # screeplot(pc, type = "lines")
-scree(df.Zscore.ImputedUnempCorrect, factors = TRUE, pc = TRUE)
+scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
 
 #' comp <- data.frame(pc$x[,1:4]) 
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
 
-factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
+factorAn <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality

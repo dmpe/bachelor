@@ -6,9 +6,9 @@ set.seed(5154)
 
 # summary(df.Zscore.Imputed)
 # covMat <- cov(df.Zscore.Imputed)
-# round(covMat, 2)
+# round(covMat, 2) df.Original.MinMax
 # corelationMat <- cor(df.Zscore.Imputed)
-corelationMat2 <- cor(df.Original.MinMax)
+corelationMat2 <- cor(df.Zscore.Imputed)
 
 # round(corelationMat, 2)
 

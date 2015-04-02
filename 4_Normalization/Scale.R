@@ -50,9 +50,9 @@ df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unempl
                                        (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
 
 # copy and create new data set with new polarity of unempl.
-df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
-df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
-
+# df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
+# df.Zscore.ImputedUnempCorrect$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
+df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
 #' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of the relationship between 
 #' the indicator and the phenomenon to be measured (e.g., in a well-being index, 
