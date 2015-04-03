@@ -48,7 +48,7 @@ t1.1 <- as.data.frame(t1)
 t2.1 <- as.data.frame(t2)
 t1.1
 t2.1
-fun.12(t1.1,t2.1)
+# fun.12(t1.1,t2.1)
 # screeplot(pc, type = "lines")
 scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
 

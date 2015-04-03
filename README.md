@@ -25,9 +25,11 @@ Dmitrij Petrov (Jun. 2015), *Attractiveness Index of Global Economies*, Bachelor
 
 ## Interpretation
 
+
+? > z-score - sonst weg, nur min-max
+
 country + FA-auswirkung sind minimal (maximal 4 Anderung in den Platzen)
-z-score - sonst weg, nur min-max
-ein beispiel oder paar rausnehmen germany + china, russland ! > inseln, gut, aber nicht uberall > sensibility An. > onen Bild ano. 
+ein beispiel oder paar rausnehmen germany + china ! > inseln, gut, aber nicht uberall > sensibility An. > onen Bild ano. 
 
 plausibel, nicht stark unter. 
 
