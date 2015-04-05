@@ -53,7 +53,6 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 agn <- agnes(x = dist(df.Zscore.Imputed), method = "ward", metric = "euclidean")
-agn
 plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
 
@@ -64,7 +63,7 @@ plot(agn)
 euroclust <- hclust(dist(df.Zscore.Imputed, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
-coef.hclust(euroclust)
+coef.hclust(euroclust) # agglomerative coef.
 
 #' K Means 
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
