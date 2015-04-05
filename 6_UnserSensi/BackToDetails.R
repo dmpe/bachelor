@@ -14,7 +14,7 @@ source("6_UnserSensi/US_Graphs.R")
 
 df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
 df.BackToDetails$Country <- rownames(df.BackToDetails) 
-df.BackToDetails.p1 <- df.BackToDetails[,1:3]
+df.BackToDetails.p1 <- df.BackToDetails[,1:3]s
 df.BackToDetails.p1$Country <- rownames(df.BackToDetails.p1) 
 df.BackToDetails.p2 <- df.BackToDetails[,4:7]
 
