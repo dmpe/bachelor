@@ -45,8 +45,11 @@ e9 <- e9 + ggtitle("Bar chart decomposition of Attractiveness Index (MM.FA)") + 
 e9 <- e9 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights") 
 e9
 
+# Table
+EducatValue <- cbind(df.BackToDetails$Education / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
+BusinessValue <- cbind(df.BackToDetails$BussEcon / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
 
-
+df.BackToDetails.table <- data.frame(cbind(df.BackToDetails$Country), EducatValue, BusinessValue)
 
 # what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
 # what_long4 <- melt(zscoreMultiFA.Weights, id="Country")  # convert to long format
