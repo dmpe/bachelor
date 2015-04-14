@@ -45,7 +45,7 @@ df.Original.MinMax <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)
 rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not best (e.i. that would be 
-#' logic without this step below). 
+#' the logic without this step below). 
 df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
                                        (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
 

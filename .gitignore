@@ -1,5 +1,6 @@
-.Rproj.user
+*-Ex.R
 .Rhistory
+.RData
+.Rproj.user
 Theses Final.docx
 figure.png
-.RData

@@ -68,8 +68,8 @@ coef.hclust(euroclust) # agglomerative coef.
 #' K Means 
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
-klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
-dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment
+klust <- kmeans(dist(df.Zscore.Imputed, method = "euclidean"), 2, nstart = 25, iter.max = 100)
+dataWithCluster <- data.frame(df.Zscore.Imputed, klust$cluster)  # append cluster assignment
 # aggregate(df.Zscore.Imputed, by=list(klust$cluster), FUN = mean) # get cluster means
 
 
@@ -114,7 +114,7 @@ dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round
 #' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point()
-#gp <- gp + coord_cartesian(ylim = c(-1.2, 0.70)) + scale_y_continuous(breaks = seq(-2, 1, 0.20))
+gp <- gp + coord_cartesian(ylim = c(-1.2, 0.70)) + scale_y_continuous(breaks = seq(-2, 1, 0.20))
 gp <- gp + theme_gdocs() + scale_color_gdocs()
 gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
 gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
