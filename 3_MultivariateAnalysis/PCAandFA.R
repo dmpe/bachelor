@@ -56,13 +56,20 @@ scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
-
 factorAn <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
 sum(communality)/6 # maybe to consider as a threashold of communality
 
+
+
+factorAn564 <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
+
+
+testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
+                 MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
+all.equal(testing$MinMax1, testing$Zsc)
 
 #' promax(loadings(pcaNOT))
 promax(loadings(factorAn))
