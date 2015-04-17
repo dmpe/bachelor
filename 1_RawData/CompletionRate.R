@@ -15,10 +15,11 @@ CompletionRate$Country[CompletionRate$Country == "Taiwan, China"] <- "Taiwan"
 CompletionRate$Country[CompletionRate$Country == "Korea, Rep."] <- "Korea"
 CompletionRate$Country[CompletionRate$Country == "Russian Federation"] <- "Russia"
 
-CompletionRate$CompletionRate[CompletionRate$Country == "Korea"] <- CompletionRate$X2012[CompletionRate$Country == "Korea"]
+
 # Proxy https://www.seab.gov.sg/content/pressReleases/Release_of_2014_PSLE_Results_21112014.pdf
 CompletionRate$CompletionRate[CompletionRate$Country == "Singapore"] <- 97.6
 
+CompletionRate$CompletionRate[CompletionRate$Country == "Korea"] <- CompletionRate$X2012[CompletionRate$Country == "Korea"]
 CompletionRate$CompletionRate[CompletionRate$Country == "China"] <- CompletionRate$X1997[CompletionRate$Country == "China"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Germany"] <- CompletionRate$X2012[CompletionRate$Country == "Germany"]
 CompletionRate$CompletionRate[CompletionRate$Country == "Switzerland"] <- CompletionRate$X2012[CompletionRate$Country == "Switzerland"]

@@ -50,7 +50,7 @@ EducatValue <- cbind(df.BackToDetails$Education / (df.BackToDetails$Education + 
 BusinessValue <- cbind(df.BackToDetails$BussEcon / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
 
 df.BackToDetails.table <- data.frame(cbind(df.BackToDetails$Country), EducatValue, BusinessValue)
-
+df.BackToDetails.table
 # what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
 # what_long4 <- melt(zscoreMultiFA.Weights, id="Country")  # convert to long format
 # what_long5 <- melt(minMaxMultiEqual.Weights, id="Country")  # convert to long format
