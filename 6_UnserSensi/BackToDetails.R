@@ -37,11 +37,11 @@ df.BackToDetails$Country[df.BackToDetails$Country == "South Africa"] <- "S. Afri
 df.BackToDetails$Country[df.BackToDetails$Country == "New Zealand"] <- "N. Zealand"
 # df.BackToDetails$Country[df.BackToDetails$Country == "Switzerland"] <- "Swizerl."
 
-what_long9 <- melt(df.BackToDetails, id="Country")  # convert to long format
+what_long9 <- melt(df.BackToDetails, id = "Country")  # convert to long format
 
-e9 <- ggplot(data=what_long9, aes(reorder(Country, value), fill=variable, weight=value)) + geom_bar()
+e9 <- ggplot(data = what_long9, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
 e9 <- e9 + coord_cartesian(ylim = c(0, 85)) + scale_y_continuous(breaks = seq(0, 85, 5))
-e9 <- e9 + ggtitle("Bar chart decomposition of Attractiveness Index (MM.FA)") + scale_fill_discrete(name="Dimensions")
+e9 <- e9 + ggtitle("Bar chart decomposition of Attractiveness Index (MM.FA)") + scale_fill_discrete(name = "Dimensions")
 e9 <- e9 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights") 
 e9
 
