@@ -48,6 +48,8 @@ rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)
 #' the logic without this step below). 
 df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
                                        (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
+# VELKY PRUSER ? CO STIM TED
+df.Original.MinMax$Freedom_Index_NonScaled <- df.Original$Freedom_Index_NonScaled
 
 # copy and create new data set with new polarity of unempl.
 # df.Zscore.ImputedUnempCorrect <- df.Zscore.Imputed
