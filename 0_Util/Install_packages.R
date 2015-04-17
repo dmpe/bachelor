@@ -8,7 +8,7 @@ ipak <- function(pkg) {
   sapply(pkg, require, character.only = TRUE)
 }
 
-# Installation may take very long time (>15 minutes)
+# Installation may take very long time (> 15 minutes)
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", "RColorBrewer", "scales", "grid", "mclust", "psych", 
               "GPArotation", "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot", "xlsx", "RCurl", "Rcpp", "VIM", "data.table", 
               "coda", "rgl", "R2WinBUGS", "mice", "mi", "NbClust", "clustrd", "flexclust", "ellipse", "psych", "FactoMineR", "Benchmarking",

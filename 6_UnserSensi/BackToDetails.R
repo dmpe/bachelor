@@ -24,8 +24,8 @@ df.BackToDetails.p1 <- adply(df.BackToDetails.p1, 1, transform, sumBuEco = sum(U
 
 
 df.BackToDetails <- data.frame(Education = df.BackToDetails.p2$sumEdu, 
-                              BussEcon = df.BackToDetails.p1$sumBuEco, 
-                              Country = df.BackToDetails.p1$Country)
+                               BussEcon = df.BackToDetails.p1$sumBuEco, 
+                               Country = df.BackToDetails.p1$Country)
 
 df.BackToDetails$Country <- as.character(df.BackToDetails$Country)
 

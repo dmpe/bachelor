@@ -28,7 +28,7 @@ set.seed(5154)
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
 df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
 df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
- 
+
 
 df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
 df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
@@ -44,7 +44,7 @@ meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA
 meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
 meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
 
-                                   
+
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
 meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Kingdom"] <- "UK"
