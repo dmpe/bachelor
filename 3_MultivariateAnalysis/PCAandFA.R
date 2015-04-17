@@ -52,6 +52,7 @@ t2.1
 # screeplot(pc, type = "lines")
 scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
 
+#' plot(cat.sim.6) <- simpart(df.Zscore.Imputed, simpledim = 0, cov = FALSE)
 #' comp <- data.frame(pc$x[,1:4]) 
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
