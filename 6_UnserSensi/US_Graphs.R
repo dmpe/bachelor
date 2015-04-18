@@ -1,12 +1,11 @@
 library("reshape2")
 library("ggplot2")
-library("grid")
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
-# source("3_MultivariateAnalysis/PCAandFA.R")
+# source("3_Normalization/Scale.R")
+# source("4_MultivariateAnalysis/PCAandFA.R")
 # source("5_WeightingAggregation/WeAg.R")
 
 ##################################
@@ -18,10 +17,7 @@ set.seed(5154)
 #' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
 #' library(gridExtra)
 #' library(plotflow)
-##################################
-
-
-
+#' library(grid)
 #' For printing purposes
 # df.Original.Imputed
 # df.Zscore.Imputed
@@ -29,6 +25,7 @@ set.seed(5154)
 # df.Original.MM.EW # MIn-MAX + EW
 # df.Zscore.FA # ZSCORE + FA
 # df.Zscore.EW # Zscore EW
+##################################
 
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
 df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
@@ -48,13 +45,6 @@ meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Cou
 meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA")],  id = "Country")
 meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
 meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
-
-
-meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
-meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
-meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Kingdom"] <- "UK"
-meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "Czech Republic"] <- "Czech Rep."
-meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
 
 meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United States"] <- "USA"
 meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Arab Emirates"] <- "UAE"
@@ -97,9 +87,6 @@ me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/S
 me1 
 
 
-
-
-# meltingZscore.FAEW.Subset
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
 me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
 me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
@@ -107,6 +94,17 @@ me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. met
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
 
+
+
+
+
+########################################
+
+# meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
+# meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Arab Emirates"] <- "UAE"
+# meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United Kingdom"] <- "UK"
+# meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "Czech Republic"] <- "Czech Rep."
+# meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
 
 # df.Zscore.FA$Country <- rownames(df.Zscore.FA) 
 # df.Zscore.EW$Country <- rownames(df.Zscore.EW)

@@ -1,7 +1,5 @@
 library("reshape2")
 library("ggplot2")
-# library(grid)
-# library(gridExtra)
 
 set.seed(5154)
 source("1_RawData/DataFrame.R")
@@ -11,6 +9,10 @@ source("4_MultivariateAnalysis/PCAandFA.R")
 source("5_WeightingAggregation/WeAg.R")
 source("6_UnserSensi/US_Graphs.R")
 
+#######################
+# library(grid)
+# library(gridExtra)
+#######################
 
 df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
 df.BackToDetails$Country <- rownames(df.BackToDetails) 
@@ -37,9 +39,9 @@ df.BackToDetails$Country[df.BackToDetails$Country == "South Africa"] <- "S. Afri
 df.BackToDetails$Country[df.BackToDetails$Country == "New Zealand"] <- "N. Zealand"
 # df.BackToDetails$Country[df.BackToDetails$Country == "Switzerland"] <- "Swizerl."
 
-what_long9 <- melt(df.BackToDetails, id = "Country")  # convert to long format
+df.meltedBackToDetails <- melt(df.BackToDetails, id = "Country")  # convert to long format
 
-e9 <- ggplot(data = what_long9, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
+e9 <- ggplot(data = df.meltedBackToDetails, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
 e9 <- e9 + coord_cartesian(ylim = c(0, 85)) + scale_y_continuous(breaks = seq(0, 85, 5))
 e9 <- e9 + ggtitle("Bar chart decomposition of Attractiveness Index (MM.FA)") + scale_fill_discrete(name = "Dimensions")
 e9 <- e9 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights") 
