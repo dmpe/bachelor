@@ -1,14 +1,12 @@
-library(Compind)
 set.seed(5154)
 
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
-# source("3_MultivariateAnalysis/PCAandFA.R")
+# source("3_Normalization/Scale.R")
+# source("4_MultivariateAnalysis/PCAandFA.R")
 
 
 #######################################################
-#
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
 #' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
 #' https://stats.stackexchange.com/questions/63546/comparing-hierarchical-clustering-dendrograms-obtained-by-different-distances/63549#63549
@@ -16,7 +14,7 @@ set.seed(5154)
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
 #' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
-
+# library(Compind)
 #######################################################
 
 
@@ -36,7 +34,7 @@ FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
 df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
                          Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
 
-df.weights$colMax <- apply(df.weights, 1, function(x) max(x[]))
+df.weights$colMax <- apply(df.weights, 1, function(x) max(x[])) # rowwise
 
 df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
                                   FactorWeight2, FactorWeight1, FactorWeight2)
@@ -47,10 +45,8 @@ df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 # round(df.weights$colMax ,3)
 # sum(df.weights$colMax)
 
-# normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 
-#' 
-#' Min-MAX + FA weights.
+#' Min-MAX + FA weights
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
 df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
 df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:23))
@@ -75,4 +71,6 @@ df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC
 # zscoreMultiEqual.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * c(rep(1/6, 6)))
 # df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
 # df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
+
+# normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 

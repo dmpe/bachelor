@@ -8,6 +8,7 @@ set.seed(5154)
 #' http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html 
 ################################
 
+names(df.Original.MinMax) <- c("Unemployment", "Freedom_Index", "WEF_Score", "LearningCurve_Index", "CompletionRate", "H_Index")
 # summary(df.Zscore.Imputed)
 # covMat <- cov(df.Zscore.Imputed)
 # round(covMat, 2) df.Original.MinMax

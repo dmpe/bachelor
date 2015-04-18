@@ -3,10 +3,9 @@ library(psych)
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
+# source("3_Normalization/Scale.R")
 
 ################################
-#
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
 #' http://www.iiap.res.in/astrostat/School08/tuts/clus.html
@@ -19,13 +18,12 @@ set.seed(5154)
 # library(FactoMineR)
 # library(clustrd)
 # library(rgl)
-#
 ################################
 
+#' 'Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
+#' the correlation matrix.'  
 
-#' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
-#' the correlation matrix.  
-
+#####################################
 #' NOT RECOMMENDED
 #' pcaNOT <- princomp(df.Zscore.Imputed, cor = FALSE, scores = TRUE)
 #' plot(pcaNOT)
@@ -36,50 +34,52 @@ set.seed(5154)
 #' round(pcaNOT$loading, 3)
 #' round(pcaNOT$sdev, 3)
 #' round(pcaNOT$scores, 3)
-
 #' (pcaNOT$sdev)^2 
 #' sum((pcaNOT$loading[,1])^2) 
 #' eigenvalues 
 #' tmp <- svd(df.Zscore.Imputed)  df.Original.MinMax
 #' tmp
+#####################################
+
+
 pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
 summary(pc2)
-#' This is using singular value decomposition
-pc1 <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
-summary(pc1)
-t1<-round(pc1$rotation, 3)
-t2<-round(pc2$rotation, 3)
-t1.1 <- as.data.frame(t1)
-t2.1 <- as.data.frame(t2)
-t1.1
-t2.1
+as.data.frame(round(pc2$rotation, 3))
+
+
+# pc1 <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
+# summary(pc1)
+# 
+# t1.1 <- as.data.frame(round(pc1$rotation, 3))
+# t2.1 <- as.data.frame(round(pc2$rotation, 3))
+# t1.1
+# t2.1
 # fun.12(t1.1,t2.1)
 # screeplot(pc, type = "lines")
-scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
+scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
 
-#' plot(cat.sim.6) <- simpart(df.Zscore.Imputed, simpledim = 0, cov = FALSE)
+#' plot(cat.sim.6) <- simpart(df.Original.MinMax, simpledim = 0, cov = FALSE)
 #' comp <- data.frame(pc$x[,1:4]) 
 #' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
 #' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
 
-factorAn <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
+factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
-sum(communality)/6 # maybe to consider as a threashold of communality
+sum(communality)/6 # maybe to consider as a threashold of communality -> never used
 
 
 
-factorAn564 <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
-
-
+factorAn564 <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
 testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
                             MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
 all.equal(testing$MinMax1, testing$Zsc)
 
 #' promax(loadings(pcaNOT))
-promax(loadings(factorAn))
+#' promax(loadings(factorAn))
 
+######################################
 #' An advanced method that 'combines k-means cluster analysis with aspects of Factor Analysis and PCA is offered by Vichi &
 #' Kiers (2001)' [p. 81].
 #' outf <- FactorialKM(df.Zscore.Imputed, nclus = 2, ndim = 2, nstart = 25, smartStart = TRUE)
