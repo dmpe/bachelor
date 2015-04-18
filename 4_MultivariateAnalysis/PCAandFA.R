@@ -1,8 +1,12 @@
 library(psych)
-# library(FactoMineR)
-# library(clustrd)
-# library(rgl)
 
+set.seed(5154)
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/Imputation.R")
+# source("4_Normalization/Scale.R")
+
+################################
+#
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' http://little-book-of-r-for-multivariate-analysis.readthedocs.org/en/latest/src/multivariateanalysis.html#principal-component-analysis
 #' http://www.iiap.res.in/astrostat/School08/tuts/clus.html
@@ -12,11 +16,12 @@ library(psych)
 #' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 #' http://factominer.free.fr/classical-methods/principal-components-analysis.html
 #' http://www.r-bloggers.com/identifying-records-in-data-frame-a-that-are-not-contained-in-data-frame-b-%E2%80%93-a-comparison/
+# library(FactoMineR)
+# library(clustrd)
+# library(rgl)
+#
+################################
 
-set.seed(5154)
-# source("1_RawData/DataFrame.R")
-# source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
 
 #' Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
 #' the correlation matrix.  
@@ -69,7 +74,7 @@ factorAn564 <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 
 
 testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
-                 MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
+                            MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
 all.equal(testing$MinMax1, testing$Zsc)
 
 #' promax(loadings(pcaNOT))
@@ -86,4 +91,4 @@ promax(loadings(factorAn))
 #' pcaFAS <- PCA(df.Zscore.Imputed, scale.unit = TRUE)
 #' round(pcaFAS$eig, 3)
 #' plot(pcaFAS, axes = c(1, 2), choix = "ind", habillage = "ind")
- 
+

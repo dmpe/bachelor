@@ -1,4 +1,4 @@
-library("Compind")
+library(Compind)
 set.seed(5154)
 
 # source("1_RawData/DataFrame.R")

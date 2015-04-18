@@ -4,21 +4,44 @@ library(ggplot2)
 library(clustrd)
 library("ggthemes")
 library(reshape2)
-library(gridExtra)
-# library(fpc)
-# library(vegan)
-# library(pvclust)
-# library(flexclust)
 
-
-# Use when new data frame is needed - df.Original.MinMax
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
 # source("4_Normalization/Scale.R")
 
-#' Fix for the plot, using agnes; Later; moved to MICE
+################################
+# library(fpc)
+# library(vegan)
+# library(pvclust)
+# library(flexclust)
+#' library(gridExtra)
+#' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
+#' 
+#' http://www.statmethods.net/advstats/cluster.html 
+#' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
+#' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
+#' 
+#' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
+#' http://rpubs.com/gaston/dendrograms
+#' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria
+#' 
+#' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
+#' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
+#' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
+#' 
+#' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
+#' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
+#' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
+
+################################
+
+
+# Use when new data frame is needed - df.Original.MinMax
+
+
+#' Fix for the plot, using agnes; Later; moved to MICE
 #' df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[,-1], row.names=df.Zscore.Imputed[,1])
 
 #' How many clusters ? My choice of 2 
@@ -30,7 +53,6 @@ nc <- NbClust(df.Original.MinMax, distance = "euclidean", method = "ward.D2", in
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
 
-#' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' Not possible in my case, because of non-existent
 #' type (e.g. default data would need have already some kind of Type/'Cluster' which we could then compare with the new
 #' cluster 'quantify the agreement between type and cluster')
@@ -40,7 +62,6 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 # ct.km
 
 
-#' http://www.statmethods.net/advstats/cluster.html 
 # dfa <- scale(df.Zscore.Imputed) 
 # pamk(df.Zscore.Imputed) 
 # wss <- (nrow(df.Zscore.Imputed)-1)*sum(apply(df.Zscore.Imputed,2,var)) 
@@ -51,23 +72,18 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 
 
 #' produces same results, just different package
-#' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 agn <- agnes(x = dist(df.Original.MinMax), method = "ward", metric = "euclidean")
 plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
 
 
 #' Hierarchical Clustering 
-#' http://rpubs.com/gaston/dendrograms
-#' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
 euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust) # agglomerative coef.
 
 #' K Means 
-#' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
-#' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
 klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
 dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignmentdf.Original.MinMax
 # aggregate(df.Zscore.Imputed, by=list(klust$cluster), FUN = mean) # get cluster means
@@ -75,11 +91,6 @@ dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append clust
 
 
 #' Silhouette plot 
-#' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
-#' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
-#' that's fucking silly
-#' Very good overview of all 8 methods
-#' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 
 # sk2 <- silhouette(klust$cl, dist(df.Zscore.Imputed, method = 'euclidean')) 
 # plot(sk2)
@@ -109,32 +120,30 @@ dfClustMeans
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
 dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,2))
 
-#' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
-#' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
-#' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
+
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point()
 gp <- gp + coord_cartesian(ylim = c(-1.2, 0.70)) + scale_y_continuous(breaks = seq(-2, 1, 0.20))
 gp <- gp + theme_gdocs() + scale_color_gdocs()
 gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
 gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
-                                              gpar.rowtext = gpar(cex = 1.2)), xmin = -Inf, xmax = Inf, ymin = -Inf,
-                             ymax = Inf)
+                                              gpar.rowtext = gpar(cex = 1.2)), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
 gp
 
 
 
+
+
+################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
+# 
 # cluster.bootstrap <- pvclust(df.Zscore.Imputed, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 # plot(cluster.bootstrap)
 # pvrect(cluster.bootstrap) 
 
-################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
-# 
 # pamk.best <- pamk(df.Zscore.Imputed)
 # cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
 # plot(pam(df.Zscore.Imputed, pamk.best$nc))
 
-# 
 # fitcas <- cascadeKM(df.Zscore.Imputed, 1, 10, iter = 1000)
 # plot(fitcas, sortg = TRUE, grpmts.plot = TRUE)
 # calinski.best <- as.numeric(which.max(fitcas$results[2,]))
