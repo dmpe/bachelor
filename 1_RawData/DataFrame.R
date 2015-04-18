@@ -1,7 +1,7 @@
 # This file loads necessary R-Scripts, adds additional data and finally creates data.frame
 
-library("plyr")
-library("dplyr")
+library(plyr)
+library(dplyr)
 set.seed(5154)
 
 # From R Documentation: source() causes R to accept its input from the named file or URL or connection.  Input is read and

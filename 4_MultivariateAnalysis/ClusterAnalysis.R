@@ -8,21 +8,21 @@ library(reshape2)
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
+# source("3_Normalization/Scale.R")
 
 ################################
 # library(fpc)
 # library(vegan)
 # library(pvclust)
 # library(flexclust)
-#' library(gridExtra)
+# library(gridExtra)
+#' 
 #' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 #' 
 #' http://www.statmethods.net/advstats/cluster.html 
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
-#' 
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria
@@ -30,21 +30,15 @@ set.seed(5154)
 #' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
 #' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
-#' 
 #' http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
 #' http://www.cookbook-r.com/Graphs/Legends_%28ggplot2%29/
 #' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
-
 ################################
 
-
-# Use when new data frame is needed - df.Original.MinMax
-
-
-#' Fix for the plot, using agnes; Later; moved to MICE
+#' Fix for the plot, using agnes; Later moved to MICE; df.Original.MinMax
 #' df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[,-1], row.names=df.Zscore.Imputed[,1])
 
-#' How many clusters ? My choice of 2 
+#' How many clusters ?
 #' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='single', index='all') 
 #' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='kmeans', index='all') 
 #' NbClust(df.Zscore.Imputed, distance = 'euclidean', method='ward.D', index='all') ward.D2
@@ -62,16 +56,16 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 # ct.km
 
 
-# dfa <- scale(df.Zscore.Imputed) 
-# pamk(df.Zscore.Imputed) 
-# wss <- (nrow(df.Zscore.Imputed)-1)*sum(apply(df.Zscore.Imputed,2,var)) 
+# dfa <- scale(df.Original.MinMax) 
+# pamk(df.Original.MinMax) 
+# wss <- (nrow(df.Original.MinMax)-1)*sum(apply(df.Original.MinMax,2,var)) 
 # for (i in 2:15) { 
-#   wss[i] <- sum(kmeans(df.Zscore.Imputed,centers=i)$withinss) 
+#   wss[i] <- sum(kmeans(df.Original.MinMax,centers=i)$withinss) 
 # } 
 # plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
 
 
-#' produces same results, just different package
+#' produces same results, just different technique
 agn <- agnes(x = dist(df.Original.MinMax), method = "ward", metric = "euclidean")
 plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
@@ -85,16 +79,14 @@ coef.hclust(euroclust) # agglomerative coef.
 
 #' K Means 
 klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
-dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignmentdf.Original.MinMax
-# aggregate(df.Zscore.Imputed, by=list(klust$cluster), FUN = mean) # get cluster means
+dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment df.Original.MinMax
+# aggregate(df.Original.MinMax, by=list(klust$cluster), FUN = mean) # gets cluster mean
 
 
 
 #' Silhouette plot 
-
 # sk2 <- silhouette(klust$cl, dist(df.Zscore.Imputed, method = 'euclidean')) 
 # plot(sk2)
-
 # par(mar = c(5, 10, 3, 2) + 0.1)
 # sk3 <- silhouette(pam(df.Zscore.Imputed, 2))
 # plot(sk3, max.strlen = 30)
@@ -103,7 +95,7 @@ dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append clust
 
 
 #' Who is in, who is out ?  
-#' sort(table(klust$clust))
+sort(table(klust$clust))
 clust <- names(sort(table(klust$clust)))
 row.names(dataWithCluster[klust$clust==clust[1],]) 
 row.names(dataWithCluster[klust$clust==clust[2],])
@@ -114,7 +106,13 @@ Advanced <- sapply(dataWithCluster[klust$clust == clust[2], ], mean) #0.55 menti
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
-dfClustMeans
+dfClustMeans$vars[dfClustMeans$vars == "Unemployment_NonScaled"] <- "Y. Unemployment"
+dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Ind."
+dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF"
+dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Ind."
+dfClustMeans$vars[dfClustMeans$vars == "CompletionRate_NonScaled"] <- "Completion rate"
+dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "Hirsch Ind."
+
 #' sapply(dfClustMeans, class)
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
@@ -122,16 +120,12 @@ dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round
 
 
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
-gp <- gp + geom_line() + geom_point()
-gp <- gp + coord_cartesian(ylim = c(-1.2, 0.70)) + scale_y_continuous(breaks = seq(-2, 1, 0.20))
-gp <- gp + theme_gdocs() + scale_color_gdocs()
-gp <- gp + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries") + ggtitle("Means plot for clusters")
+gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
+gp <- gp + coord_cartesian(ylim = c(10, 90)) + scale_y_continuous(breaks = seq(10, 90, 10))
+gp <- gp + theme_gdocs() + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
 gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
                                               gpar.rowtext = gpar(cex = 1.2)), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
 gp
-
-
-
 
 
 ################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run

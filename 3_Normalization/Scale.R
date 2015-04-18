@@ -1,11 +1,9 @@
 library(scales)
 library(plyr)
-# library(Compind)
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
 # source("2_Imputation/Imputation.R")
-
 
 #' ##########################################
 #' http://howto.commetrics.com/methodology/statistics/normalization/
@@ -17,9 +15,8 @@ set.seed(5154)
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 #' https://stats.stackexchange.com/questions/70801/how-to-normalize-data-to-0-1-range 
 #' https://stackoverflow.com/questions/5294955/how-to-scale-down-a-range-of-numbers-with-a-known-min-and-max-value
-
+# library(Compind)
 ############################################
-
 
 
 #' For testing 
@@ -33,21 +30,22 @@ set.seed(5154)
 #' newvalueOpposite10 <- (max(df.Original.Imputed$Unemployment_NonScaled)-df.Original.Imputed$Unemployment_NonScaled)/
 #' (max(df.Original.Imputed$Unemployment_NonScaled)-min(df.Original.Imputed$Unemployment_NonScaled))
 
+#' This normalizes columns of a data frame from minValue to maxValue. Beware colwise will be used (from plyr)!
+#'
+#' @param x A data frame
+#' @param minValue A minimal value of the range of the scale (e.g. 0)
+#' @param maxValue A maximal value of the range of the scale (e.g. 100)
 rescaleColumns <- function(x, minValue, maxValue) {
   scales::rescale(x, to = c(minValue, maxValue))
 }
 
-
-#' Use colwise from plyr package to scale columns
 df.Original.MinMax <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)
 rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 
-#' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not best (e.i. that would be 
-#' the logic without this step below). 
+#' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
+#' the logic without this step). 
 df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
                                                (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
-# VELKY PRUSER ? CO STIM TED
-# df.Original.MinMax$Freedom_Index_NonScaled <- df.Original$Freedom_Index_NonScaled
 
 # copy and create new data set with new polarity of unempl.
 df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
@@ -55,16 +53,9 @@ df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
 
 
-#' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of the relationship between 
-#' the indicator and the phenomenon to be measured (e.g., in a well-being index, 
+#' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of 
+#' the relationship between the indicator and the phenomenon to be measured (e.g., in a well-being index, 
 #' "GDP per capita" has 'positive' polarity and "Unemployment rate" has 'negative' polarity).
 #' 
 #' see documentation with precise formulas
-# normalise_ci(df.Original.Imputed,c(1:3),c("NEG","POS", "POS"), method=2)
-
-
-
-
-############# To continue, look in 'WeightingAggregation' folder, ->> 'WeAg.R' is required to run
-
-
+#' normalise_ci(df.Original.Imputed,c(1:3),c("NEG","POS", "POS"), method=2)
