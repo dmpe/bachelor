@@ -1,20 +1,22 @@
 library("Compind")
+set.seed(5154)
 
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/Imputation.R")
+# source("4_Normalization/Scale.R")
+# source("3_MultivariateAnalysis/PCAandFA.R")
+
+
+#######################################################
+#
 #' http://cran.r-project.org/web/packages/Compind/Compind.pdf
 #' http://cran.r-project.org/web/packages/conjoint/conjoint.pdf
 #' https://stats.stackexchange.com/questions/63546/comparing-hierarchical-clustering-dendrograms-obtained-by-different-distances/63549#63549
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
 #' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
-#' 
-#' Creates Data Frame of Weights
-# set.seed(5154)
-# source("1_RawData/DataFrame.R")
-# source("2_Imputation/Imputation.R")
-# source("4_Normalization/Scale.R")
-# source("3_MultivariateAnalysis/PCAandFA.R")
+#######################################################
 
-set.seed(5154)
 
 # factorAn
 factor1SquaredLoadings <- factorAn$loadings[, 1]^2
