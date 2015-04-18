@@ -1,14 +1,6 @@
-#' https://beckmw.wordpress.com/2013/10/07/sensitivity-analysis-for-neural-networks/
-#' http://docs.ggplot2.org/current/scale_discrete.html
-#' http://stackoverflow.com/questions/3253641/how-to-change-the-order-of-a-discrete-x-scale-in-ggplot
-#' http://blog.mckuhn.de/2011/08/ggplot2-determining-order-in-which.html
-#' http://stackoverflow.com/questions/21192002/how-to-combine-2-plots-ggplot-into-one-plot
-
 library("reshape2")
 library("ggplot2")
 library("grid")
-library(gridExtra)
-library(plotflow)
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
@@ -16,6 +8,19 @@ set.seed(5154)
 # source("4_Normalization/Scale.R")
 # source("3_MultivariateAnalysis/PCAandFA.R")
 # source("5_WeightingAggregation/WeAg.R")
+
+##################################
+#' https://beckmw.wordpress.com/2013/10/07/sensitivity-analysis-for-neural-networks/
+#' http://docs.ggplot2.org/current/scale_discrete.html
+#' http://stackoverflow.com/questions/3253641/how-to-change-the-order-of-a-discrete-x-scale-in-ggplot
+#' http://blog.mckuhn.de/2011/08/ggplot2-determining-order-in-which.html
+#' http://stackoverflow.com/questions/21192002/how-to-combine-2-plots-ggplot-into-one-plot
+#' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
+#' library(gridExtra)
+#' library(plotflow)
+##################################
+
+
 
 #' For printing purposes
 # df.Original.Imputed
@@ -127,7 +132,6 @@ me3
 # meltingZscore.FAEW.Subset$Country[meltingZscore.FAEW.Subset$Country == "South Africa"] <- "S. Africa"
 
 
-#' http://stackoverflow.com/questions/17150183/r-plot-multiple-lines-in-one-graph
 # d <- ggplot(data=what_long, aes(x=Country, y=value, colour=variable, group = variable))
 # d <- d + geom_line() + geom_point(size = 4, shape=21, fill="white")  # geom_ribbon(aes(ymin=value, ymax=value+1))
 # d <- d + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))

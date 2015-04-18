@@ -15,6 +15,8 @@ set.seed(5154)
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
 #' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
+#' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
+
 #######################################################
 
 
@@ -47,7 +49,6 @@ df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 
 # normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
 
-#' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
 #' 
 #' Min-MAX + FA weights.
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
