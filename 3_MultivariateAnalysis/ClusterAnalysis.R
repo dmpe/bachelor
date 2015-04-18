@@ -26,7 +26,7 @@ set.seed(5154)
 #' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='kmeans', index='all') 
 #' NbClust(df.Zscore.Imputed, distance = 'euclidean', method='ward.D', index='all') ward.D2
 
-nc <- NbClust(df.Zscore.Imputed, distance = "euclidean", method = "ward.D2", index = "all")
+nc <- NbClust(df.Original.MinMax, distance = "euclidean", method = "ward.D2", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
 
@@ -52,7 +52,7 @@ barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Cri
 
 #' produces same results, just different package
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
-agn <- agnes(x = dist(df.Zscore.Imputed), method = "ward", metric = "euclidean")
+agn <- agnes(x = dist(df.Original.MinMax), method = "ward", metric = "euclidean")
 plot(agn) 
 #' plot(as.dendrogram(agn, hang = -1))
 
@@ -60,7 +60,7 @@ plot(agn)
 #' Hierarchical Clustering 
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria?rq=1
-euroclust <- hclust(dist(df.Zscore.Imputed, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust) # agglomerative coef.
