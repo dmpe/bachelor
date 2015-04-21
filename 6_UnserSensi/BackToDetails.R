@@ -1,5 +1,5 @@
-library("reshape2")
-library("ggplot2")
+library(reshape2)
+library(ggplot2)
 
 set.seed(5154)
 source("1_RawData/DataFrame.R")
@@ -16,9 +16,9 @@ source("6_UnserSensi/US_Graphs.R")
 
 df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
 df.BackToDetails$Country <- rownames(df.BackToDetails) 
-df.BackToDetails.p1 <- df.BackToDetails[,1:3]
+df.BackToDetails.p1 <- df.BackToDetails[, 1:3]
 df.BackToDetails.p1$Country <- rownames(df.BackToDetails.p1) 
-df.BackToDetails.p2 <- df.BackToDetails[,4:7]
+df.BackToDetails.p2 <- df.BackToDetails[, 4:7]
 
 # Sum rowwise
 df.BackToDetails.p2 <- adply(df.BackToDetails.p2, 1, transform, sumEdu = sum(LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))

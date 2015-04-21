@@ -2,8 +2,9 @@ library(cluster)
 library(NbClust)
 library(ggplot2)
 library(clustrd)
-library("ggthemes")
+library(ggthemes)
 library(reshape2)
+library(gridExtra)
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
@@ -15,7 +16,6 @@ set.seed(5154)
 # library(vegan)
 # library(pvclust)
 # library(flexclust)
-# library(gridExtra)
 #' 
 #' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
@@ -101,7 +101,7 @@ row.names(dataWithCluster[klust$clust==clust[1],])
 row.names(dataWithCluster[klust$clust==clust[2],])
 
 Developing <- sapply(dataWithCluster[klust$clust == clust[1], ], mean)
-Advanced <- sapply(dataWithCluster[klust$clust == clust[2], ], mean) #0.55 mentioned in the text, page 44
+Advanced <- sapply(dataWithCluster[klust$clust == clust[2], ], mean)
 
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
@@ -121,11 +121,15 @@ dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round
 
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
-gp <- gp + coord_cartesian(ylim = c(10, 90)) + scale_y_continuous(breaks = seq(10, 90, 10))
+gp <- gp + coord_cartesian(ylim = c(10, 90)) + scale_y_continuous(breaks = seq(10, 90, 5))
 gp <- gp + theme_gdocs() + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
 gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
-                                              gpar.rowtext = gpar(cex = 1.2)), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
+                                              gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 45)
 gp
+
+###############  0.5 mentioned in the text, page 44
+mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
+                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States"), 4])
 
 
 ################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
