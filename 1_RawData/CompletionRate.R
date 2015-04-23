@@ -15,6 +15,7 @@ CompletionRate$Country[CompletionRate$Country == "Taiwan, China"] <- "Taiwan"
 CompletionRate$Country[CompletionRate$Country == "Korea, Rep."] <- "Korea"
 CompletionRate$Country[CompletionRate$Country == "Russian Federation"] <- "Russia"
 
+Quandl("WEDU/NGA_HH_DHS_PCR", authcode="GgnxpyUBXHsyQxqp67bY")
 
 # Proxy https://www.seab.gov.sg/content/pressReleases/Release_of_2014_PSLE_Results_21112014.pdf
 CompletionRate$CompletionRate[CompletionRate$Country == "Singapore"] <- 97.6
