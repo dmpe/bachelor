@@ -74,7 +74,7 @@ plot(agn)
 #' Hierarchical Clustering 
 euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
 plot(euroclust, hang = -1)
-rect.hclust(euroclust, k = 3, border = "red")  # create border for 2 clusters
+rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust) # agglomerative coef.
 
 #' K Means 
@@ -118,13 +118,12 @@ dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "Hirsch Ind."
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
 dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,2))
 
-
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
 gp <- gp + coord_cartesian(ylim = c(10, 105)) + scale_y_continuous(breaks = seq(10, 105, 5))
 gp <- gp + theme_gdocs() + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
 gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
-                                              gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 45)
+                                              gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
 gp
 
 ###############  0.5 mentioned in the text, page 44
