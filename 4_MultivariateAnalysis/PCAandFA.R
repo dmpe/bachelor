@@ -71,10 +71,10 @@ sum(communality)/6 # maybe to consider as a threashold of communality -> never u
 
 
 
-factorAn564 <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
-testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
-                            MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
-all.equal(testing$MinMax1, testing$Zsc)
+# factorAn564 <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
+# testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
+#                             MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
+# all.equal(testing$MinMax1, testing$Zsc)
 
 #' promax(loadings(pcaNOT))
 #' promax(loadings(factorAn))
