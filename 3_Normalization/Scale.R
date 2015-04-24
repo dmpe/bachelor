@@ -2,8 +2,8 @@ library(scales)
 library(plyr)
 
 set.seed(5154)
-source("1_RawData/DataFrame.R")
-source("2_Imputation/Imputation.R")
+# source("1_RawData/DataFrame.R")
+# source("2_Imputation/Imputation.R")
 
 #' ##########################################
 #' http://howto.commetrics.com/methodology/statistics/normalization/
@@ -15,32 +15,11 @@ source("2_Imputation/Imputation.R")
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 #' https://stats.stackexchange.com/questions/70801/how-to-normalize-data-to-0-1-range 
 #' https://stackoverflow.com/questions/5294955/how-to-scale-down-a-range-of-numbers-with-a-known-min-and-max-value
-# library(Compind)
+#' library(Compind)
 ############################################
 
+# rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 
-#' For testing 
-#' rescale(nonScaledDataFrame$Unemployment_NonScaled, to = c(0,3))
-#' rescale(nonScaledDataFrame$Freedom_Index_NonScaled, to = c(0,3))
-#' Now scale columns to 0 to 3. Don't apply to data frame !!!  
-#' joinedDB.7 <- rescale(df.Original.Imputed, to = c(0,3)) # Wrong
-#' 
-#' newvalue = ((1-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
-#'               (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
-#' newvalueOpposite10 <- (max(df.Original.Imputed$Unemployment_NonScaled)-df.Original.Imputed$Unemployment_NonScaled)/
-#' (max(df.Original.Imputed$Unemployment_NonScaled)-min(df.Original.Imputed$Unemployment_NonScaled))
-
-#' This normalizes columns of a data frame from minValue to maxValue. Beware colwise will be used (from plyr)!
-#'
-#' @param x A data frame
-#' @param minValue A minimal value of the range of the scale (e.g. 0)
-#' @param maxValue A maximal value of the range of the scale (e.g. 100)
-rescaleColumns <- function(x, minValue, maxValue) {
-  scales::rescale(x, to = c(minValue, maxValue), from = range(-3.5:3.5))
-}
-
-df.Original.MinMax <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)
-rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 
 
 df.Original.MinMax <- df.Original.Imputed
@@ -50,9 +29,9 @@ df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Scor
 df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_NonScaled-1)/
                                            (1518-1)) + 0
 
-# delit nul nelza
-df.Original.MinMax$LearningCurve_Index <- ((100-0)*(df.Original.Imputed$LearningCurve_Index-3.5)/
-                                           (Inf-Inf)) + 0
+# Stays the same
+# df.Original.MinMax$CompletionRate_NonScaled <- ((100-0)*(df.Original.Imputed$CompletionRate_NonScaled-0)/
+#                                                   (100-0)) + 0
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
 #' the logic without this step). 
@@ -60,15 +39,22 @@ df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unempl
                                                (0-100)) + 0
 
 
+#' This normalizes columns of 'LearningCurve_Index' from minValue to maxValue. Beware of colwise that will be used (from plyr)!
+#'
+#' @param x A data frame
+#' @param minValue A minimal value of the range of the scale (e.g. 0)
+#' @param maxValue A maximal value of the range of the scale (e.g. 100)
+rescaleColumns <- function(x, minValue, maxValue) {
+  scales::rescale(x, to = c(minValue, maxValue), from = range(-3.5:3.5))
+}
+
+df.Original.MinMax$LearningCurve_Index <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)[, 4]
 
 
 
 
 
 
-
-# copy and create new data set with new polarity of unempl.
-# df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
 #' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of 
 #' the relationship between the indicator and the phenomenon to be measured (e.g., in a well-being index, 
