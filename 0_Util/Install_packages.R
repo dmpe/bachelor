@@ -11,7 +11,7 @@ ipak <- function(pkg) {
 # Installation may take very long time (> 15 minutes)
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", "RColorBrewer", "scales", "grid", "mclust", "psych", 
               "GPArotation", "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot", "xlsx", "RCurl", "Rcpp", "VIM", "data.table", 
-              "coda", "rgl", "R2WinBUGS", "mice", "mi", "NbClust", "clustrd", "flexclust", "ellipse", "FactoMineR", "Benchmarking",
+              "coda", "R2WinBUGS", "mice", "mi", "NbClust", "clustrd", "flexclust", "ellipse", "FactoMineR", "Benchmarking",
               "pmr", "Compind", "lattice", "gridExtra", "grid", "plotflow")
 ipak(packages)
 
