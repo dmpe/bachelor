@@ -31,26 +31,9 @@ df.Original.MM.FA$Country <- rownames(df.Original.MM.FA)
 df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
 df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
 
-
-df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
-df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
-
-df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
-df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
-
-# Now melt them all
-meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country") 
-meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Country")
-
 meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA")],  id = "Country")
 meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
 meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
-
-meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United States"] <- "USA"
-meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Arab Emirates"] <- "UAE"
-meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Kingdom"] <- "UK"
-meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "Czech Republic"] <- "Czech Rep."
-meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "South Africa"] <- "S. Africa"
 
 meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United States"] <- "USA"
 meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United Arab Emirates"] <- "UAE"
@@ -86,6 +69,26 @@ me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1 
 
+
+
+
+
+# all lines are different, doens't have a straight one
+df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
+df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
+
+df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
+df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
+
+# Now melt them all
+meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country") 
+meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Country")
+
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "South Africa"] <- "S. Africa"
 
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
 me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
