@@ -7,6 +7,8 @@ Thesis can be download here <> and please feel free to contact me if needed. Any
 
 My website <https://indestat.wordpress.com/contact-me>
 
+As a small exercise (before I even started with the work) I create <http://rpubs.com/F789GH/SingaporesEducation> this.
+
 ## rJava Installation
 
 The installation process (on Ubuntu) can be quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava>. To make rJava work, use google (and stackoverflow). 
