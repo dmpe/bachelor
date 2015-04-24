@@ -2,8 +2,8 @@ library(scales)
 library(plyr)
 
 set.seed(5154)
-# source("1_RawData/DataFrame.R")
-# source("2_Imputation/Imputation.R")
+source("1_RawData/DataFrame.R")
+source("2_Imputation/Imputation.R")
 
 #' ##########################################
 #' http://howto.commetrics.com/methodology/statistics/normalization/
@@ -36,22 +36,39 @@ set.seed(5154)
 #' @param minValue A minimal value of the range of the scale (e.g. 0)
 #' @param maxValue A maximal value of the range of the scale (e.g. 100)
 rescaleColumns <- function(x, minValue, maxValue) {
-  scales::rescale(x, to = c(minValue, maxValue))
+  scales::rescale(x, to = c(minValue, maxValue), from = range(-3.5:3.5))
 }
 
 df.Original.MinMax <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)
 rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 
+
+df.Original.MinMax <- df.Original.Imputed
+df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/
+                                             (7-1)) + 0
+
+df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_NonScaled-1)/
+                                           (1518-1)) + 0
+
+# delit nul nelza
+df.Original.MinMax$LearningCurve_Index <- ((100-0)*(df.Original.Imputed$LearningCurve_Index-3.5)/
+                                           (Inf-Inf)) + 0
+
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
 #' the logic without this step). 
-df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-max(df.Original.Imputed$Unemployment_NonScaled))/
-                                               (min(df.Original.Imputed$Unemployment_NonScaled)-max(df.Original.Imputed$Unemployment_NonScaled))) + 0
+df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-100)/
+                                               (0-100)) + 0
+
+
+
+
+
+
+
+
 
 # copy and create new data set with new polarity of unempl.
-df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
-
-
-
+# df.Zscore.Imputed$Unemployment <- unemplo$Unemployment_ZscoreNEGATIVE
 
 #' Polarity vector: "POS" = positive, "NEG" = negative. The polarity of a individual indicator is the sign of 
 #' the relationship between the indicator and the phenomenon to be measured (e.g., in a well-being index, 
