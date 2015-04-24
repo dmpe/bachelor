@@ -25,8 +25,8 @@ freedom$Country[freedom$Country == "Korea, South"] <- "Korea"
 freedom <- subset(freedom, select = c(Country, Freedom_Index, RankOverall))
 
 # convert from factor to numeric
-freedom$Freedom_Index <- as.numeric(as.character(freedom$Freedom_Index))
-freedom$RankOverall <- as.numeric(as.character(freedom$RankOverall))
+freedom$Freedom_Index <- suppressWarnings(as.numeric(as.character(freedom$Freedom_Index)))
+freedom$RankOverall <- suppressWarnings(as.numeric(as.character(freedom$RankOverall)))
 
 freedom_normalisation <- na.omit(freedom)
 
