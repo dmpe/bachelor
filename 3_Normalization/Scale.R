@@ -23,6 +23,7 @@ set.seed(5154)
 
 
 df.Original.MinMax <- df.Original.Imputed
+
 df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/
                                              (7-1)) + 0
 

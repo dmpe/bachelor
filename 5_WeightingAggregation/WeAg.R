@@ -14,7 +14,7 @@ set.seed(5154)
 #' http://sites.stat.psu.edu/~ajw13/stat505/fa06/17_factor/13_factor_varimax.html 
 #' https://stackoverflow.com/questions/24497186/rowwise-maximum-for-r
 #' http://stackoverflow.com/questions/3643555/multiply-rows-of-matrix-by-vector
-# library(Compind)
+#' library(Compind)
 #######################################################
 
 

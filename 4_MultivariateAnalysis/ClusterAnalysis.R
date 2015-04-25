@@ -128,7 +128,7 @@ gp
 
 ###############  0.5 mentioned in the text, page 44
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
-                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States"), 4])
+                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia"), 4])
 
 
 ################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
