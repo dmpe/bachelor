@@ -19,12 +19,12 @@ set.seed(5154)
 #' library(plotflow)
 #' library(grid)
 #' For printing purposes
-# df.Original.Imputed
-# df.Zscore.Imputed
-# df.Original.MM.FA # Min-MAX + FA weights.
-# df.Original.MM.EW # MIn-MAX + EW
-# df.Zscore.FA # ZSCORE + FA
-# df.Zscore.EW # Zscore EW
+#' df.Original.Imputed
+#' df.Zscore.Imputed
+#' df.Original.MM.FA # Min-MAX + FA weights.
+#' df.Original.MM.EW # MIn-MAX + EW
+#' df.Zscore.FA # ZSCORE + FA
+#' df.Zscore.EW # Zscore EW
 ##################################
 
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
@@ -96,10 +96,6 @@ me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(
 me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
-
-
-
-
 
 ########################################
 

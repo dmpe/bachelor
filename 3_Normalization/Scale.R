@@ -19,9 +19,6 @@ set.seed(5154)
 ############################################
 
 # rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
-
-
-
 df.Original.MinMax <- df.Original.Imputed
 
 df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/
@@ -50,10 +47,6 @@ rescaleColumns <- function(x, minValue, maxValue) {
 }
 
 df.Original.MinMax$LearningCurve_Index <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)[, 4]
-
-
-
-
 
 
 
