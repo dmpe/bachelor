@@ -41,5 +41,6 @@ df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "United A
 # df.Original.Imputed$LearningCurve_Index <- df.Zscore.Imputed$LearningCurve_Index
 df.Original.Imputed <- data.frame(df.Original.Imputed[, -1], row.names = df.Original.Imputed[, 1])
 
-
+df.Original.Imputed2 <- df.Original.Imputed
+df.Original.Imputed2$CompletionRate_NonScaled <- df.Original2$Index
 # rfunsuper(df.Zscore[2:7]) #' for notUsed/UnsuperRF.R. Load first the source file !

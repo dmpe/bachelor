@@ -20,7 +20,7 @@ set.seed(5154)
 
 # rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
 df.Original.MinMax <- df.Original.Imputed
-
+df.Original.MinMax <- df.Original.Imputed2
 df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/
                                              (7-1)) + 0
 
@@ -28,8 +28,7 @@ df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_No
                                            (1518-1)) + 0
 
 # Stays the same
-# df.Original.MinMax$CompletionRate_NonScaled <- ((100-0)*(df.Original.Imputed$CompletionRate_NonScaled-0)/
-#                                                   (100-0)) + 0
+df.Original.MinMax$CompletionRate_NonScaled <- df.Original.Imputed2$CompletionRate_NonScaled * 100
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
 #' the logic without this step). 
