@@ -66,7 +66,7 @@ me1 <- me1 + geom_line(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, v
 me1 <- me1 + geom_point(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
 # all together
 me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
-me1 <- me1 + ggtitle("Comparison of Min-Max method with weights based on FA/EW/Self") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+me1 <- me1 + ggtitle("Comparison of 3 weighting method (FA/EW/my choice)") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1 
 
 
