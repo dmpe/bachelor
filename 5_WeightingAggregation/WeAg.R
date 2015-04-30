@@ -22,19 +22,15 @@ set.seed(5154)
 factor1SquaredLoadings <- factorAn$loadings[, 1]^2
 factor2SquaredLoadings <- factorAn$loadings[, 2]^2
 
-#' factor3UnitNormalisation <- factorAn$loadings[, 3]^2
-
 Sum_SFL <- sum(factor1SquaredLoadings) + sum(factor2SquaredLoadings) # + sum(factorAn$loadings[, 3]^2)
 
 FactorWeight1 <- sum(factor1SquaredLoadings)/Sum_SFL
 FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
 
-#' FactorWeight3 <- sum(factorAn$loadings[, 3]^2)/Sum_SFL
-
 df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
                          Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
 
-df.weights$colMax <- apply(df.weights, 1, function(x) max(x[])) # rowwise
+df.weights$colMax <- apply(df.weights, 1, function(x) max(x[])) # take max values from both columns, yet rowwise!
 
 df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
                                   FactorWeight1, FactorWeight1, FactorWeight1)
@@ -42,8 +38,8 @@ df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2,
 df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
 df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 
-# round(df.weights$colMax ,3)
-# sum(df.weights$colMax)
+# round(factor2SquaredLoadings ,3)
+# sum(factor2SquaredLoadings)
 # round(df.weights, 3)
 
 #' Min-MAX + FA weights
