@@ -46,7 +46,7 @@ pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
 summary(pc2)
 as.data.frame(round(pc2$rotation, 3))
 
-
+variamx(pc2$rotation)
 # pc1 <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
 # summary(pc1)
 # 
