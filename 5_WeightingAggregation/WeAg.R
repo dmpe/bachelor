@@ -37,14 +37,14 @@ df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor
 df.weights$colMax <- apply(df.weights, 1, function(x) max(x[])) # rowwise
 
 df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
-                                  FactorWeight2, FactorWeight1, FactorWeight2)
+                                  FactorWeight1, FactorWeight1, FactorWeight1)
 
 df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
 df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 
 # round(df.weights$colMax ,3)
 # sum(df.weights$colMax)
-
+# round(df.weights, 3)
 
 #' Min-MAX + FA weights
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
