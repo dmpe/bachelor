@@ -65,7 +65,7 @@ me1 <- me1 + geom_point(data=meltingOriginal.MM.EW.Subset, aes(reorder(Country, 
 me1 <- me1 + geom_line(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
 me1 <- me1 + geom_point(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
 # all together
-me1 <- me1 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
+me1 <- me1 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
 me1 <- me1 + ggtitle("Comparison of 3 weighting method (FA/EW/my choice)") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1 
 
@@ -92,7 +92,7 @@ meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Countr
 
 me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
 me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
-me3 <- me3 + coord_cartesian(ylim = c(0, 25)) + scale_y_continuous(breaks = seq(0, 25, 1))
+me3 <- me3 + coord_cartesian(ylim = c(0, 30)) + scale_y_continuous(breaks = seq(0, 30, 1))
 me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3

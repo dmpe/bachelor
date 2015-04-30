@@ -12,7 +12,7 @@ source("1_RawData/Unemplo.R")
 source("1_RawData/FreedomIndex.R")
 source("1_RawData/WEF.R")
 source("1_RawData/LearningCurve.R")
-source("1_RawData/CompletionRate.R")
+# source("1_RawData/CompletionRate.R")
 source("1_RawData/HIndex.R")
 source("1_RawData/EUI.R")
 
@@ -53,17 +53,18 @@ df.Original <- plyr::arrange(df.Original, df.Original$Country)
 df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, 
                                               Freedom_Index_NonScaled, WEF_Score_NonScaled, LearningCurve_Index))
 
-df.Original <- dplyr::left_join(df.Original, CompletionRate, by = "Country")
-df.Original <- plyr::arrange(df.Original, df.Original$Country)
+# df.Original <- dplyr::left_join(df.Original, CompletionRate, by = "Country")
+# df.Original <- plyr::arrange(df.Original, df.Original$Country)
 
 df.Original <- dplyr::left_join(df.Original, hindex, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)
-df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
-                                              LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))
+# df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
+#                                               LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))
 
-df.Original2 <- dplyr::left_join(df.Original, hdi, by = "Country")
-df.Original2 <- subset(df.Original2, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
-                                              LearningCurve_Index, Index, H_Index_NonScaled))
+df.Original <- dplyr::left_join(df.Original, hdi, by = "Country")
+df.Original <- plyr::arrange(df.Original, df.Original$Country)
+df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
+                                              LearningCurve_Index, HDIEducatIndex, H_Index_NonScaled))
 
 # To continue look in 'Imputation' folder, ->> 'MICE_Imputation.R'
 

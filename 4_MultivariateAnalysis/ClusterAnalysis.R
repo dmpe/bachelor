@@ -110,7 +110,7 @@ dfClustMeans$vars[dfClustMeans$vars == "Unemployment_NonScaled"] <- "Y. Unemploy
 dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Ind."
 dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF"
 dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Ind."
-dfClustMeans$vars[dfClustMeans$vars == "CompletionRate_NonScaled"] <- "Completion rate"
+dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "Humna. Edu Ind."
 dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "Hirsch Ind."
 
 #' sapply(dfClustMeans, class)

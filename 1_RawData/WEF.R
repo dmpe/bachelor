@@ -6,9 +6,9 @@ wef <- read.xlsx("1_RawData/DataSources/GCR_Rankings_2014-2015.xlsx", sheetName 
 wef <- plyr::rename(wef, c("The.Global.Competitiveness.Index.2014.2015.rankings." = "Country", "NA."= "Ranking_WEF", "NA..1" = "WEF_Score"))
 wef$Country <- str_trim(wef$Country, side = "both")
 
-selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", 
-    "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", 
-    "Kenya", "Finland", "Canada", "Israel", "New Zealand")
+selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", "Mexico", 
+                          "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya", 
+                          "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
 
 # correct names and convert to numeric
 # https://stackoverflow.com/questions/3418128/how-to-convert-a-factor-to-an-integer-numeric-without-a-loss-of-information

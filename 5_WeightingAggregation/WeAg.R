@@ -49,17 +49,17 @@ df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 #' Min-MAX + FA weights
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
 df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
-df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:23))
+df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:30))
 
 #' Min-MAX + EW
 minMaxMultiEqual.Weights <- t(t(df.Original.MinMax) * c(rep(1/6, 6)))
 df.Original.MM.EW <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
-df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:23))
+df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:30))
 
 #' Min-MAX + My own choice
 minMaxMultiMyChoice.Weights <- t(t(df.Original.MinMax) * c(0.140, 0.170, 0.230, 0.220, 0.130, 0.110))
 df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing = T)
-df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:23))
+df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:30))
 
 
 # #' ZSCORE + FA

@@ -35,12 +35,13 @@ df.Original.Imputed <- df.Original
 df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Nigeria"] <- -2.1
 df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "South Africa"] <- -1.9
 df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Kenya"] <- -1.5
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Ghana"] <- -1.0
 df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Jordan"] <- -0.5
 df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "United Arab Emirates"] <- -0.2
 
 # df.Original.Imputed$LearningCurve_Index <- df.Zscore.Imputed$LearningCurve_Index
 df.Original.Imputed <- data.frame(df.Original.Imputed[, -1], row.names = df.Original.Imputed[, 1])
 
-df.Original.Imputed2 <- df.Original.Imputed
-df.Original.Imputed2$CompletionRate_NonScaled <- df.Original2$Index
+# df.Original.Imputed2 <- df.Original.Imputed
+# df.Original.Imputed2$CompletionRate_NonScaled <- df.Original2$Index
 # rfunsuper(df.Zscore[2:7]) #' for notUsed/UnsuperRF.R. Load first the source file !

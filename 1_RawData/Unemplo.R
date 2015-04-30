@@ -2,11 +2,11 @@ library(Quandl)
 
 Country = c("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", "Mexico", 
             "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya", 
-            "Finland", "Canada", "Israel", "New Zealand")
+            "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
 
 selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", 
                           "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", 
-                          "Kenya", "Finland", "Canada", "Israel", "New Zealand")
+                          "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
 
 # see Quandl emails
 Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
@@ -43,10 +43,10 @@ Turkey <- Quandl("WORLDBANK/TUR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY"
 Hungary <- Quandl("WORLDBANK/HUN_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 Ghana <- Quandl("WORLDBANK/GHA_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
 Thailand <- Quandl("WORLDBANK/THA_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
-Columbia <- Quandl("WORLDBANK/COL_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
+Colombia <- Quandl("WORLDBANK/COL_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
 
 
-unemplo <- data.frame(Country = Country, Unemployment_NonScaled = seq(1, 35), stringsAsFactors = FALSE)
+unemplo <- data.frame(Country = Country, Unemployment_NonScaled = seq(1, 30), stringsAsFactors = FALSE)
 # Unemployment = seq(1, 23),
 unemplo$Unemployment_NonScaled[unemplo$Country == "Korea"] <- Korea
 unemplo$Unemployment_NonScaled[unemplo$Country == "Singapore"] <- Singapore
@@ -75,7 +75,7 @@ unemplo$Unemployment_NonScaled[unemplo$Country == "Nigeria"] <- Nigeria
 unemplo$Unemployment_NonScaled[unemplo$Country == "France"] <- France
 unemplo$Unemployment_NonScaled[unemplo$Country == "Ghana"] <- Ghana
 unemplo$Unemployment_NonScaled[unemplo$Country == "Indonesia"] <- Indonesia
-unemplo$Unemployment_NonScaled[unemplo$Country == "Columbia"] <- Columbia
+unemplo$Unemployment_NonScaled[unemplo$Country == "Columbia"] <- Colombia
 unemplo$Unemployment_NonScaled[unemplo$Country == "Turkey"] <- Turkey
 unemplo$Unemployment_NonScaled[unemplo$Country == "Hungary"] <- Hungary
 unemplo$Unemployment_NonScaled[unemplo$Country == "Thailand"] <- Thailand

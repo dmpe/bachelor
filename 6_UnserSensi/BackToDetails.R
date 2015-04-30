@@ -21,7 +21,7 @@ df.BackToDetails.p1$Country <- rownames(df.BackToDetails.p1)
 df.BackToDetails.p2 <- df.BackToDetails[, 4:7]
 
 # Sum rowwise
-df.BackToDetails.p2 <- adply(df.BackToDetails.p2, 1, transform, sumEdu = sum(LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))
+df.BackToDetails.p2 <- adply(df.BackToDetails.p2, 1, transform, sumEdu = sum(LearningCurve_Index, HDIEducatIndex, H_Index_NonScaled))
 df.BackToDetails.p1 <- adply(df.BackToDetails.p1, 1, transform, sumBuEco = sum(Unemployment_NonScaled, WEF_Score_NonScaled, Freedom_Index_NonScaled))
 
 
@@ -42,7 +42,7 @@ df.BackToDetails$Country[df.BackToDetails$Country == "New Zealand"] <- "N. Zeala
 df.meltedBackToDetails <- melt(df.BackToDetails, id = "Country")  # convert to long format
 
 e9 <- ggplot(data = df.meltedBackToDetails, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
-e9 <- e9 + coord_cartesian(ylim = c(0, 85)) + scale_y_continuous(breaks = seq(0, 85, 5))
+e9 <- e9 + coord_cartesian(ylim = c(0, 100)) + scale_y_continuous(breaks = seq(0, 100, 5))
 e9 <- e9 + ggtitle("Bar chart decomposition of Attractiveness Index (MM.FA)") + scale_fill_discrete(name = "Dimensions")
 e9 <- e9 + ylab("Index value in the ranking") + xlab("Countries")
 e9
