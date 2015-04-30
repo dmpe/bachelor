@@ -28,6 +28,7 @@ df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Scor
 df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_NonScaled-1)/
                                            (1518-1)) + 0
 
+# It is between 0 and 1 -> multiply with 100
 df.Original.MinMax$HDIEducatIndex <- df.Original.Imputed$HDIEducatIndex * 100
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
