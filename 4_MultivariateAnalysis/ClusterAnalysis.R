@@ -108,10 +108,10 @@ dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
 dfClustMeans$vars[dfClustMeans$vars == "Unemployment_NonScaled"] <- "Y. Unemployment"
 dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Ind."
-dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF"
+dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF's GCI"
 dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Ind."
-dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "Human. Edu. Ind."
-dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "Hirsch Ind."
+dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "HDI's Edu. Ind."
+dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "H-Index"
 
 #' sapply(dfClustMeans, class)
 
@@ -128,7 +128,8 @@ gp
 
 ###############  0.5 mentioned in the text, page 44
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
-                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia"), 4])
+                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
+                      "United Arab Emirates", "France"), 4])
 
 
 ################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
