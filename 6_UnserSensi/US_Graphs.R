@@ -66,11 +66,23 @@ me1 <- me1 + geom_line(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, v
 me1 <- me1 + geom_point(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
 # all together
 me1 <- me1 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
-me1 <- me1 + ggtitle("Comparison of 3 weighting method (FA/EW/my choice)") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
+me1 <- me1 + ggtitle("Comparison of 3 weighting methods (FA/EW/my choice)") + ylab("Position in Ranking") + xlab("Countries") + labs(color = "We/No methods")
 me1 
 
+me2 <- ggplot()
+me2 <- me2 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
+me2 <- me2 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 3, shape=21, fill="white")
+me2 <- me2 + geom_boxplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
+me2 <- me2 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))# + scale_colour_manual(values=c("green - FA weights"))
+me2 <- me2 + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of 3 weighting methods")
+me2
 
-
+  
+p <- ggplot(meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
+p <- p + geom_boxplot() + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
+p <- p + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
+p <- p + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of given 3 weighting methods")
+p
 
 
 # all lines are different, doens't have a straight one
