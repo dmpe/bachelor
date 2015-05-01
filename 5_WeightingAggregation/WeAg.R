@@ -69,4 +69,4 @@ df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC
 # df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
 
 # normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
-
+# round(df.Original.MinMax, 2)
