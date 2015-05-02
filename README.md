@@ -7,7 +7,7 @@ Thesis can be download here <> and please feel free to contact me if needed. Any
 
 My website <https://indestat.wordpress.com/contact-me>
 
-As a small exercise (before I even started with the work) I create <http://rpubs.com/F789GH/SingaporesEducation> this.
+As a small exercise (before I even started with the work) I created <http://rpubs.com/F789GH/SingaporesEducation> this (btw. you will need to look <https://gist.github.com/dmpe/b8c3f74d1e937d90b20f> for the code (the link inside is wrong).
 
 ## rJava Installation
 
