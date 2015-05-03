@@ -82,7 +82,9 @@ klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, 
 dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment df.Original.MinMax
 # aggregate(df.Original.MinMax, by=list(klust$cluster), FUN = mean) # gets cluster mean
 
-
+################
+# [!rownames(df.Original.MinMax) == "United Arab Emirates", ] # To be used when UAR should not be included. Need to be in both rows above
+################
 
 #' Silhouette plot 
 # sk2 <- silhouette(klust$cl, dist(df.Zscore.Imputed, method = 'euclidean')) 
@@ -129,10 +131,10 @@ gp
 ###############  0.5 mentioned in the text, page 44
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
                       "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
-                      "United Arab Emirates", "France"), 4])
+                      "France"), 4])
 
 
-################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run
+################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run   "United Arab Emirates",
 # 
 # cluster.bootstrap <- pvclust(df.Zscore.Imputed, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 # plot(cluster.bootstrap)
