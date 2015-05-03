@@ -19,16 +19,18 @@ set.seed(5154)
 ############################################
 
 # rownames(df.Original.MinMax) <- row.names(df.Original.Imputed)  
-# df.Original.MinMax <- df.Original.Imputed2
 
+#' create a new data frame (df.Original.MinMax) based on the old one (df.Original.Imputed). This 
+#' makes 1:1 copy of the data frame, yet with the different name
 df.Original.MinMax <- df.Original.Imputed
+
 df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/
                                              (7-1)) + 0
 
 df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_NonScaled-1)/
                                            (1518-1)) + 0
 
-# It is between 0 and 1 -> multiply with 100
+# HDI's Educat. Index is between 0 and 1 -> convert to (by multipling it with) 0-100
 df.Original.MinMax$HDIEducatIndex <- df.Original.Imputed$HDIEducatIndex * 100
 
 #' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
@@ -37,8 +39,10 @@ df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unempl
                                                (0-100)) + 0
 
 
-#' This normalizes columns of 'LearningCurve_Index' from minValue to maxValue. Beware of colwise that will be used (from plyr)!
-#'
+#' This normalizes columns of 'LearningCurve_Index' from minValue to maxValue. Beware of the colwise function that will be used on
+#' on the whole data frame (from plyr)!
+#' An assumption is made that although z-score beginngs from -Inf to Inf, I am going to use only a range between +-3.5
+#' 
 #' @param x A data frame
 #' @param minValue A minimal value of the range of the scale (e.g. 0)
 #' @param maxValue A maximal value of the range of the scale (e.g. 100)

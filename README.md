@@ -11,9 +11,9 @@ As a small exercise (before I even started with the work) I created <http://rpub
 
 ## rJava Installation
 
-The installation process (on Ubuntu) can be quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava>. To make rJava work, use google (and stackoverflow). 
+The installation process (on Ubuntu) can be quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava> (as of 2015, he seems to have aboned it). To make rJava work, use google (and stackoverflow). 
 
-Always install official java 8 from oracle and less *official* "openjdk-8". Don't forget to run R CMD javareconf (-e). Maybe this will also help <http://stackoverflow.com/a/21504335>
+Always install official java 8 from oracle and less *official* "openjdk-8". Don't forget to run R CMD javareconf (-e) too! Maybe this will also help <http://stackoverflow.com/a/21504335>
 
 Or, at last use some other package too: <https://github.com/hadley/readxl>
 
