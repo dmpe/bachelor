@@ -20,7 +20,7 @@ learningCurveData$Ranking_LearningCurve <- seq(1, 40)
 # learningCurveData$LearningCurve_Index <- scale(learningCurveData$LearningCurve_Index)
 
 #' mean of 24 countries z-score
-# format(round(mean(subset(learningCurveData, Country %in% selectedCountries)$LearningCurve_Index), 5), nsmall = 5) 
+#' format(round(mean(subset(learningCurveData, Country %in% selectedCountries)$LearningCurve_Index), 5), nsmall = 5) 
 
 
 
