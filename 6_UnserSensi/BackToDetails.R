@@ -12,6 +12,8 @@ source("6_UnserSensi/US_Graphs.R")
 #######################
 # library(grid)
 # library(gridExtra)
+# minMaxMultiFA.Weights
+# minMaxMultiMyChoice.Weights
 #######################
 
 df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
