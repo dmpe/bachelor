@@ -17,7 +17,7 @@ Always install official java 8 from oracle and less *official* "openjdk-8". Don'
 
 Or, at last use some other package too: <https://github.com/hadley/readxl>
 
-## Citations
+## Citation
 
 To quote me please consider using :
 
