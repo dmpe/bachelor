@@ -1,5 +1,5 @@
-library("reshape2")
-library("ggplot2")
+library(reshape2)
+library(ggplot2)
 
 set.seed(5154)
 # source("1_RawData/DataFrame.R")
@@ -110,6 +110,20 @@ p <- p + geom_boxplot() + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(
 p <- p + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
 p <- p + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of given 3 weighting methods")
 p
+
+
+
+#' The only disadvantage is that it stores them in a list :(
+df.list <- list(x = meltingOriginal.MM.FA.Subset, y = meltingOriginal.MM.EW.Subset, z = meltingOriginal.MM.MC.Subset)
+for(i in 1:length(df.list)) {
+  df.list[[i]]$Country[df.list[[i]]$Country == "United States"] <- "USA"
+  df.list[[i]]$Country[df.list[[i]]$Country == "United Arab Emirates"] <- "UAE"
+  df.list[[i]]$Country[df.list[[i]]$Country == "United Kingdom"] <- "UK"
+  df.list[[i]]$Country[df.list[[i]]$Country == "Czech Republic"] <- "Czech Rep."
+  df.list[[i]]$Country[df.list[[i]]$Country == "South Africa"] <- "S. Africa"
+}
+
+
 ########################################
 
 # meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
