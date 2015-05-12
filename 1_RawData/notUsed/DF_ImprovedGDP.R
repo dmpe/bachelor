@@ -42,6 +42,7 @@ TigersGDP = subset(GDPperCapitaIMF, Country %in% c("Korea", "Singapore", "Japan"
 
 
 
+df.Original <- dplyr::left_join(unemplo, freedom, by = "Country")
 
 df.meltedBackToDetails <- melt(df.BackToDetails, id = "Country")  # convert to long format
 
