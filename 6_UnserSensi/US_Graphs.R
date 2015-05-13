@@ -123,6 +123,53 @@ for(i in 1:length(df.list)) {
   df.list[[i]]$Country[df.list[[i]]$Country == "South Africa"] <- "S. Africa"
 }
 
+######################################################
+
+qwer1 <- melt(df.Original.MM.FA[, c("Country", "Value")],  id = "Country")
+qwer1$variable <- as.character(qwer1$variable)
+qwer2 <- melt(df.Original.MM.EW[, c("Country", "Value")],  id = "Country")
+qwer2$variable <- as.character(qwer2$variable)
+qwer3 <- melt(df.Original.MM.MyChoice[, c("Country", "Value")],  id = "Country")
+qwer3$variable <- as.character(qwer3$variable)
+
+sapply(qwer1, class)
+
+qwer1$variable[qwer1$variable == "Value"] <- as.character("RankMM.FA")
+qwer2$variable[qwer2$variable == "Value"] <- "RankMM.EW"
+qwer3$variable[qwer3$variable == "Value"] <- "RankMM.MC"
+
+qwer1$Country[qwer1$Country == "United States"] <- "USA"
+qwer1$Country[qwer1$Country == "United Arab Emirates"] <- "UAE"
+qwer1$Country[qwer1$Country == "United Kingdom"] <- "UK"
+qwer1$Country[qwer1$Country == "Czech Republic"] <- "Czech Rep."
+qwer1$Country[qwer1$Country == "South Africa"] <- "S. Africa"
+
+qwer2$Country[qwer2$Country == "United States"] <- "USA"
+qwer2$Country[qwer2$Country == "United Arab Emirates"] <- "UAE"
+qwer2$Country[qwer2$Country == "United Kingdom"] <- "UK"
+qwer2$Country[qwer2$Country == "Czech Republic"] <- "Czech Rep."
+qwer2$Country[qwer2$Country == "South Africa"] <- "S. Africa"
+
+qwer3$Country[qwer3$Country == "United States"] <- "USA"
+qwer3$Country[qwer3$Country == "United Arab Emirates"] <- "UAE"
+qwer3$Country[qwer3$Country == "United Kingdom"] <- "UK"
+qwer3$Country[qwer3$Country == "Czech Republic"] <- "Czech Rep."
+qwer3$Country[qwer3$Country == "South Africa"] <- "S. Africa"
+
+
+tyr2 <- ggplot()
+tyr2 <- tyr2 + geom_line(data=qwer1, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer1, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + geom_line(data=qwer2, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer2, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + geom_line(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + coord_cartesian(ylim = c(35, 85)) + scale_y_continuous(breaks = seq(30, 85, 2))
+tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/my choice)") + ylab("Attractiveness Index") + xlab("Countries")
+tyr2 
+
+
+
 
 ########################################
 
