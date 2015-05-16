@@ -8,11 +8,12 @@ ipak <- function(pkg) {
   sapply(pkg, require, character.only = TRUE)
 }
 
-# Installation may take very long time (> 15 minutes)
+# Here are packages which I have used. Some others will requriered to be installed manually, if running code in the comments !
+# Installation may take very long time (> 15 minutes) !
+# PS: Not all are listed here. 
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", "RColorBrewer", "scales", "grid", "mclust", "psych", 
-              "GPArotation", "cluster", "dplyr", "rJava", "rvest", "mice", "corrplot", "xlsx", "RCurl", "Rcpp", "VIM", "data.table", 
-              "coda", "R2WinBUGS", "mice", "mi", "NbClust", "clustrd", "flexclust", "ellipse", "FactoMineR", "Benchmarking",
-              "pmr", "Compind", "lattice", "gridExtra", "grid", "plotflow", "ggthemes")
+              "cluster", "dplyr", "rJava", "rvest", "corrplot", "xlsx", "RCurl", "Rcpp", "data.table","coda", "NbClust", "clustrd", 
+              "flexclust", "ellipse", "pmr", "Compind", "lattice", "gridExtra", "grid", "plotflow", "ggthemes")
 ipak(packages)
 
 # Because rJava may print error messages (during or after installation), it is still necessary load it correctly. For
