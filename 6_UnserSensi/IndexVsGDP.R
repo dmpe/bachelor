@@ -40,10 +40,10 @@ f18 <- ggplot(data=gdpTiger, aes(x = Value, y = GDPinDollars, label=Country))
 f18 <- f18 + geom_point() + geom_text(aes(label=Country), hjust=0, vjust=0) + stat_smooth(method="lm", se=FALSE)
 f18 <- f18 + coord_cartesian(ylim = c(0, 85000)) + scale_y_continuous(breaks = seq(0, 85000, 5000))
 f18 <- f18 + coord_cartesian(xlim = c(35, 90)) + scale_x_continuous(breaks = seq(35, 90, 2))
-f18 <- f18 + ggtitle("Relationship between GDP and Attractiveness Index") + ylab("GDP per Capita (PPP $), 2015")
+f18 <- f18 + ggtitle("Relationship between GDP and the Attractiveness Index") + ylab("GDP (PPP) per Capita, 2015")
 f18 <- f18 + xlab("Attractiveness Index, score between 35-90")
 f18 
 
 cor(gdpTiger$Value, gdpTiger$GDPinDollars)
- 
+summary(lm(GDPinDollars ~ Value, data = gdpTiger))$r.squared
 # gdpTiger.melted <- melt(gdpTiger, id = "Country")  # convert to long format
