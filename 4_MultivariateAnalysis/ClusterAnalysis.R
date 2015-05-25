@@ -109,22 +109,24 @@ dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
 dfClustMeans$vars <- rownames(dfClustMeans)
 dfClustMeans$vars[dfClustMeans$vars == "Unemployment_NonScaled"] <- "Y. Unemployment"
-dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Ind."
+dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Index"
 dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF's GCI"
-dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Ind."
-dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "HDI's Edu. Ind."
+dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Index"
+dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "HDI's Edu. Index"
 dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "H-Index"
 
 #' sapply(dfClustMeans, class)
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
-dataWithCluster.table <- cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,2))
+dataWithCluster.table <- data.frame(cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,1)))
+dataWithCluster.table$Difference <- as.numeric(levels(dataWithCluster.table$Difference))[dataWithCluster.table$Difference]
+dataWithCluster.table[with(dataWithCluster.table, order(Difference)), ]
 
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
 gp <- gp + coord_cartesian(ylim = c(10, 105)) + scale_y_continuous(breaks = seq(10, 105, 5))
 gp <- gp + theme_gdocs() + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
-gp <- gp + annotation_custom(grob = tableGrob(dataWithCluster.table, gpar.coltext = gpar(cex = 1.2), 
+gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table), gpar.coltext = gpar(cex = 1.2), 
                                               gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
 gp
 
