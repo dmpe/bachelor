@@ -2,7 +2,6 @@ library(cluster)
 library(NbClust)
 library(ggplot2)
 library(clustrd)
-library(ggthemes)
 library(reshape2)
 library(gridExtra)
 
@@ -16,7 +15,8 @@ set.seed(5154)
 # library(vegan)
 # library(pvclust)
 # library(flexclust)
-#' 
+#' library(ggthemes)
+
 #' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
 #' 
@@ -125,11 +125,12 @@ dataWithCluster.table[with(dataWithCluster.table, order(Difference)), ]
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
 gp <- gp + coord_cartesian(ylim = c(10, 105)) + scale_y_continuous(breaks = seq(10, 105, 5))
-gp <- gp + theme_gdocs() + scale_color_gdocs() + ylab("Mean") + xlab("Indicators") + labs(color = "Types of Countries")
+gp <- gp + ylab("Mean of each varaible in 2 clusters") + xlab("Indicators") + labs(color = "Types of Countries")
 gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table), gpar.coltext = gpar(cex = 1.2), 
                                               gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
 gp
 
+# scale_color_gdocs() + theme_solarized() + scale_colour_solarized("red") 
 ###############  0.5 mentioned in the text, page 44
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
                       "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
