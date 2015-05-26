@@ -119,8 +119,10 @@ dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "H-Index"
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
 dataWithCluster.table <- data.frame(cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,1)))
+dataWithCluster.table$Indicator <- as.character(dataWithCluster.table$Indicator)
 dataWithCluster.table$Difference <- as.numeric(levels(dataWithCluster.table$Difference))[dataWithCluster.table$Difference]
-dataWithCluster.table[with(dataWithCluster.table, order(Difference)), ]
+dataWithCluster.table <- dataWithCluster.table[with(dataWithCluster.table, order(Difference)), ]
+row.names(dataWithCluster.table) <- NULL
 
 gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
