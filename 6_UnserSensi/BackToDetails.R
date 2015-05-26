@@ -46,7 +46,7 @@ df.meltedBackToDetails <- melt(df.BackToDetails, id = "Country")  # convert to l
 e9 <- ggplot(data = df.meltedBackToDetails, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
 e9 <- e9 + coord_cartesian(ylim = c(0, 100)) + scale_y_continuous(breaks = seq(0, 100, 5))
 e9 <- e9 + ggtitle("Bar chart decomposition of the Attractiveness Index (MM.FA)") + scale_fill_discrete(name = "Dimensions")
-e9 <- e9 + ylab("'Index' Value") + xlab("Countries")
+e9 <- e9 + ylab("Index Value") + xlab("Countries")
 e9
 
 # Table

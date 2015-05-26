@@ -169,9 +169,6 @@ tyr2 <- tyr2 + coord_cartesian(ylim = c(35, 85)) + scale_y_continuous(breaks = s
 tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Attractiveness Index") + xlab("Countries")
 tyr2 
 
-
-
-
 ########################################
 
 # meltingOriginal.MM.FAEW.Subset$Country[meltingOriginal.MM.FAEW.Subset$Country == "United States"] <- "USA"
