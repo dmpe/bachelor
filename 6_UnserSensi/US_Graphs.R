@@ -166,7 +166,7 @@ tyr2 <- tyr2 + geom_point(data=qwer2, aes(reorder(Country, value), value, group 
 tyr2 <- tyr2 + geom_line(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable))
 tyr2 <- tyr2 + geom_point(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
 tyr2 <- tyr2 + coord_cartesian(ylim = c(35, 85)) + scale_y_continuous(breaks = seq(30, 85, 2))
-tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Attractiveness Index") + xlab("Countries")
+tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Index Value") + xlab("Countries")
 tyr2 
 
 ########################################
