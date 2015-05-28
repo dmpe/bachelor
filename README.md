@@ -1,13 +1,13 @@
 Bachelor's Thesis
 ========
 
-This repo contains source code, which I have used for my bachelor's thesis when creating my own composite indicator: "Attractiveness Index of Global Economies". 
+This repo contains the source code, which I have used for my bachelor's thesis when creating my own composite indicator: [*The Attractiveness Index of Global Economies*](https://dmpe.github.io/PapersAndArticles/). 
 
-Thesis can be download here <> and please feel free to contact me if needed. Any corrections or suggestions may (and probably even will!) be done.
+My thesis can be download here <https://dmpe.github.io/PapersAndArticles/> and please feel free to contact me if needed. Any corrections or suggestions may (and probably even will!) be done.
 
 My website <https://indestat.wordpress.com/contact-me>.
 
-As a small exercise (before I even started with the work) I created <http://rpubs.com/F789GH/SingaporesEducation> (btw. you will need to look <https://gist.github.com/dmpe/b8c3f74d1e937d90b20f> for the code (the link inside is wrong).
+As a small exercise (before I even started with the work) I have created <http://rpubs.com/F789GH/SingaporesEducation> (btw. you will need to look <https://gist.github.com/dmpe/b8c3f74d1e937d90b20f> for the code as the link inside is wrong).
 
 ## rJava Installation
 
@@ -21,10 +21,17 @@ Or, at last use some other package too: <https://github.com/hadley/readxl>
 
 To quote me, please consider using :
 
-Dmitrij Petrov (Jun. 2015), *Attractiveness Index of Global Economies*, Bachelor Thesis, Reutlingen University
+Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bachelor Thesis, Reutlingen University
 
 ** Bibtext **
 
-
+@BACHELORSTHESIS {,
+    author  = "Dmitrij Petrov",
+    title   = "The Attractiveness Index of Global Economies",
+    school  = "Reutlingen University",
+    year    = "2015",
+    address = "https://dmpe.github.io/PapersAndArticles/",
+    month   = "jun"
+}
 
 
