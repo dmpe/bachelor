@@ -25,13 +25,13 @@ Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bach
 
 **Bibtext**
 ```
-@BACHELORSTHESIS {,
-    author  = "Dmitrij Petrov",
-    title   = "The Attractiveness Index of Global Economies",
-    school  = "Reutlingen University",
-    year    = "2015",
-    address = "https://dmpe.github.io/PapersAndArticles/",
-    month   = "jun"
+@BACHELORSTHESIS {bachelorsthesis,
+    author  = {Dmitrij Petrov},
+    title   = {The Attractiveness Index of Global Economies},
+    school  = {Reutlingen University},
+    year    = 2015,
+    url     = {https://dmpe.github.io/PapersAndArticles/},
+    month   = 6
 }
 ```
 
