@@ -21,7 +21,7 @@ Or, at last use some other package too: <https://github.com/hadley/readxl>
 
 To quote me, please consider using :
 
-Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bachelor Thesis, Reutlingen University
+Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bachelor's Thesis, Reutlingen University
 
 **Bibtext**
 ```
