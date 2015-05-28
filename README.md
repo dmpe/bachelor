@@ -1,4 +1,4 @@
-Bachelor's Thesis
+Bachelor's Thesis: The Attractiveness Index of Global Economies
 ========
 
 This repo contains the source code, which I have used for my bachelor's thesis when creating my own composite indicator: [*The Attractiveness Index of Global Economies*](https://dmpe.github.io/PapersAndArticles/). 
@@ -23,8 +23,8 @@ To quote me, please consider using :
 
 Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bachelor Thesis, Reutlingen University
 
-** Bibtext **
-
+**Bibtext**
+```
 @BACHELORSTHESIS {,
     author  = "Dmitrij Petrov",
     title   = "The Attractiveness Index of Global Economies",
@@ -33,5 +33,5 @@ Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bach
     address = "https://dmpe.github.io/PapersAndArticles/",
     month   = "jun"
 }
-
+```
 
