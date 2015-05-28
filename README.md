@@ -25,7 +25,8 @@ Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bach
 
 **Bibtext**
 ```
-@BACHELORSTHESIS {bachelorsthesis,
+@mastersthesis {petrov15,
+    type    = {Bachelor Thesis},
     author  = {Dmitrij Petrov},
     title   = {The Attractiveness Index of Global Economies},
     school  = {Reutlingen University},
