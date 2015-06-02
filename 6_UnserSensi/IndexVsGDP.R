@@ -1,7 +1,6 @@
 library(stringr)
 library(dplyr)
 library(ggplot2)
-# library(reshape2)
 
 ###################
 # Sources: https://stackoverflow.com/questions/24954624/error-in-download-file-no-such-file-or-directory
@@ -30,9 +29,13 @@ names(GDPperCapitaIMF)[names(GDPperCapitaIMF) == "X2015"] <- "GDPinDollars"
 # https://stat.ethz.ch/pipermail/r-help/2011-April/274149.html
 TigersGDP = subset(GDPperCapitaIMF, Country %in% c("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", 
                                                    "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", 
-                                                   "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey"), select = c(Country, GDPinDollars))
+                                                   "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey"),
+                   select = c(Country, GDPinDollars))
 
-gdpTiger <- dplyr::full_join(TigersGDP, df.Original.MM.FA, by = "Country")
+df.Original.MM.FA.special <- df.Original.MM.FA
+df.Original.MM.FA.special$Country <- rownames(df.Original.MM.FA)
+
+gdpTiger <- dplyr::full_join(TigersGDP, df.Original.MM.FA.special, by = "Country")
 sapply(gdpTiger, class)
 
 
