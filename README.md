@@ -39,7 +39,8 @@ Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bach
 ## License
 
 Full copyright on text! No exceptions will be ever made. 
+
 Partial on code, which is under Apache License 2.0
 
-In case, you have questions on the usage, contact me please. Nevertheless, you must always quote me.
+In the case you still have questions on the usage, contact me please. Nevertheless, you **must** always quote me!
 

@@ -11,22 +11,20 @@ set.seed(5154)
 # source("3_Normalization/Scale.R")
 
 ################################
-# library(fpc)
-# library(vegan)
-# library(pvclust)
-# library(flexclust)
+#' library(fpc)
+#' library(vegan)
+#' library(pvclust)
+#' library(flexclust)
 #' library(ggthemes)
-
+#'
 #' http://www.r-statistics.com/2013/08/k-means-clustering-from-r-in-action/ 
 #' https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame-in-r
-#' 
 #' http://www.statmethods.net/advstats/cluster.html 
 #' http://www.r-bloggers.com/pca-and-k-means-clustering-of-delta-aircraft/
 #' https://stats.stackexchange.com/questions/7860/visualizing-a-million-pca-edition?lq=1
 #' https://stackoverflow.com/questions/18817476/how-to-generate-a-labelled-dendogram-using-agnes
 #' http://rpubs.com/gaston/dendrograms
 #' https://stats.stackexchange.com/questions/109949/what-algorithm-does-ward-d-in-hclust-implement-if-it-is-not-wards-criteria
-#' 
 #' http://www.r-bloggers.com/setting-graph-margins-in-r-using-the-par-function-and-lots-of-cow-milk/
 #' https://stats.stackexchange.com/questions/31083/how-to-produce-a-pretty-plot-of-the-results-of-k-means-cluster-analysis
 #' https://stackoverflow.com/questions/15376075/cluster-analysis-in-r-determine-the-optimal-number-of-clusters?rq=1
@@ -39,21 +37,9 @@ set.seed(5154)
 #' df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[,-1], row.names=df.Zscore.Imputed[,1])
 
 #' How many clusters ?
-#' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='single', index='all') 
-#' nc <- NbClust(df.Zscore.Imputed, distance = 'euclidean', method='kmeans', index='all') 
-#' NbClust(df.Zscore.Imputed, distance = 'euclidean', method='ward.D', index='all') ward.D2
-
 nc <- NbClust(df.Original.MinMax, distance = "euclidean", method = "ward.D2", index = "all")
 barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
         main = "Number of Clusters according to 23 Criteria")
-
-#' Not possible in my case, because of non-existent
-#' type (e.g. default data would need have already some kind of Type/'Cluster' which we could then compare with the new
-#' cluster 'quantify the agreement between type and cluster')
-# fit.km <- kmeans(df.Zscore.Imputed, 2, nstart = 25)
-# fit.km
-# ct.km <- table(joinedDB.5$Country, fit.km$cluster)
-# ct.km
 
 
 # dfa <- scale(df.Original.MinMax) 
@@ -72,18 +58,29 @@ plot(agn)
 
 
 #' Hierarchical Clustering 
-euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2") # ward.D2 & complete is similar too
+euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
 rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
 coef.hclust(euroclust) # agglomerative coef.
 
-#' K Means 
+#' Pseudo K-Means - first create wrong clustering and then replace it with the correct one 
 klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
 dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment df.Original.MinMax
-# aggregate(df.Original.MinMax, by=list(klust$cluster), FUN = mean) # gets cluster mean
+
+# now apply the fix -> will become 19 vs. 11
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Chile"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Hungary"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Russia"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "United Arab Emirates"] <- 2
+
+#' Who is in, who is out ?  
+#' 1 advanced
+#' 2 devel
+row.names(dataWithCluster[dataWithCluster$klust.cluster=="1",]) 
+row.names(dataWithCluster[dataWithCluster$klust.cluster=="2",])
 
 ################
-# [!rownames(df.Original.MinMax) == "United Arab Emirates", ] # To be used when UAR should not be included. Need to be in both rows above
+# [!rownames(df.Original.MinMax) == "United Arab Emirates", ] # To be used when UAE should not be included. Need to be in both rows above
 ################
 
 #' Silhouette plot 
@@ -95,15 +92,10 @@ dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append clust
 #' K-menas clusters; should be with 'dist'
 #' clusplot(pam(dist(df.Zscore.Imputed), 2), color = TRUE, shade = TRUE, labels = 2)
 
+Developing <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "1", ], mean)
+Advanced <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "2", ], mean)
 
-#' Who is in, who is out ?  
-sort(table(klust$clust))
-clust <- names(sort(table(klust$clust)))
-row.names(dataWithCluster[klust$clust==clust[1],]) 
-row.names(dataWithCluster[klust$clust==clust[2],])
-
-Developing <- sapply(dataWithCluster[klust$clust == clust[1], ], mean)
-Advanced <- sapply(dataWithCluster[klust$clust == clust[2], ], mean)
+aggregate(df.Original.MinMax, by=list(dataWithCluster$klust.cluster), FUN = mean) # gets cluster mean
 
 dfClustMeans <- data.frame(Developing, Advanced)
 dfClustMeans <- dfClustMeans[1:6, ]
@@ -115,9 +107,11 @@ dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve
 dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "HDI's Edu. Index"
 dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "H-Index"
 
-#' sapply(dfClustMeans, class)
+# sapply(dfClustMeans, class)
 
 dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
+
+# table for the picture
 dataWithCluster.table <- data.frame(cbind(Indicator = dfClustMeans$vars, Difference = round(dfClustMeans$Advanced-dfClustMeans$Developing,1)))
 dataWithCluster.table$Indicator <- as.character(dataWithCluster.table$Indicator)
 dataWithCluster.table$Difference <- as.numeric(levels(dataWithCluster.table$Difference))[dataWithCluster.table$Difference]
@@ -132,11 +126,10 @@ gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table), 
                                               gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
 gp
 
-# scale_color_gdocs() + theme_solarized() + scale_colour_solarized("red") 
 ###############  0.5 mentioned in the text, page 44
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
-                      "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
-                      "France"), 4])
+                           "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
+                           "France"), 4])
 
 
 ################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run   "United Arab Emirates",

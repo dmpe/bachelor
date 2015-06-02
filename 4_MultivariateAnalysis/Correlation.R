@@ -23,5 +23,4 @@ corelationMat2 <- cor(df.Original.MinMax)
 #' plotcorr(corelationMat, col = colorfun)
 
 colorfun2 <- colorRampPalette(c("#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"))
-#' corrplot(corelationMat, method = "number", type = "lower")
 corrplot(corelationMat2, method = "number", type = "lower", order = "FPC", col = colorfun2(100)) 
