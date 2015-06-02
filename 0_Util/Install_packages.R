@@ -18,6 +18,7 @@ ipak(packages)
 
 # Because rJava may print error messages (during or after installation), it is still necessary load it correctly. For
 # solutions look here:
+
 # http://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/
 # https://stackoverflow.com/questions/3311940/r-rjava-package-install-failing
 

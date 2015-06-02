@@ -36,7 +36,6 @@ UK <- Quandl("WORLDBANK/GBR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[
 Jordan <- Quandl("WORLDBANK/JOR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 Israel <- Quandl("WORLDBANK/ISR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 Singapore <- Quandl("WORLDBANK/SGP_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
-
 France <- Quandl("WORLDBANK/FRA_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 Indonesia <- Quandl("WORLDBANK/IDN_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
 Turkey <- Quandl("WORLDBANK/TUR_SL_UEM_1524_ZS", authcode="GgnxpyUBXHsyQxqp67bY")[1, 2]
@@ -71,7 +70,6 @@ unemplo$Unemployment_NonScaled[unemplo$Country == "Czech Republic"] <- Czech
 unemplo$Unemployment_NonScaled[unemplo$Country == "Chile"] <- Chile
 unemplo$Unemployment_NonScaled[unemplo$Country == "Japan"] <- Japan
 unemplo$Unemployment_NonScaled[unemplo$Country == "Nigeria"] <- Nigeria
-
 unemplo$Unemployment_NonScaled[unemplo$Country == "France"] <- France
 unemplo$Unemployment_NonScaled[unemplo$Country == "Ghana"] <- Ghana
 unemplo$Unemployment_NonScaled[unemplo$Country == "Indonesia"] <- Indonesia
@@ -79,10 +77,6 @@ unemplo$Unemployment_NonScaled[unemplo$Country == "Columbia"] <- Colombia
 unemplo$Unemployment_NonScaled[unemplo$Country == "Turkey"] <- Turkey
 unemplo$Unemployment_NonScaled[unemplo$Country == "Hungary"] <- Hungary
 unemplo$Unemployment_NonScaled[unemplo$Country == "Thailand"] <- Thailand
-
-
-# unemplo$Unemployment_MinMax = ((100-0)*(unemplo$Unemployment_NonScaled-max(unemplo$Unemployment_NonScaled))/
-#                                       (min(unemplo$Unemployment_NonScaled)-max(unemplo$Unemployment_NonScaled))) + 0
 
 unemplo$Unemployment <- as.numeric(scale(unemplo$Unemployment_NonScaled))
 unemplo$Unemployment_ZscoreNEGATIVE <- as.numeric(-scale(unemplo$Unemployment_NonScaled))

@@ -1,6 +1,7 @@
 library(plyr)
 library(dplyr)
 set.seed(5154)
+
 ###########################
 # From R Documentation: source() causes R to accept its input from the named file or URL or connection.  Input is read and
 # parsed from that file until the end of the file is reached, then the parsed expressions are evaluated sequentially in the
@@ -53,13 +54,8 @@ df.Original <- plyr::arrange(df.Original, df.Original$Country)
 df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, 
                                               Freedom_Index_NonScaled, WEF_Score_NonScaled, LearningCurve_Index))
 
-# df.Original <- dplyr::left_join(df.Original, CompletionRate, by = "Country")
-# df.Original <- plyr::arrange(df.Original, df.Original$Country)
-
 df.Original <- dplyr::left_join(df.Original, hindex, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)
-# df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
-#                                               LearningCurve_Index, CompletionRate_NonScaled, H_Index_NonScaled))
 
 df.Original <- dplyr::left_join(df.Original, hdi, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)

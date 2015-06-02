@@ -15,9 +15,9 @@ set.seed(5154)
 #' http://www.statoek.wiso.uni-goettingen.de/veranstaltungen/Multivariate/Daten/mvsec5.pdf
 #' http://factominer.free.fr/classical-methods/principal-components-analysis.html
 #' http://www.r-bloggers.com/identifying-records-in-data-frame-a-that-are-not-contained-in-data-frame-b-%E2%80%93-a-comparison/
-# library(FactoMineR)
-# library(clustrd)
-# library(rgl)
+#' library(FactoMineR)
+#' library(clustrd)
+#' library(rgl)
 ################################
 
 #' 'Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
@@ -47,15 +47,8 @@ summary(pc2)
 as.data.frame(round(pc2$rotation, 3))
 
 varimax(pc2$rotation)
-# pc1 <- prcomp(df.Zscore.Imputed, center = TRUE, scale = FALSE)
-# summary(pc1)
-# 
-# t1.1 <- as.data.frame(round(pc1$rotation, 3))
-# t2.1 <- as.data.frame(round(pc2$rotation, 3))
-# t1.1
-# t2.1
-# fun.12(t1.1,t2.1)
-# screeplot(pc, type = "lines")
+
+# screeplot(pc2, type = "lines")
 scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
 
 #' plot(cat.sim.6) <- simpart(df.Original.MinMax, simpledim = 0, cov = FALSE)
@@ -68,7 +61,6 @@ factorAn  # SS is sum of squares
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
 sum(communality)/6 # maybe to consider as a threashold of communality -> never used
-
 
 
 # factorAn564 <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)

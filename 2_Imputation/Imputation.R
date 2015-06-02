@@ -9,10 +9,10 @@ set.seed(5154)
 #' http://www.stat.columbia.edu/~gelman/arm/missing.pdf
 #' http://pj.freefaculty.org/guides/Rcourse/multipleImputation/multipleImputation-1-lecture.pdf
 #' http://www.stefvanbuuren.nl/mi/docs/Utrecht-15MayCourse%20handout.pdf
-# library(mice)
-# library(VIM)
-# library(R2WinBUGS)
-# library(lattice)
+#' library(mice)
+#' library(VIM)
+#' library(R2WinBUGS)
+#' library(lattice)
 ################################################
 
 
