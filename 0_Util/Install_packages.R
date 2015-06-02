@@ -12,8 +12,8 @@ ipak <- function(pkg) {
 # Installation may take very long time (> 15 minutes) !
 # PS: Not all are listed here. 
 packages <- c("Quandl", "stringr", "ggplot2", "fpc", "plyr", "reshape2", "RColorBrewer", "scales", "grid", "mclust", "psych", 
-              "cluster", "dplyr", "rJava", "rvest", "corrplot", "xlsx", "RCurl", "Rcpp", "data.table","coda", "NbClust", "clustrd", 
-              "flexclust", "ellipse", "pmr", "Compind", "lattice", "gridExtra", "grid", "plotflow")
+              "cluster", "dplyr", "rJava", "rvest", "corrplot", "xlsx", "RCurl", "Rcpp", "data.table", "coda", "NbClust", "clustrd", 
+              "flexclust", "ellipse", "pmr", "Compind", "lattice", "gridExtra", "grid")
 ipak(packages)
 
 # Because rJava may print error messages (during or after installation), it is still necessary load it correctly. For
@@ -24,7 +24,7 @@ ipak(packages)
 # Also see readme. Or (it may help) use just < R CMD javareconf >
 
 # Format R scripts everything
-tidy_dir(getwd(), recursive = TRUE) 
+# tidy_dir(getwd(), recursive = TRUE) 
 
 # Get the number of packages installed
 installedPacks <- installed.packages(priority = "NA", noCache = TRUE)

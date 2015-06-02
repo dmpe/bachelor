@@ -1,9 +1,9 @@
 Bachelor's Thesis: The Attractiveness Index of Global Economies
 ========
 
-This repo contains the source code, which I have used for my bachelor's thesis when creating my own composite indicator: [*The Attractiveness Index of Global Economies*](https://dmpe.github.io/PapersAndArticles/). 
+This repo contains **the source code**, which I have used for my bachelor's thesis when creating my own composite indicator: [*The Attractiveness Index of Global Economies*](https://dmpe.github.io/PapersAndArticles/). 
 
-My thesis can be download here <https://dmpe.github.io/PapersAndArticles/> and please feel free to contact me if needed. Any corrections or suggestions may (and probably even will!) be done.
+My thesis can be read here <https://dmpe.github.io/PapersAndArticles/> and please feel free to contact me if needed. Any corrections or suggestions may (and probably even will!) be done.
 
 My website <https://indestat.wordpress.com/contact-me>.
 
@@ -19,7 +19,7 @@ Or, at last use some other packages too: <https://github.com/hadley/readxl>
 
 ## Citation
 
-To quote me, please consider using :
+<u>To quote me, please consider using</u>:
 
 Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bachelor's Thesis, Reutlingen University
 
@@ -30,9 +30,9 @@ Dmitrij Petrov (Jun. 2015), *The Attractiveness Index of Global Economies*, Bach
     author  = {Dmitrij Petrov},
     title   = {The Attractiveness Index of Global Economies},
     school  = {Reutlingen University},
-    year    = 2015,
+    year    = {2015},
     url     = {https://dmpe.github.io/PapersAndArticles/},
-    month   = 6
+    month   = {6}
 }
 ```
 
