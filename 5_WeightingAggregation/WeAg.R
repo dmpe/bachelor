@@ -38,10 +38,6 @@ df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2,
 df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
 df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
 
-# round(factor2SquaredLoadings ,3)
-# sum(factor2SquaredLoadings)
-# round(df.weights, 3)
-
 #' Min-MAX + FA weights
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
 df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
@@ -56,17 +52,3 @@ df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:30)
 minMaxMultiMyChoice.Weights <- t(t(df.Original.MinMax) * c(0.140, 0.170, 0.230, 0.220, 0.130, 0.110))
 df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing = T)
 df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:30))
-
-
-# #' ZSCORE + FA
-# zscoreMultiFA.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * df.weights$UnitScaled)
-# df.Zscore.FA <- sort(rowSums(zscoreMultiFA.Weights), decreasing = T)
-# df.Zscore.FA <- data.frame(Value = df.Zscore.FA, RankZS.FA = seq(1:23))
-
-# #' Zscore + EW
-# zscoreMultiEqual.Weights <- t(t(df.Zscore.ImputedUnempCorrect) * c(rep(1/6, 6)))
-# df.Zscore.EW <- sort(rowSums(zscoreMultiEqual.Weights), decreasing = T)
-# df.Zscore.EW <- data.frame(Value = df.Zscore.EW, RankZS.EW = seq(1:23))
-
-# normalise_ci(nonScaledCompleteDF, c(1:3), c("NEG", "POS", "POS"), method=1)
-# round(df.Original.MinMax, 2)

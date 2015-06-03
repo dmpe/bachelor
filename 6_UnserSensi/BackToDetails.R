@@ -56,25 +56,6 @@ BusinessValue <- cbind(df.BackToDetails$BussEcon / (df.BackToDetails$Education +
 df.BackToDetails.table <- data.frame(cbind(df.BackToDetails$Country), EducatValue, BusinessValue)
 df.BackToDetails.table
 
-###########################
-# what_long3 <- melt(zscoreMultiEqual.Weights, id="Country")  # convert to long format
-# what_long4 <- melt(zscoreMultiFA.Weights, id="Country")  # convert to long format
-# what_long5 <- melt(minMaxMultiEqual.Weights, id="Country")  # convert to long format
-# what_long6 <- melt(minMaxMultiFA.Weights, id="Country")  # convert to long format
-# Var1 is country
-# Var2 is indicator
-# source("http://peterhaschke.com/Code/multiplot.R")
-# e1 <- ggplot(data=what_long3, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-# e2 <- ggplot(data=what_long4, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-# e3 <- ggplot(data=what_long5, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-# e4 <- ggplot(data=what_long6, aes(Var1, fill=Var2, weight=value)) + geom_bar()
-# grid.arrange(e1, e2,e3,e4, ncol = 2, nrow = 2,  main = "Main title")
-# grid.arrange(e1, e2,  main = "Main title")
-# multiplot(e1, e2, e3, e4, cols=2)
-# par(mfrow=c(2,2))
-###########################
-
-
 # This is only for Equal Weighting Results
 
 # df.BackToDetails2 <- as.data.frame(minMaxMultiEqual.Weights)

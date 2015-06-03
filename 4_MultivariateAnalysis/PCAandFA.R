@@ -20,28 +20,6 @@ set.seed(5154)
 #' library(rgl)
 ################################
 
-#' 'Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using
-#' the correlation matrix.'  
-
-#####################################
-#' NOT RECOMMENDED
-#' pcaNOT <- princomp(df.Zscore.Imputed, cor = FALSE, scores = TRUE)
-#' plot(pcaNOT)
-#' summary(pcaNOT)
-#' screeplot(pcaNOT, type = "lines")
-#' scree(df.Zscore.Imputed, factors = TRUE, pc = TRUE)
-#' biplot(pcaNOT, var.axes = TRUE, cex = 0.8, main = "(PCA) Biplot of Countries Data", xlim = c(-0.5, 0.6), ylim = c(-0.3, 0.7), arrow.len = 0.15)
-#' round(pcaNOT$loading, 3)
-#' round(pcaNOT$sdev, 3)
-#' round(pcaNOT$scores, 3)
-#' (pcaNOT$sdev)^2 
-#' sum((pcaNOT$loading[,1])^2) 
-#' eigenvalues 
-#' tmp <- svd(df.Zscore.Imputed)  df.Original.MinMax
-#' tmp
-#####################################
-
-
 pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
 summary(pc2)
 as.data.frame(round(pc2$rotation, 3))
@@ -51,24 +29,12 @@ varimax(pc2$rotation)
 # screeplot(pc2, type = "lines")
 scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
 
-#' plot(cat.sim.6) <- simpart(df.Original.MinMax, simpledim = 0, cov = FALSE)
-#' comp <- data.frame(pc$x[,1:4]) 
-#' plot(comp, pch=16, col=rgb(0,0,0,0.5)) 
-#' plot3d(comp$PC1, comp$PC2, comp$PC3, comp$PC4)
-
 factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
-sum(communality)/6 # maybe to consider as a threashold of communality -> never used
+sum(communality)/6
 
-
-# factorAn564 <- factanal(df.Zscore.Imputed, rotation = "varimax", factors = 2)
-# testing <- data.frame(cbind(MinMax1 = factorAn564$loadings[,1], Zsc = factorAn$loadings[,1], 
-#                             MinMax2 = factorAn564$loadings[,2], Zsc2 = factorAn$loadings[,2]))
-# all.equal(testing$MinMax1, testing$Zsc)
-
-#' promax(loadings(pcaNOT))
 #' promax(loadings(factorAn))
 
 ######################################

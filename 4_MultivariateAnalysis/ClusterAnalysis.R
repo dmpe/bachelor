@@ -96,21 +96,3 @@ gp
 mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Finland", "Germany", "Israel", "Japan", "Korea", 
                            "New Zealand", "Singapore", "Switzerland", "United Kingdom", "United States", "China", "Russia", "Hungary",
                            "France"), 4])
-
-
-################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run "United Arab Emirates",
-# 
-# cluster.bootstrap <- pvclust(df.Zscore.Imputed, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
-# plot(cluster.bootstrap)
-# pvrect(cluster.bootstrap) 
-
-# pamk.best <- pamk(df.Zscore.Imputed)
-# cat("number of clusters estimated by optimum average silhouette width:", pamk.best$nc, "\n")
-# plot(pam(df.Zscore.Imputed, pamk.best$nc))
-
-# fitcas <- cascadeKM(df.Zscore.Imputed, 1, 10, iter = 1000)
-# plot(fitcas, sortg = TRUE, grpmts.plot = TRUE)
-# calinski.best <- as.numeric(which.max(fitcas$results[2,]))
-# cat("Calinski criterion optimal number of clusters:", calinski.best, "\n")
-
-
