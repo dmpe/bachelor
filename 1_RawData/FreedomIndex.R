@@ -1,10 +1,9 @@
 library(stringr)
 library(plyr)
-library(readxl)
+library(xlsx)
 
-# Excel Way
-freedom <- read_excel("1_RawData/DataSources/index2015_data.xlsx", sheet = 1)
-freedom <- plyr::rename(freedom, c("Country Name" = "Country", "2015 Score" = "Freedom_Index", "World Rank" = "RankOverall"), warn_duplicated = F)
+freedom <- read.xlsx("1_RawData/DataSources/index2015_data.xlsx", sheetIndex = 1, endRow = 187)
+freedom <- plyr::rename(freedom, c(Country.Name = "Country", X2015.Score = "Freedom_Index", World.Rank = "RankOverall"), warn_duplicated = F)
 freedom$Country <- str_trim(freedom$Country, side = "both")
 freedom$Country[freedom$Country == "Korea, South"] <- "Korea"
 freedom <- subset(freedom, select = c(Country, Freedom_Index, RankOverall))

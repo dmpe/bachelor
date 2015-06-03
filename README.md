@@ -21,7 +21,7 @@ Or, at last use some other packages too: <https://github.com/hadley/readxl>.
 
 **Then**
 
-Only if you are sure that `rJava` works (e.g. you can load it without getting any errors), only then you can execute first 10 lines of the code in the `6_UnserSensi\BackToDetails.R`. This is basically the starting point to reproduce any data frame. 
+Only if you are sure that `rJava` works (e.g. you can load it without getting any errors), only then you can execute first 10 lines of the code in the `6_UnserSensi\BackToDetails.R`. This is basically the starting point to reproduce any data frames & values. 
 
 ## Citation
 
