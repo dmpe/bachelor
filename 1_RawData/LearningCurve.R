@@ -1,10 +1,10 @@
 library(stringr)
 library(plyr)
-library(xlsx)
+library(readxl)
 
-learningCurveData <- read.xlsx("1_RawData/DataSources/learningcurve.xlsx", sheetIndex = 1, startRow = 18, endRow = 58)
+learningCurveData <- read_excel("1_RawData/DataSources/learningcurve.xlsx", sheet = 1, skip = 6)[1:40,1:5]
 
-learningCurveData <- plyr::rename(learningCurveData, c(NA. = "Country", Overall.Index = "LearningCurve_Index"))
+learningCurveData <- plyr::rename(learningCurveData, c(NULL = "Country", Overall.Index = "LearningCurve_Index"))
 # sapply(learningCurveData, class) # factors -> to char
 
 learningCurveData$Country <- str_trim(learningCurveData$Country, side = "both")
