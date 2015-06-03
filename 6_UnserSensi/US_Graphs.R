@@ -87,36 +87,6 @@ me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. met
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
 
-##################
-
-me2 <- ggplot()
-me2 <- me2 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
-me2 <- me2 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 3, shape=21, fill="white")
-me2 <- me2 + geom_boxplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
-me2 <- me2 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))# + scale_colour_manual(values=c("green - FA weights"))
-me2 <- me2 + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of 3 weighting methods")
-me2
-
-###################
-
-p <- ggplot(meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
-p <- p + geom_boxplot() + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
-p <- p + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
-p <- p + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of given 3 weighting methods")
-p
-
-
-###################
-#' The only disadvantage is that it stores them in a list :(
-df.list <- list(x = meltingOriginal.MM.FA.Subset, y = meltingOriginal.MM.EW.Subset, z = meltingOriginal.MM.MC.Subset)
-for(i in 1:length(df.list)) {
-  df.list[[i]]$Country[df.list[[i]]$Country == "United States"] <- "USA"
-  df.list[[i]]$Country[df.list[[i]]$Country == "United Arab Emirates"] <- "UAE"
-  df.list[[i]]$Country[df.list[[i]]$Country == "United Kingdom"] <- "UK"
-  df.list[[i]]$Country[df.list[[i]]$Country == "Czech Republic"] <- "Czech Rep."
-  df.list[[i]]$Country[df.list[[i]]$Country == "South Africa"] <- "S. Africa"
-}
-
 ######################################################
 
 qwer1 <- melt(df.Original.MM.FA[, c("Country", "Value")],  id = "Country")
