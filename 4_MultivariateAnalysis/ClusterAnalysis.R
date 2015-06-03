@@ -1,5 +1,4 @@
 library(cluster)
-library(NbClust)
 library(ggplot2)
 library(clustrd)
 library(reshape2)
@@ -33,30 +32,6 @@ set.seed(5154)
 #' http://blog.mollietaylor.com/2013/10/table-as-image-in-r.html
 ################################
 
-#' Fix for the plot, using agnes; Later moved to MICE; df.Original.MinMax
-#' df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[,-1], row.names=df.Zscore.Imputed[,1])
-
-#' How many clusters ?
-nc <- NbClust(df.Original.MinMax, distance = "euclidean", method = "ward.D2", index = "all")
-barplot(table(nc$Best.n[1, ]), xlab = "Numer of Clusters", ylab = "Number of Criteria",
-        main = "Number of Clusters according to 23 Criteria")
-
-
-# dfa <- scale(df.Original.MinMax) 
-# pamk(df.Original.MinMax) 
-# wss <- (nrow(df.Original.MinMax)-1)*sum(apply(df.Original.MinMax,2,var)) 
-# for (i in 2:15) { 
-#   wss[i] <- sum(kmeans(df.Original.MinMax,centers=i)$withinss) 
-# } 
-# plot(1:15, wss, type='b', xlab='Number of Clusters', ylab='Within groups sum of squares')
-
-
-#' produces same results, just different technique
-agn <- agnes(x = dist(df.Original.MinMax), method = "ward", metric = "euclidean")
-plot(agn) 
-#' plot(as.dendrogram(agn, hang = -1))
-
-
 #' Hierarchical Clustering 
 euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2")
 plot(euroclust, hang = -1)
@@ -82,15 +57,6 @@ row.names(dataWithCluster[dataWithCluster$klust.cluster=="2",])
 ################
 # [!rownames(df.Original.MinMax) == "United Arab Emirates", ] # To be used when UAE should not be included. Need to be in both rows above
 ################
-
-#' Silhouette plot 
-# sk2 <- silhouette(klust$cl, dist(df.Zscore.Imputed, method = 'euclidean')) 
-# plot(sk2)
-# par(mar = c(5, 10, 3, 2) + 0.1)
-# sk3 <- silhouette(pam(df.Zscore.Imputed, 2))
-# plot(sk3, max.strlen = 30)
-#' K-menas clusters; should be with 'dist'
-#' clusplot(pam(dist(df.Zscore.Imputed), 2), color = TRUE, shade = TRUE, labels = 2)
 
 Developing <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "1", ], mean)
 Advanced <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "2", ], mean)
@@ -132,7 +98,7 @@ mean(df.Original.Imputed[c("Australia", "Canada", "Chile", "Czech Republic", "Fi
                            "France"), 4])
 
 
-################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run   "United Arab Emirates",
+################ To continue, look in 'Normalisation' folder, ->> 'Scale.R' is required to run "United Arab Emirates",
 # 
 # cluster.bootstrap <- pvclust(df.Zscore.Imputed, nboot = 1000, method.dist = "correlation", method.hclust = "ward.D2")
 # plot(cluster.bootstrap)

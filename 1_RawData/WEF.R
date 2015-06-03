@@ -22,6 +22,3 @@ wef <- subset(wef, Country %in% selectedCountries)
 wef$WEF_Score_NonScaled <- as.numeric(levels(wef$WEF_Score)[wef$WEF_Score])
 wef$WEF_Score <- as.numeric(scale(wef$WEF_Score_NonScaled))
 
-# wef$WEF_Score <- as.numeric(scale(wef$WEF_Score_NonScaled)) # sapply(wef, class) wef$WEF_Score2 <-
-# as.numeric(as.character(wef$WEF_Score)) wef <- subset(wef, Country %in% selectedCountries, select=c(Country, Ranking_WEF,
-# WEF_Score)) wef$WEF_Score2 <- as.numeric(scale(wef$WEF_Score2)) 
