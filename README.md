@@ -11,18 +11,17 @@ As a small exercise (before I even started with my work) I have created <http://
 
 ## (rJava) Installation
 
-To install necessary packages, go to `0_Util\Install_packages.R`.
+To install necessary packages, go to `0_Util\Install_packages.R` and read corresponding (and another) `Read Me` file.
 
 The installation process of rJava (on Ubuntu) is quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava> (as of 2015, he seems to have abandoned it). To make `rJava` work, use Google and stackoverflow. 
 
 Always install official java 8 from oracle and (less) *official* "openjdk-8". Don't forget to run R CMD javareconf (-e) too! Maybe this will also help <http://stackoverflow.com/a/21504335>
 
-Or, at last use some other packages too: <https://github.com/hadley/readxl>
+Or, at last use some other packages too: <https://github.com/hadley/readxl>. 
 
 **Then**
 
 Only if you are sure that `rJava` works (e.g. you can load it without getting any errors), only then you can execute first 10 lines of the code in the `6_UnserSensi\BackToDetails.R`. This is basically the starting point to reproduce any data frame. 
-
 
 ## Citation
 
