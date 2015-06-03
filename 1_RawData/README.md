@@ -9,7 +9,7 @@ In my thesis I describe and write only about `rJava` library which is necessary 
 
 all are using this package. For the sake of convinience (and the case something won't work) I have also prepared another implementation of those files using `readxl` package which DOES NOT require `rJava`.
 
-For that the user is asked to unzip `.zip` folder and overwrite those 4 files (make backup somewhere). 
+For that the user is asked to unzip `readXL.zip` folder and overwrite those 4 files (make a backup somewhere too). 
 
 
 
