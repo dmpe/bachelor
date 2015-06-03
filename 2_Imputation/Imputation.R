@@ -3,7 +3,6 @@ set.seed(5154)
 # source("2_Imputation/notUsed/UnsuperRF.R")
 
 ################################################
-#'     
 #' https://stackoverflow.com/questions/25966518/daisy-function-warning-message-nas-introduced-by-coercion
 #' http://www.researchgate.net/post/What_is_the_proper_imputation_method_for_categorical_missing_value
 #' http://www.stat.columbia.edu/~gelman/arm/missing.pdf
@@ -14,19 +13,6 @@ set.seed(5154)
 #' library(R2WinBUGS)
 #' library(lattice)
 ################################################
-
-
-#' This creates new data frame with 'old' column of countries (nat. preserving orders) -> Necessary
-# df.Zscore.Imputed <- df.Zscore
-# df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "Nigeria"] <- -2.1
-# df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "South Africa"] <- -1.9
-# df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "Kenya"] <- -1.5
-# df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "Jordan"] <- -0.5
-# df.Zscore.Imputed$LearningCurve_Index[df.Zscore.Imputed$Country == "United Arab Emirates"] <- -0.2
-
-# df.Zscore.Imputed$Country <- df.Zscore$Country
-# df.Zscore.Imputed <- df.Zscore.Imputed[, c(7, 1, 2, 3, 4, 5, 6)]  # Reorder them
-# df.Zscore.Imputed <- data.frame(df.Zscore.Imputed[, -1], row.names = df.Zscore.Imputed[, 1])
 
 
 #' This is non scaled data frame, containing same values in the joinedDB.6$LearningCurveIndex (only) 
