@@ -8,7 +8,6 @@ selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republi
                           "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", 
                           "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
 
-# see Quandl emails
 Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS", authcode = "GgnxpyUBXHsyQxqp67bY")[1, 2]
 # http://api.worldbank.org/countries/CHN/indicators/SL.UEM.1524.ZS?per_page=1000
 # China <- Quandl('WORLDBANK/CHN_SL_UEM_1524_ZS', authcode="GgnxpyUBXHsyQxqp67bY")[1,2]

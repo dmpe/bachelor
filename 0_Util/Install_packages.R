@@ -24,8 +24,5 @@ ipak(packages)
 
 # Also see readme. Or (it may help) use just < R CMD javareconf >
 
-# Format R scripts everything
-# tidy_dir(getwd(), recursive = TRUE) 
-
 # Get the number of packages installed
 installedPacks <- installed.packages(priority = "NA", noCache = TRUE)

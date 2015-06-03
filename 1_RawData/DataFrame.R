@@ -17,31 +17,6 @@ source("1_RawData/FreedomIndex.R")
 source("1_RawData/WEF.R")
 source("1_RawData/HIndex.R")
 
-
-# df.Zscore <- dplyr::left_join(unemplo, freedom, by = "Country")
-# 
-# df.Zscore <- dplyr::left_join(df.Zscore, wef, by = "Country")
-# df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
-# 
-# df.Zscore <- dplyr::left_join(df.Zscore, learningCurveData, by = "Country")
-# df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
-# df.Zscore <- subset(df.Zscore, select = c(Country, Unemployment, Freedom_Index, WEF_Score, LearningCurve_Index))
-# 
-# df.Zscore <- dplyr::left_join(df.Zscore, CompletionRate, by = "Country")
-# df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
-# 
-# df.Zscore <- dplyr::left_join(df.Zscore, hindex, by = "Country")
-# df.Zscore <- plyr::arrange(df.Zscore, df.Zscore$Country)
-# df.Zscore <- subset(df.Zscore, select = c(Country, Unemployment, Freedom_Index, WEF_Score, 
-#                                             LearningCurve_Index, CompletionRate, H_Index))
-# 
-# 
-# # http://stackoverflow.com/a/10331131
-# sapply(df.Zscore, class)
-
-
-
-
 # Data here are non scaled, they contain 'the real values'.
 
 df.Original <- dplyr::left_join(unemplo, freedom, by = "Country")
