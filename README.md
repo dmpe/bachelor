@@ -9,6 +9,8 @@ My website <https://indestat.wordpress.com/contact-me>.
 
 As a small exercise (before I even started with my work) I have created <http://rpubs.com/F789GH/SingaporesEducation> (BTW. you will need to look <https://gist.github.com/dmpe/b8c3f74d1e937d90b20f> for the code as the link inside is wrong).
 
+There are two branches. The master branch is the default one. However, what I have handed to the university is located under ``. This is also much more cleaned up from the unused comments, mess etc. 
+
 ## rJava Installation
 
 The installation process (on Ubuntu) is quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava> (as of 2015, he seems to have abandoned it). To make rJava work, use Google and stackoverflow. 
