@@ -4,6 +4,8 @@ author: "Dmitrij Petrov (@dmpe)"
 date: "September 30, 2015"
 output: 
   html_document: 
+    fig_height: 7
+    fig_width: 10
     number_sections: yes
     toc: yes
 ---
@@ -16,6 +18,8 @@ The source code can be found at GitHub: <https://github.com/dmpe/bachelor>
 # Libraries
 
 ```{r, include=FALSE}
+library(grid)
+library(gridExtra)
 library(rvest)
 library(plyr)
 library(dplyr)
@@ -30,8 +34,7 @@ library(cluster)
 library(ggplot2)
 library(clustrd)
 library(reshape2)
-library(grid)
-library(gridExtra)
+
 
 set.seed(5154)
 ```
@@ -369,9 +372,6 @@ pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
 summary(pc2)
 as.data.frame(round(pc2$rotation, 3))
 
-varimax(pc2$rotation)
-
-# screeplot(pc2, type = "lines")
 scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
 ```
 
@@ -384,7 +384,6 @@ factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
 communality
-sum(communality)/6 
 ```
 
 
@@ -441,12 +440,9 @@ gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, co
 gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
 gp <- gp + coord_cartesian(ylim = c(10, 105)) + scale_y_continuous(breaks = seq(10, 105, 5))
 gp <- gp + ylab("Mean of each varaible in 2 clusters") + xlab("Indicators") + labs(color = "Types of Countries")
-gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table), gpar.coltext = gpar(cex = 1.2), 
-                                              gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
+gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
 gp
 ```
-
-
 
 # Weighting and aggregation
 
@@ -455,15 +451,6 @@ Based on chapter 2.6, page 34ff.
 ## Weighting based on factor analysis and my own preference
 
 Based on chapter 2.6.1.1, page 36f. 
-
-```{r}
-
-```
-
-
-## Aggregation methods
-
-Based on chapter 2.6.2, page 39f. 
 
 ```{r}
 factor1SquaredLoadings <- factorAn$loadings[, 1]^2
@@ -484,10 +471,7 @@ df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2,
 
 df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
 df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
-
-# round(factor2SquaredLoadings ,3)
-# sum(factor2SquaredLoadings)
-# round(df.weights, 3)
+df.weights
 
 #' Min-MAX + FA weights
 minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
@@ -505,9 +489,241 @@ df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing
 df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:30))
 ```
 
+# Results
+
+## Plot 1
+
+```{r}
+df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
+df.BackToDetails$Country <- rownames(df.BackToDetails) 
+df.BackToDetails.p1 <- df.BackToDetails[, 1:3]
+df.BackToDetails.p1$Country <- rownames(df.BackToDetails.p1) 
+df.BackToDetails.p2 <- df.BackToDetails[, 4:7]
+
+# Sum rowwise
+df.BackToDetails.p2 <- adply(df.BackToDetails.p2, 1, transform, sumEdu = sum(LearningCurve_Index, HDIEducat_Index, H_Index))
+df.BackToDetails.p1 <- adply(df.BackToDetails.p1, 1, transform, sumBuEco = sum(Unemployment, WEF_Score, Freedom_Index))
 
 
+df.BackToDetails <- data.frame(Education = df.BackToDetails.p2$sumEdu, 
+                               BussEcon = df.BackToDetails.p1$sumBuEco, 
+                               Country = df.BackToDetails.p1$Country)
+
+df.BackToDetails$Country <- as.character(df.BackToDetails$Country)
+
+df.BackToDetails$Country[df.BackToDetails$Country == "United States"] <- "USA"
+df.BackToDetails$Country[df.BackToDetails$Country == "United Arab Emirates"] <- "UAE"
+df.BackToDetails$Country[df.BackToDetails$Country == "United Kingdom"] <- "UK"
+df.BackToDetails$Country[df.BackToDetails$Country == "Czech Republic"] <- "Czech Rep."
+df.BackToDetails$Country[df.BackToDetails$Country == "South Africa"] <- "S. Africa"
+df.BackToDetails$Country[df.BackToDetails$Country == "New Zealand"] <- "N. Zealand"
+# df.BackToDetails$Country[df.BackToDetails$Country == "Switzerland"] <- "Swizerl."
+
+df.meltedBackToDetails <- melt(df.BackToDetails, id = "Country")  # convert to long format
+
+e9 <- ggplot(data = df.meltedBackToDetails, aes(reorder(Country, value), fill = variable, weight = value)) + geom_bar()
+e9 <- e9 + coord_cartesian(ylim = c(0, 100)) + scale_y_continuous(breaks = seq(0, 100, 5))
+e9 <- e9 + ggtitle("Bar chart decomposition of the Attractiveness Index (MM.FA)") + scale_fill_discrete(name = "Dimensions")
+e9 <- e9 + ylab("Index Value") + xlab("Countries")
+e9
+
+# Table
+EducatValue <- cbind(df.BackToDetails$Education / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
+BusinessValue <- cbind(df.BackToDetails$BussEcon / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
+
+df.BackToDetails.table <- data.frame(cbind(df.BackToDetails$Country), EducatValue, BusinessValue)
+df.BackToDetails.table
+```
+
+## Plot 2
+
+```{r, echo=FALSE}
+df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
+df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
+df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
+
+meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA")],  id = "Country")
+meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
+meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
+
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.FA.Subset$Country[meltingOriginal.MM.FA.Subset$Country == "South Africa"] <- "S. Africa"
+
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.EW.Subset$Country[meltingOriginal.MM.EW.Subset$Country == "South Africa"] <- "S. Africa"
+
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.MC.Subset$Country[meltingOriginal.MM.MC.Subset$Country == "South Africa"] <- "S. Africa"
 
 
+me1 <- ggplot()
+# green
+me1 <- me1 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
+me1 <- me1 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
+# red
+me1 <- me1 + geom_line(data=meltingOriginal.MM.EW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
+me1 <- me1 + geom_point(data=meltingOriginal.MM.EW.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
+# blue
+me1 <- me1 + geom_line(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable))
+me1 <- me1 + geom_point(data=meltingOriginal.MM.MC.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 4, shape=21, fill="white") 
+# all together
+me1 <- me1 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
+me1 <- me1 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Positions") + xlab("Countries") + labs(color = "We/No methods")
+me1 
+```
 
+
+## Plot 3
+
+```{r, echo=FALSE}
+# all lines are different, doens't have a straight one
+df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
+df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
+
+df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
+df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
+
+# Now melt them all
+meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country") 
+meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Country")
+
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United States"] <- "USA"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Arab Emirates"] <- "UAE"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "United Kingdom"] <- "UK"
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "Czech Republic"] <- "Czech Rep."
+meltingOriginal.MM.FAEWMC.Subset$Country[meltingOriginal.MM.FAEWMC.Subset$Country == "South Africa"] <- "S. Africa"
+
+me3 <- ggplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value, colour = variable, group = variable))
+me3 <- me3 + geom_line() + geom_point(size = 4, shape=21, fill="white")
+me3 <- me3 + coord_cartesian(ylim = c(0, 30)) + scale_y_continuous(breaks = seq(0, 30, 1))
+me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
+me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
+me3
+
+```
+
+
+## Plot 4
+
+```{r, echo=FALSE}
+me2 <- ggplot()
+me2 <- me2 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
+me2 <- me2 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 3, shape=21, fill="white")
+me2 <- me2 + geom_boxplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
+me2 <- me2 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))# + scale_colour_manual(values=c("green - FA weights"))
+me2 <- me2 + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of 3 weighting methods")
+me2
+```
+
+## Plot 5
+
+```{r}
+
+p <- ggplot(meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
+p <- p + geom_boxplot() + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
+p <- p + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
+p <- p + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of given 3 weighting methods")
+p
+
+```
+
+## Plot 6
+
+```{r, echo=FALSE}
+qwer1 <- melt(df.Original.MM.FA[, c("Country", "Value")],  id = "Country")
+qwer1$variable <- as.character(qwer1$variable)
+qwer2 <- melt(df.Original.MM.EW[, c("Country", "Value")],  id = "Country")
+qwer2$variable <- as.character(qwer2$variable)
+qwer3 <- melt(df.Original.MM.MyChoice[, c("Country", "Value")],  id = "Country")
+qwer3$variable <- as.character(qwer3$variable)
+
+sapply(qwer1, class)
+
+qwer1$variable[qwer1$variable == "Value"] <- as.character("RankMM.FA")
+qwer2$variable[qwer2$variable == "Value"] <- "RankMM.EW"
+qwer3$variable[qwer3$variable == "Value"] <- "RankMM.MC"
+
+qwer1$Country[qwer1$Country == "United States"] <- "USA"
+qwer1$Country[qwer1$Country == "United Arab Emirates"] <- "UAE"
+qwer1$Country[qwer1$Country == "United Kingdom"] <- "UK"
+qwer1$Country[qwer1$Country == "Czech Republic"] <- "Czech Rep."
+qwer1$Country[qwer1$Country == "South Africa"] <- "S. Africa"
+
+qwer2$Country[qwer2$Country == "United States"] <- "USA"
+qwer2$Country[qwer2$Country == "United Arab Emirates"] <- "UAE"
+qwer2$Country[qwer2$Country == "United Kingdom"] <- "UK"
+qwer2$Country[qwer2$Country == "Czech Republic"] <- "Czech Rep."
+qwer2$Country[qwer2$Country == "South Africa"] <- "S. Africa"
+
+qwer3$Country[qwer3$Country == "United States"] <- "USA"
+qwer3$Country[qwer3$Country == "United Arab Emirates"] <- "UAE"
+qwer3$Country[qwer3$Country == "United Kingdom"] <- "UK"
+qwer3$Country[qwer3$Country == "Czech Republic"] <- "Czech Rep."
+qwer3$Country[qwer3$Country == "South Africa"] <- "S. Africa"
+
+
+tyr2 <- ggplot()
+tyr2 <- tyr2 + geom_line(data=qwer1, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer1, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + geom_line(data=qwer2, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer2, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + geom_line(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable))
+tyr2 <- tyr2 + geom_point(data=qwer3, aes(reorder(Country, value), value, group = variable, colour=variable), size = 2, shape=21, fill="white") 
+tyr2 <- tyr2 + coord_cartesian(ylim = c(35, 85)) + scale_y_continuous(breaks = seq(30, 85, 2))
+tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Index Value") + xlab("Countries")
+tyr2 
+
+```
+
+## Plot 7
+
+
+```{r, echo=FALSE}
+###################
+# Sources: https://stackoverflow.com/questions/24954624/error-in-download-file-no-such-file-or-directory
+# gdp projections from 2015 IMF
+# https://www.imf.org/external/pubs/ft/weo/2015/01/weodata/index.aspx
+# https://www.imf.org/external/pubs/ft/weo/2015/01/weodata/weorept.aspx?sy=2015&ey=2015&scsm=1&ssd=1&sort=country&ds=.&br=0&pr1.x=49&pr1.y=10&c=512%2C668%2C914%2C672%2C612%2C946%2C614%2C137%2C311%2C962%2C213%2C674%2C911%2C676%2C193%2C548%2C122%2C556%2C912%2C678%2C313%2C181%2C419%2C867%2C513%2C682%2C316%2C684%2C913%2C273%2C124%2C868%2C339%2C921%2C638%2C948%2C514%2C943%2C218%2C686%2C963%2C688%2C616%2C518%2C223%2C728%2C516%2C558%2C918%2C138%2C748%2C196%2C618%2C278%2C624%2C692%2C522%2C694%2C622%2C142%2C156%2C449%2C626%2C564%2C628%2C565%2C228%2C283%2C924%2C853%2C233%2C288%2C632%2C293%2C636%2C566%2C634%2C964%2C238%2C182%2C662%2C453%2C960%2C968%2C423%2C922%2C935%2C714%2C128%2C862%2C611%2C135%2C321%2C716%2C243%2C456%2C248%2C722%2C469%2C942%2C253%2C718%2C642%2C724%2C643%2C576%2C939%2C936%2C644%2C961%2C819%2C813%2C172%2C199%2C132%2C733%2C646%2C184%2C648%2C524%2C915%2C361%2C134%2C362%2C652%2C364%2C174%2C732%2C328%2C366%2C258%2C734%2C656%2C144%2C654%2C146%2C336%2C463%2C263%2C528%2C268%2C923%2C532%2C738%2C944%2C578%2C176%2C537%2C534%2C742%2C536%2C866%2C429%2C369%2C433%2C744%2C178%2C186%2C436%2C925%2C136%2C869%2C343%2C746%2C158%2C926%2C439%2C466%2C916%2C112%2C664%2C111%2C826%2C298%2C542%2C927%2C967%2C846%2C443%2C299%2C917%2C582%2C544%2C474%2C941%2C754%2C446%2C698%2C666&s=PPPPC&grp=0&a=
+###################
+GDPperCapitaIMF <- read.delim("1_RawData/DataSources/GDPIMF.txt")
+GDPperCapitaIMF$X2015 = str_replace_all(GDPperCapitaIMF$X2015, ",", "")
+GDPperCapitaIMF = GDPperCapitaIMF[-188, ]
+GDPperCapitaIMF$X2015 = as.numeric(GDPperCapitaIMF$X2015)
+names(GDPperCapitaIMF)[names(GDPperCapitaIMF) == "X2015"] <- "GDPinDollars"
+
+
+# https://stat.ethz.ch/pipermail/r-help/2011-April/274149.html
+TigersGDP = subset(GDPperCapitaIMF, Country %in% c("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", 
+                                                   "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", 
+                                                   "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey"),
+                   select = c(Country, GDPinDollars))
+
+df.Original.MM.FA.special <- df.Original.MM.FA
+df.Original.MM.FA.special$Country <- rownames(df.Original.MM.FA)
+
+gdpTiger <- dplyr::full_join(TigersGDP, df.Original.MM.FA.special, by = "Country")
+sapply(gdpTiger, class)
+
+
+f18 <- ggplot(data=gdpTiger, aes(x = Value, y = GDPinDollars, label=Country))
+f18 <- f18 + geom_point() + geom_text(aes(label=Country), hjust=0, vjust=0) + stat_smooth(method="lm", se=FALSE)
+f18 <- f18 + coord_cartesian(ylim = c(0, 85000)) + scale_y_continuous(breaks = seq(0, 85000, 5000))
+f18 <- f18 + coord_cartesian(xlim = c(35, 90)) + scale_x_continuous(breaks = seq(35, 90, 2))
+f18 <- f18 + ggtitle("Relationship between GDP and my Attractiveness Index (MM.FA)") + ylab("GDP (PPP) per Capita, 2015")
+f18 <- f18 + xlab("Index Value, score between 35-90")
+f18 
+
+# correlation
+cor(gdpTiger$Value, gdpTiger$GDPinDollars)
+
+```
 
