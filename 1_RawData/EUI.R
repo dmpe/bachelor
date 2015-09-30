@@ -1,7 +1,7 @@
 library(rvest)
 library(plyr)
 
-hdi <- html('http://hdr.undp.org/en/content/education-index') 
+hdi <- read_html('http://hdr.undp.org/en/content/education-index') 
 hdi <- hdi %>%
   html_node('.table') %>% 
   html_table(header = T)

@@ -9,11 +9,11 @@ My website <https://indestat.wordpress.com/contact-me>.
 
 As a small exercise (before I even started with my work) I have created <http://rpubs.com/F789GH/SingaporesEducation> (BTW. you will need to look <https://gist.github.com/dmpe/b8c3f74d1e937d90b20f> for the code as the link inside is wrong).
 
-There are two branches. The master branch is the default one. However, what I have handed to the university is located under ``. This is also much more polished one e.g. from the unused comments, mess etc. 
+There are two branches. The master branch is the default one. However, what I have handed to the university is located under `pro_odevzdani`. This is also much more polished one e.g. from the unused comments, mess etc. 
 
 ## rJava Installation
 
-The installation process (on Ubuntu) is quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava> (as of 2015, he seems to have abandoned it). To make rJava work, use Google and stackoverflow. 
+The installation process (on Ubuntu) is quite pathetic. So take a long breath and submit problems to <https://github.com/s-u/rJava>. To make rJava work, use Google and stackoverflow. 
 
 Always install official java 8 from oracle and less *official* "openjdk-8". Don't forget to run R CMD javareconf (-e) too! Maybe this will also help <http://stackoverflow.com/a/21504335>
 

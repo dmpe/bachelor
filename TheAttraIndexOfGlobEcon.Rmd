@@ -1,0 +1,513 @@
+---
+title: "The Attractiveness Index of Global Economies (Oct. 2015)"
+author: "Dmitrij Petrov (@dmpe)"
+date: "September 30, 2015"
+output: 
+  html_document: 
+    number_sections: yes
+    toc: yes
+---
+# Intro
+
+This is a short `code-summary`, which shows how I have created <i>The Attractiveness Index of Global Economies</i> in my [bachelor thesis](https://dmpe.github.io/PapersAndArticles/thesis/). The ONLY difference with the original text is that this summary uses (kind-of) latest data available as of October 2015 (the thesis was submitted in mid-July 2015).
+
+The source code can be found at GitHub: <https://github.com/dmpe/bachelor>
+
+# Libraries
+
+```{r, include=FALSE}
+library(rvest)
+library(plyr)
+library(dplyr)
+library(stringr)
+library(xlsx)
+library(Quandl)
+library(scales)
+library(corrplot)
+library(ellipse)
+library(psych)
+library(cluster)
+library(ggplot2)
+library(clustrd)
+library(reshape2)
+library(grid)
+library(gridExtra)
+
+set.seed(5154)
+```
+
+# 30 Counties
+```{r}
+selectedCountries <- list("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland",
+                          "Mexico", "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates",
+                          "Australia", "South Africa", "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary",
+                          "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
+
+```
+
+# Data Sources
+
+Based on chapter 2.2, page 15ff. 
+
+## Human Development's Educational Index (UNDP) 
+
+```{r}
+# "Extract-HTML" way
+hdi <- read_html('http://hdr.undp.org/en/content/education-index') 
+hdi <- hdi %>%
+  html_node('.table') %>% 
+  html_table(header = T)
+
+hdi <- hdi[1:187,c("Country", "2013")]
+hdi <- plyr::rename(hdi, c(`2013` = "HDIEducatIndex"))
+
+hdi$Country[hdi$Country == "Korea (Republic of)"] <- "Korea"
+hdi$Country[hdi$Country == "Russian Federation"] <- "Russia"
+hdi$HDIEducatIndex <- as.numeric(hdi$HDIEducatIndex)
+head(hdi)
+```
+
+## Pearson’s Learning Curve Index
+
+```{r}
+# Data as of January 2014
+learningCurveData <- read.xlsx("1_RawData/DataSources/learningcurve.xlsx", sheetIndex = 1, startRow = 18, endRow = 58)
+
+learningCurveData <- plyr::rename(learningCurveData, c(NA. = "Country", Overall.Index = "LearningCurve_Index"))
+# sapply(learningCurveData, class) # factors -> to char
+
+learningCurveData$Country <- str_trim(learningCurveData$Country, side = "both")
+
+learningCurveData$Country[learningCurveData$Country == "South Korea"] <- "Korea"
+learningCurveData$Country[learningCurveData$Country == "Hong Kong-China"] <- "China"
+
+#' delete some columns
+learningCurveData <- learningCurveData[, !(colnames(learningCurveData) %in% c("Cognitive.Skills", "Educational.Attainment", 
+    "Notes", "NA..1", "NA..2"))]
+
+learningCurveData$Ranking_LearningCurve <- seq(1, 40)
+head(learningCurveData)
+```
+
+## The Youth unemployment rate
+
+```{r, echo=TRUE}
+Country = c("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", "Mexico", 
+            "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
+
+Quandl.api_key("GgnxpyUBXHsyQxqp67bY")
+
+Korea <- Quandl("WORLDBANK/KOR_SL_UEM_1524_ZS")[1, 2]
+# http://api.worldbank.org/countries/CHN/indicators/SL.UEM.1524.ZS?per_page=1000
+# China <- Quandl('WORLDBANK/CHN_SL_UEM_1524_ZS')[1,2]
+China <- 10.1
+Germany <- Quandl("WORLDBANK/DEU_SL_UEM_1524_ZS")[1, 2]
+```
+
+```{r, echo=FALSE}
+Switzerland <- Quandl("WORLDBANK/CHE_SL_UEM_1524_ZS")[1, 2]
+Mexico <- Quandl("WORLDBANK/MEX_SL_UEM_1524_ZS")[1, 2]
+Brazil <- Quandl("WORLDBANK/BRA_SL_UEM_1524_ZS")[1, 2]
+Russia <- Quandl("WORLDBANK/RUS_SL_UEM_1524_ZS")[1, 2]
+USA <- Quandl("WORLDBANK/USA_SL_UEM_1524_ZS")[1, 2]
+UAE <- Quandl("WORLDBANK/ARE_SL_UEM_1524_ZS")[1, 2]
+# http://api.worldbank.org/countries/KEN/indicators/SL.UEM.1524.ZS?per_page=1000
+# Kenya <- Quandl('WORLDBANK/KEN_SL_UEM_1524_ZS')[1,2]
+Kenya <- 17.1
+Finland <- Quandl("WORLDBANK/FIN_SL_UEM_1524_ZS")[1, 2]
+NewZeland <- Quandl("WORLDBANK/NZL_SL_UEM_1524_ZS")[1, 2]
+Czech <- Quandl("WORLDBANK/CZE_SL_UEM_1524_ZS")[1, 2]
+Japan <- Quandl("WORLDBANK/JPN_SL_UEM_1524_ZS")[1, 2]
+Chile <- Quandl("WORLDBANK/CHL_SL_UEM_1524_ZS")[1, 2]
+Nigeria <- Quandl("WORLDBANK/NGA_SL_UEM_1524_ZS")[1, 2]
+SA <- Quandl("WORLDBANK/ZAF_SL_UEM_1524_ZS")[1, 2]
+Canada <- Quandl("WORLDBANK/CAN_SL_UEM_1524_ZS")[1, 2]
+Australia <- Quandl("WORLDBANK/AUS_SL_UEM_1524_ZS")[1, 2]
+UK <- Quandl("WORLDBANK/GBR_SL_UEM_1524_ZS")[1, 2]
+Jordan <- Quandl("WORLDBANK/JOR_SL_UEM_1524_ZS")[1, 2]
+Israel <- Quandl("WORLDBANK/ISR_SL_UEM_1524_ZS")[1, 2]
+Singapore <- Quandl("WORLDBANK/SGP_SL_UEM_1524_ZS")[1, 2]
+France <- Quandl("WORLDBANK/FRA_SL_UEM_1524_ZS")[1, 2]
+Indonesia <- Quandl("WORLDBANK/IDN_SL_UEM_1524_ZS")[1, 2]
+Turkey <- Quandl("WORLDBANK/TUR_SL_UEM_1524_ZS")[1, 2]
+Hungary <- Quandl("WORLDBANK/HUN_SL_UEM_1524_ZS")[1, 2]
+Ghana <- Quandl("WORLDBANK/GHA_SL_UEM_1524_ZS")[1, 2]
+Thailand <- Quandl("WORLDBANK/THA_SL_UEM_1524_ZS")[1, 2]
+Colombia <- Quandl("WORLDBANK/COL_SL_UEM_1524_ZS")[1, 2]
+
+
+unemplo <- data.frame(Country = Country, Unemployment_NonScaled = seq(1, 30), stringsAsFactors = FALSE)
+# Unemployment = seq(1, 23),
+unemplo$Unemployment_NonScaled[unemplo$Country == "Korea"] <- Korea
+unemplo$Unemployment_NonScaled[unemplo$Country == "Singapore"] <- Singapore
+unemplo$Unemployment_NonScaled[unemplo$Country == "China"] <- China
+unemplo$Unemployment_NonScaled[unemplo$Country == "Germany"] <- Germany
+unemplo$Unemployment_NonScaled[unemplo$Country == "Switzerland"] <- Switzerland
+unemplo$Unemployment_NonScaled[unemplo$Country == "Mexico"] <- Mexico
+unemplo$Unemployment_NonScaled[unemplo$Country == "Brazil"] <- Brazil
+unemplo$Unemployment_NonScaled[unemplo$Country == "Russia"] <- Russia
+unemplo$Unemployment_NonScaled[unemplo$Country == "United States"] <- USA
+unemplo$Unemployment_NonScaled[unemplo$Country == "United Kingdom"] <- UK
+unemplo$Unemployment_NonScaled[unemplo$Country == "United Arab Emirates"] <- UAE
+unemplo$Unemployment_NonScaled[unemplo$Country == "Australia"] <- Australia
+unemplo$Unemployment_NonScaled[unemplo$Country == "South Africa"] <- SA
+unemplo$Unemployment_NonScaled[unemplo$Country == "Kenya"] <- Kenya
+unemplo$Unemployment_NonScaled[unemplo$Country == "Finland"] <- Finland
+unemplo$Unemployment_NonScaled[unemplo$Country == "Canada"] <- Canada
+unemplo$Unemployment_NonScaled[unemplo$Country == "Israel"] <- Israel
+unemplo$Unemployment_NonScaled[unemplo$Country == "New Zealand"] <- NewZeland
+unemplo$Unemployment_NonScaled[unemplo$Country == "Jordan"] <- Jordan
+unemplo$Unemployment_NonScaled[unemplo$Country == "Czech Republic"] <- Czech
+unemplo$Unemployment_NonScaled[unemplo$Country == "Chile"] <- Chile
+unemplo$Unemployment_NonScaled[unemplo$Country == "Japan"] <- Japan
+unemplo$Unemployment_NonScaled[unemplo$Country == "Nigeria"] <- Nigeria
+unemplo$Unemployment_NonScaled[unemplo$Country == "France"] <- France
+unemplo$Unemployment_NonScaled[unemplo$Country == "Ghana"] <- Ghana
+unemplo$Unemployment_NonScaled[unemplo$Country == "Indonesia"] <- Indonesia
+unemplo$Unemployment_NonScaled[unemplo$Country == "Columbia"] <- Colombia
+unemplo$Unemployment_NonScaled[unemplo$Country == "Turkey"] <- Turkey
+unemplo$Unemployment_NonScaled[unemplo$Country == "Hungary"] <- Hungary
+unemplo$Unemployment_NonScaled[unemplo$Country == "Thailand"] <- Thailand
+
+unemplo$Unemployment <- as.numeric(scale(unemplo$Unemployment_NonScaled))
+unemplo$Unemployment_ZscoreNEGATIVE <- as.numeric(-scale(unemplo$Unemployment_NonScaled))
+
+unemplo <- plyr::arrange(unemplo, unemplo$Country)
+head(unemplo)
+```
+
+## Index of Economic Freedom (Heritage Found./WSJ)
+
+```{r}
+# Excel Way | http://www.heritage.org/index/download
+freedom <- read.xlsx("1_RawData/DataSources/index2015_data.xlsx", sheetIndex = 1, endRow = 187)
+freedom <- plyr::rename(freedom, c(Country.Name = "Country", X2015.Score = "Freedom_Index", World.Rank = "RankOverall"), warn_duplicated = F)
+freedom$Country <- str_trim(freedom$Country, side = "both")
+freedom$Country[freedom$Country == "Korea, South"] <- "Korea"
+freedom <- subset(freedom, select = c(Country, Freedom_Index, RankOverall))
+
+# convert from factor to numeric
+freedom$Freedom_Index <- suppressWarnings(as.numeric(as.character(freedom$Freedom_Index)))
+freedom$RankOverall <- suppressWarnings(as.numeric(as.character(freedom$RankOverall)))
+
+freedom <- subset(freedom, Country %in% selectedCountries, select = c(Country, Freedom_Index, RankOverall))
+
+freedom$Freedom_Index_NonScaled <- freedom$Freedom_Index
+freedom$Freedom_Index <- as.numeric(scale(freedom$Freedom_Index_NonScaled))
+head(freedom)
+```
+
+## WEF's Global Competiveness Index (2015/2016)
+
+```{r}
+wef <- read.xlsx("1_RawData/DataSources/newRMD/GCR_Rankings_2015-2016.xlsx", sheetName = "GCI 2013-2014")[4:147, 1:3]
+wef <- plyr::rename(wef, c("The.Global.Competitiveness.Index.2015.2016.rankings." = "Country", "NA."= "Ranking_WEF", "NA..1" = "WEF_Score"))
+wef$Country <- str_trim(wef$Country, side = "both")
+
+# correct names and convert to numeric
+# https://stackoverflow.com/questions/3418128/how-to-convert-a-factor-to-an-integer-numeric-without-a-loss-of-information
+wef$Country[wef$Country == "Taiwan, China"] <- "Taiwan"
+wef$Country[wef$Country == "Korea, Rep."] <- "Korea"
+wef$Country[wef$Country == "Russian Federation"] <- "Russia"
+
+wef <- subset(wef, Country %in% selectedCountries)
+
+# normalazing on the sample, not population
+wef$WEF_Score_NonScaled <- as.numeric(levels(wef$WEF_Score)[wef$WEF_Score])
+wef$WEF_Score <- as.numeric(scale(wef$WEF_Score_NonScaled))
+head(wef)
+```
+
+## Countries’ H-Index (SCImago)
+
+```{r}
+# http://www.scimagojr.com/countryrank.php?area=0&category=0&region=all&year=all&order=h&min=0&min_type=it as of 30.Sep.2015
+hindex <- read.xlsx("1_RawData/DataSources/newRMD/scimagojr.xlsx", sheetIndex = 1)
+
+# sapply(hindex, class) # factors -> to char
+
+hindex$Country <- str_trim(hindex$Country, side = "both")
+hindex$Country[hindex$Country == "South Korea"] <- "Korea"
+hindex$Country[hindex$Country == "Russian Federation"] <- "Russia"
+
+hindex <- hindex[, !(colnames(hindex) %in% c("Documents", "Citable.documents", "Citations", "Self.Citations", "Citations.per.Document"))]
+hindex <- plyr::rename(hindex, c(H.index = "H_Index"))
+
+hindex <- subset(hindex, Country %in% selectedCountries, select = c(Country, Rank, H_Index))
+
+hindex$H_Index_NonScaled <- hindex$H_Index
+hindex$H_Index <- as.numeric(scale(hindex$H_Index_NonScaled))
+head(hindex)
+```
+
+## Combine all datasets
+
+```{r}
+# Data here are non scaled, they contain 'the real values'.
+
+df.Original <- dplyr::left_join(unemplo, freedom, by = "Country")
+
+df.Original <- dplyr::left_join(df.Original, wef, by = "Country")
+df.Original <- plyr::arrange(df.Original, df.Original$Country)
+
+df.Original <- dplyr::left_join(df.Original, learningCurveData, by = "Country")
+df.Original <- plyr::arrange(df.Original, df.Original$Country)
+df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, 
+                                              Freedom_Index_NonScaled, WEF_Score_NonScaled, LearningCurve_Index))
+
+df.Original <- dplyr::left_join(df.Original, hindex, by = "Country")
+df.Original <- plyr::arrange(df.Original, df.Original$Country)
+
+df.Original <- dplyr::left_join(df.Original, hdi, by = "Country")
+df.Original <- plyr::arrange(df.Original, df.Original$Country)
+df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
+                                              LearningCurve_Index, HDIEducatIndex, H_Index_NonScaled))
+
+# http://stackoverflow.com/a/10331131
+sapply(df.Original, class)
+```
+
+# Imputation of missing values
+
+Based on chapter 2.3, page 20ff. 
+
+> ... I am not going to use any of the abovementioned mechanisms for handling missing data, but will 
+> return to a much simpler method. Namely, given my knowledge, I will choose and assign six values for
+> Nigeria, Kenya, Jordan, Ghana, South Africa and the UAE. On the one hand, this is not a 
+> scientifically good approach as it brings a tangible source of uncertainty on my results. In the 
+> case of large dataset and/or very high rate of missingness it may be even impossible doing so. On 
+> the other hand, if data are not available and the reason is not related to other variables in my 
+> dataset – as it is the case here – it is very hard to impute them in a preferable (‘desired’) way 
+> even with the most advanced statistical models, simply because data do not exist. 
+
+> As result, I decide to assign z-score of -2.1 to Nigeria, -1.9 to South Africa, -1.5 to Kenya,
+> -1 to Ghana, -0.5 to Jordan, and finally -0.2 to the UAE. To conclude the whole chapter, I 
+> would like to point out that the best solution to the problem of missing data is not to have 
+> a problem of missing data. However, this is often not possible and therefore in this chapter
+> I showed several available techniques and finally assigned values to those countries 
+> considering my best (yet also limited) knowledge of their real situation.
+
+Quoted from my thesis, chapter 2.3, page 22f. 
+
+```{r}
+df.Original.Imputed <- df.Original
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Nigeria"] <- -2.1
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "South Africa"] <- -1.9
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Kenya"] <- -1.5
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Ghana"] <- -1.0
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "Jordan"] <- -0.5
+df.Original.Imputed$LearningCurve_Index[df.Original.Imputed$Country == "United Arab Emirates"] <- -0.2
+
+df.Original.Imputed <- data.frame(df.Original.Imputed[, -1], row.names = df.Original.Imputed[, 1])
+```
+
+# Normalisation
+
+Based on chapter 2.4, page 23f. 
+
+> The last normalisation technique, which I want to mention here (also used in the
+> construction of my index), is called min-max normalisation.
+
+> ... I am going to use a range between 0 and 100 and as briefly mentioned in the 
+> chapter about the youth unemployment rate, it will be required to transform its polarity, 
+> i.e. from having the highest number being the worst to having the lowest number being the
+> worst.
+
+Quoted from my thesis, chapter 2.4, page 24. 
+
+```{r}
+#' create a new data frame (df.Original.MinMax) based on the old one (df.Original.Imputed). This 
+#' makes 1:1 copy of the data frame, yet with the different name
+df.Original.MinMax <- df.Original.Imputed
+
+df.Original.MinMax$WEF_Score_NonScaled <- ((100-0)*(df.Original.Imputed$WEF_Score_NonScaled-1)/ (7-1)) + 0
+
+df.Original.MinMax$H_Index_NonScaled <- ((100-0)*(df.Original.Imputed$H_Index_NonScaled-1)/ (1518-1)) + 0
+
+# HDI's Educat. Index is between 0 and 1 -> convert to (by multipling it with) 0-100
+df.Original.MinMax$HDIEducatIndex <- df.Original.Imputed$HDIEducatIndex * 100
+
+#' Unemployment_NonScaled goes into opposite direction, worst South Africa must be the worst, not the best (e.i. that would be 
+#' the logic without this step). 
+df.Original.MinMax$Unemployment_NonScaled = ((100-0)*(df.Original.Imputed$Unemployment_NonScaled-100)/ (0-100)) + 0
+
+#' This normalizes columns of 'LearningCurve_Index' from minValue to maxValue. Beware of the colwise function that will be used on
+#' on the whole data frame (from plyr)!
+#' An assumption is made that although z-score beginngs from -Inf to Inf, I am going to use only a range between +-3.5
+#' 
+#' @param x A data frame
+#' @param minValue A minimal value of the range of the scale (e.g. 0)
+#' @param maxValue A maximal value of the range of the scale (e.g. 100)
+rescaleColumns <- function(x, minValue, maxValue) {
+  scales::rescale(x, to = c(minValue, maxValue), from = range(-3.5:3.5))
+}
+
+df.Original.MinMax$LearningCurve_Index <- plyr::colwise(rescaleColumns)(df.Original.Imputed, 0, 100)[, 4]
+```
+
+# Multivariate Analysis
+
+Based on chapter 2.5, page 24ff. 
+
+## Principal component analysis
+
+Based on chapter 2.5.1, page 25f. 
+
+```{r}
+names(df.Original.MinMax) <- c("Unemployment", "Freedom_Index", "WEF_Score", "LearningCurve_Index", "HDIEducat_Index", "H_Index")
+
+corelationMat2 <- cor(df.Original.MinMax)
+
+colorfun2 <- colorRampPalette(c("#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"))
+corrplot(corelationMat2, method = "number", type = "lower", order = "FPC", col = colorfun2(100)) 
+
+```
+
+
+```{r}
+pc2 <- prcomp(df.Original.MinMax, center = TRUE, scale = FALSE)
+summary(pc2)
+as.data.frame(round(pc2$rotation, 3))
+
+varimax(pc2$rotation)
+
+# screeplot(pc2, type = "lines")
+scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
+```
+
+## Factor analysis
+
+Based on chapter 2.5.2, page 28f. 
+
+```{r}
+factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
+factorAn  # SS is sum of squares 
+communality <- round(cbind(1 - factorAn$uniquenesses), 3)
+communality
+sum(communality)/6 
+```
+
+
+## Cluster analysis (hierarchical clustering)
+
+Based on chapter 2.5.3, page 30ff. 
+
+```{r}
+#' Hierarchical Clustering 
+euroclust <- hclust(dist(df.Original.MinMax, method = "euclidean"), "ward.D2")
+plot(euroclust, hang = -1)
+rect.hclust(euroclust, k = 2, border = "red")  # create border for 2 clusters
+coef.hclust(euroclust) # agglomerative coef.
+```
+
+```{r, echo=FALSE}
+#' Pseudo K-Means - first create wrong clustering and then replace it with the correct one 
+klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
+dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment df.Original.MinMax
+
+# now apply the fix -> will become 19 vs. 11
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Chile"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Hungary"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "Russia"] <- 2
+dataWithCluster$klust.cluster[rownames(dataWithCluster) == "United Arab Emirates"] <- 2
+
+Developing <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "1", ], mean)
+Advanced <- sapply(dataWithCluster[dataWithCluster$klust.cluster == "2", ], mean)
+
+aggregate(df.Original.MinMax, by=list(dataWithCluster$klust.cluster), FUN = mean) # gets cluster mean
+
+dfClustMeans <- data.frame(Developing, Advanced)
+dfClustMeans <- dfClustMeans[1:6, ]
+dfClustMeans$vars <- rownames(dfClustMeans)
+dfClustMeans$vars[dfClustMeans$vars == "Unemployment_NonScaled"] <- "Y. Unemployment"
+dfClustMeans$vars[dfClustMeans$vars == "Freedom_Index_NonScaled"] <- "Freedom Index"
+dfClustMeans$vars[dfClustMeans$vars == "WEF_Score_NonScaled"] <- "WEF's GCI"
+dfClustMeans$vars[dfClustMeans$vars == "LearningCurve_Index"] <- "Learning Curve Index"
+dfClustMeans$vars[dfClustMeans$vars == "HDIEducatIndex"] <- "HDI's Edu. Index"
+dfClustMeans$vars[dfClustMeans$vars == "H_Index_NonScaled"] <- "H-Index"
+
+# sapply(dfClustMeans, class)
+
+dataWithCluster.long <- melt(dfClustMeans)  # convert to long format
+
+# table for the picture
+dataWithCluster.table <- data.frame(cbind(Indicator = dfClustMeans$vars, Difference=round(dfClustMeans$Advanced-dfClustMeans$Developing,1)))
+dataWithCluster.table$Indicator <- as.character(dataWithCluster.table$Indicator)
+dataWithCluster.table$Difference <- as.numeric(levels(dataWithCluster.table$Difference))[dataWithCluster.table$Difference]
+dataWithCluster.table <- dataWithCluster.table[with(dataWithCluster.table, order(Difference)), ]
+row.names(dataWithCluster.table) <- NULL
+
+gp <- ggplot(dataWithCluster.long, aes(x = vars, y = value, group = variable, color = variable)) 
+gp <- gp + geom_line() + geom_point() + ggtitle("Means plot for clusters")
+gp <- gp + coord_cartesian(ylim = c(10, 105)) + scale_y_continuous(breaks = seq(10, 105, 5))
+gp <- gp + ylab("Mean of each varaible in 2 clusters") + xlab("Indicators") + labs(color = "Types of Countries")
+gp <- gp + annotation_custom(grob = tableGrob(as.matrix(dataWithCluster.table), gpar.coltext = gpar(cex = 1.2), 
+                                              gpar.rowtext = gpar(cex = 1.2)), xmin = 0, xmax = 11, ymin = 0, ymax = 48)
+gp
+```
+
+
+
+# Weighting and aggregation
+
+Based on chapter 2.6, page 34ff. 
+
+## Weighting based on factor analysis and my own preference
+
+Based on chapter 2.6.1.1, page 36f. 
+
+```{r}
+
+```
+
+
+## Aggregation methods
+
+Based on chapter 2.6.2, page 39f. 
+
+```{r}
+factor1SquaredLoadings <- factorAn$loadings[, 1]^2
+factor2SquaredLoadings <- factorAn$loadings[, 2]^2
+
+Sum_SFL <- sum(factor1SquaredLoadings) + sum(factor2SquaredLoadings) # + sum(factorAn$loadings[, 3]^2)
+
+FactorWeight1 <- sum(factor1SquaredLoadings)/Sum_SFL
+FactorWeight2 <- sum(factor2SquaredLoadings)/Sum_SFL
+
+df.weights <- data.frame(Factor1ScaledWeight = factor1SquaredLoadings/sum(factor1SquaredLoadings), 
+                         Factor2ScaledWeight = factor2SquaredLoadings/sum(factor2SquaredLoadings))
+
+df.weights$colMax <- apply(df.weights, 1, function(x) max(x[])) # take max values from both columns, yet rowwise!
+
+df.weights$WholeFactorWeight <- c(FactorWeight2, FactorWeight1, FactorWeight2, 
+                                  FactorWeight1, FactorWeight1, FactorWeight1)
+
+df.weights$Multipl <- df.weights$colMax * df.weights$WholeFactorWeight
+df.weights$UnitScaled <- round(df.weights$Multipl / sum(df.weights$Multipl), 4)
+
+# round(factor2SquaredLoadings ,3)
+# sum(factor2SquaredLoadings)
+# round(df.weights, 3)
+
+#' Min-MAX + FA weights
+minMaxMultiFA.Weights <- t(t(df.Original.MinMax) * df.weights$UnitScaled)
+df.Original.MM.FA <- sort(rowSums(minMaxMultiFA.Weights), decreasing = T)
+df.Original.MM.FA <- data.frame(Value = df.Original.MM.FA, RankMM.FA = seq(1:30))
+
+#' Min-MAX + EW
+minMaxMultiEqual.Weights <- t(t(df.Original.MinMax) * c(rep(1/6, 6)))
+df.Original.MM.EW <- sort(rowSums(minMaxMultiEqual.Weights), decreasing = T)
+df.Original.MM.EW <- data.frame(Value = df.Original.MM.EW, RankMM.EW = seq(1:30))
+
+#' Min-MAX + My own choice
+minMaxMultiMyChoice.Weights <- t(t(df.Original.MinMax) * c(0.140, 0.170, 0.230, 0.220, 0.130, 0.110))
+df.Original.MM.MyChoice <- sort(rowSums(minMaxMultiMyChoice.Weights), decreasing = T)
+df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC = seq(1:30))
+```
+
+
+
+
+
+
+
