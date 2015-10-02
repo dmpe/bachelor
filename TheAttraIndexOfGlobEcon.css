@@ -1,9 +1,9 @@
 /* https://stackoverflow.com/questions/24603003/changing-the-maximum-width-of-r-markdown-documents */
-body code {
+code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-body img { 
+img { 
   max-width:100%; 
   height: auto; 
 }

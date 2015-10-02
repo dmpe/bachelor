@@ -37,7 +37,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </script>
 
 
-<link href="data:text/css,%2F%2A%20https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F24603003%2Fchanging%2Dthe%2Dmaximum%2Dwidth%2Dof%2Dr%2Dmarkdown%2Ddocuments%20%2A%2F%0Abody%20code%20%7B%0A%20%20color%3A%20inherit%3B%0A%20%20background%2Dcolor%3A%20rgba%280%2C%200%2C%200%2C%200%2E04%29%3B%0A%7D%0Abody%20img%20%7B%20%0A%20%20max%2Dwidth%3A100%25%3B%20%0A%20%20height%3A%20auto%3B%20%0A%7D%0Abody%20%2Emain%2Dcontainer%20%7B%0A%20%20%20%20max%2Dwidth%3A%201200px%3B%0A%20%20%20%20margin%2Dleft%3A%20auto%3B%0A%20%20%20%20margin%2Dright%3A%20auto%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
+<link href="data:text/css,%2F%2A%20https%3A%2F%2Fstackoverflow%2Ecom%2Fquestions%2F24603003%2Fchanging%2Dthe%2Dmaximum%2Dwidth%2Dof%2Dr%2Dmarkdown%2Ddocuments%20%2A%2F%0Acode%20%7B%0A%20%20color%3A%20inherit%3B%0A%20%20background%2Dcolor%3A%20rgba%280%2C%200%2C%200%2C%200%2E04%29%3B%0A%7D%0Aimg%20%7B%20%0A%20%20max%2Dwidth%3A100%25%3B%20%0A%20%20height%3A%20auto%3B%20%0A%7D%0Abody%20%2Emain%2Dcontainer%20%7B%0A%20%20%20%20max%2Dwidth%3A%201200px%3B%0A%20%20%20%20margin%2Dleft%3A%20auto%3B%0A%20%20%20%20margin%2Dright%3A%20auto%3B%0A%7D%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -513,38 +513,48 @@ df.Original.MM.MyChoice &lt;- data.frame(Value = df.Original.MM.MyChoice, RankMM
 <div id="positions-in-the-ranking" class="section level2">
 <h2><span class="header-section-number">9.1</span> Positions in the ranking</h2>
 <pre class="r"><code>options(width=200)
-cbind(df.Original.MM.FA, df.Original.MM.EW, df.Original.MM.MyChoice)</code></pre>
-<pre><code>##                         Value RankMM.FA    Value RankMM.EW    Value RankMM.MC
-## United States        81.28559         1 81.73690         1 78.16378         1
-## United Kingdom       74.74454         2 74.02857         2 73.02718         2
-## Germany              74.08897         3 73.63900         3 72.77233         3
-## Australia            73.37582         4 72.58905         4 72.68176         4
-## Canada               72.67436         5 72.36282         5 72.42766         5
-## Switzerland          72.01711         6 72.14020         6 72.29755         6
-## Japan                71.79940         7 71.47561         7 71.69392         7
-## New Zealand          70.53898         8 70.14931         8 70.94040         8
-## Korea                70.11033         9 68.61758         9 69.54645         9
-## Singapore            69.60080        10 67.81788        10 68.59841        10
-## Finland              68.52482        11 66.97572        11 68.50636        11
-## Israel               67.36554        12 66.40975        12 66.37787        12
-## France               67.16965        13 65.84362        13 65.15433        13
-## Czech Republic       65.19164        14 62.48992        14 63.05923        14
-## Hungary              60.70704        15 60.78466        15 61.98282        15
-## Russia               59.97743        16 59.15364        16 61.10024        16
-## Chile                58.39898        17 59.04182        17 59.22305        17
-## China                58.06088        18 58.44060        18 58.70745        18
-## United Arab Emirates 57.35967        19 57.77675        19 58.20604        19
-## Jordan               53.59989        20 54.70640        20 54.93691        20
-## Turkey               52.12360        21 53.25526        21 53.25848        21
-## Thailand             50.73381        22 53.04039        22 52.72210        22
-## Mexico               50.29432        23 51.75955        23 52.44613        23
-## Brazil               49.79079        24 51.50423        24 50.80425        24
-## South Africa         49.78692        25 50.11998        25 50.40331        25
-## Colombia             49.44193        26 49.05634        26 49.09498        26
-## Indonesia            46.35889        27 48.06375        27 48.41782        27
-## Ghana                45.62863        28 46.16127        28 46.29082        28
-## Kenya                42.77701        29 46.14419        29 46.15133        29
-## Nigeria              36.85118        30 42.17782        30 41.73881        30</code></pre>
+df.Original.MM.FA$Country &lt;- rownames(df.Original.MM.FA) 
+df.Original.MM.EW$Country &lt;- rownames(df.Original.MM.EW) 
+df.Original.MM.MyChoice$Country &lt;- rownames(df.Original.MM.MyChoice) 
+
+# all lines are different, doens't have a straight one
+df.Original.MM.FAEW &lt;- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= &quot;Country&quot;)
+df.Original.MM.FAEW.Subset &lt;- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
+
+df.Original.MM.FAEWMC &lt;- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= &quot;Country&quot;)
+df.Original.MM.FAEWMC.Subset &lt;- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
+df.Original.MM.FAEWMC.Subset</code></pre>
+<pre><code>##                 Country RankMM.FA RankMM.EW RankMM.MC
+## 1         United States         1         1         1
+## 2        United Kingdom         2         3         4
+## 3               Germany         3         2         2
+## 4             Australia         4         7         8
+## 5                Canada         5         6         7
+## 6           Switzerland         6         5         5
+## 7                 Japan         7         4         3
+## 8           New Zealand         8        10        10
+## 9                 Korea         9         9         9
+## 10            Singapore        10         8         6
+## 11              Finland        11        11        11
+## 12               Israel        12        12        12
+## 13               France        13        13        13
+## 14       Czech Republic        14        14        14
+## 15              Hungary        15        19        19
+## 16               Russia        16        17        17
+## 17                Chile        17        18        18
+## 18                China        18        15        15
+## 19 United Arab Emirates        19        16        16
+## 20               Jordan        20        24        22
+## 21               Turkey        21        22        21
+## 22             Thailand        22        20        20
+## 23               Mexico        23        21        23
+## 24               Brazil        24        23        25
+## 25         South Africa        25        28        28
+## 26             Colombia        26        25        24
+## 27            Indonesia        27        27        27
+## 28                Ghana        28        26        26
+## 29                Kenya        29        29        29
+## 30              Nigeria        30        30        30</code></pre>
 </div>
 <div id="bar-chart-decomposition-of-the-attractiveness-index-mm.fa" class="section level2">
 <h2><span class="header-section-number">9.2</span> Bar chart decomposition of the Attractiveness Index (MM.FA)</h2>

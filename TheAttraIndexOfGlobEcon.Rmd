@@ -497,7 +497,17 @@ df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC
 
 ```{r}
 options(width=200)
-cbind(df.Original.MM.FA, df.Original.MM.EW, df.Original.MM.MyChoice)
+df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
+df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
+df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
+
+# all lines are different, doens't have a straight one
+df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
+df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
+
+df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
+df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
+df.Original.MM.FAEWMC.Subset
 ```
 
 ## Bar chart decomposition of the Attractiveness Index (MM.FA)
@@ -547,10 +557,6 @@ head(df.BackToDetails.table)
 ## Comparison of 3 weighting methods (FA/EW/'my choice')
 
 ```{r, echo=FALSE}
-df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
-df.Original.MM.EW$Country <- rownames(df.Original.MM.EW) 
-df.Original.MM.MyChoice$Country <- rownames(df.Original.MM.MyChoice) 
-
 meltingOriginal.MM.FA.Subset <- melt(df.Original.MM.FA[, c("Country", "RankMM.FA")],  id = "Country")
 meltingOriginal.MM.EW.Subset <- melt(df.Original.MM.EW[, c("Country", "RankMM.EW")],  id = "Country")
 meltingOriginal.MM.MC.Subset <- melt(df.Original.MM.MyChoice[, c("Country", "RankMM.MC")],  id = "Country")
@@ -593,13 +599,6 @@ me1
 ## Comparison of different weights based on Min-Max norm. method
 
 ```{r, echo=FALSE}
-# all lines are different, doens't have a straight one
-df.Original.MM.FAEW <- inner_join(df.Original.MM.FA, df.Original.MM.EW, by= "Country")
-df.Original.MM.FAEW.Subset <- subset(df.Original.MM.FAEW, select=c(Country, RankMM.FA, RankMM.EW))
-
-df.Original.MM.FAEWMC <- inner_join(df.Original.MM.FAEW, df.Original.MM.MyChoice, by= "Country")
-df.Original.MM.FAEWMC.Subset <- subset(df.Original.MM.FAEWMC, select=c(Country, RankMM.FA, RankMM.EW, RankMM.MC))
-
 # Now melt them all
 meltingOriginal.MM.FAEW.Subset <- melt(df.Original.MM.FAEW.Subset, id="Country") 
 meltingOriginal.MM.FAEWMC.Subset <- melt(df.Original.MM.FAEWMC.Subset, id = "Country")
