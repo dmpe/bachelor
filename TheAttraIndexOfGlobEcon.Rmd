@@ -96,6 +96,7 @@ head(learningCurveData)
 ## The Youth unemployment rate
 
 ```{r, echo=TRUE}
+options(width=200)
 Country = c("Korea", "Singapore", "Japan", "Chile", "Czech Republic", "Nigeria", "China", "Germany", "Switzerland", "Mexico", 
             "Jordan", "Brazil", "Russia", "United States", "United Kingdom", "United Arab Emirates", "Australia", "South Africa", "Kenya", "Finland", "Canada", "Israel", "New Zealand", "France", "Hungary", "Thailand", "Indonesia", "Ghana", "Colombia", "Turkey")
 
@@ -109,6 +110,7 @@ Germany <- Quandl("WORLDBANK/DEU_SL_UEM_1524_ZS")[1, 2]
 ```
 
 ```{r, echo=FALSE}
+options(width=200)
 Switzerland <- Quandl("WORLDBANK/CHE_SL_UEM_1524_ZS")[1, 2]
 Mexico <- Quandl("WORLDBANK/MEX_SL_UEM_1524_ZS")[1, 2]
 Brazil <- Quandl("WORLDBANK/BRA_SL_UEM_1524_ZS")[1, 2]
@@ -266,9 +268,6 @@ df.Original <- dplyr::left_join(df.Original, hdi, by = "Country")
 df.Original <- plyr::arrange(df.Original, df.Original$Country)
 df.Original <- subset(df.Original, select = c(Country, Unemployment_NonScaled, Freedom_Index_NonScaled, WEF_Score_NonScaled, 
                                               LearningCurve_Index, HDIEducatIndex, H_Index_NonScaled))
-
-# http://stackoverflow.com/a/10331131
-sapply(df.Original, class)
 ```
 
 # Imputation of missing values
@@ -380,6 +379,7 @@ scree(df.Original.MinMax, factors = TRUE, pc = TRUE)
 Based on chapter 2.5.2, page 28f. 
 
 ```{r}
+options(width=200)
 factorAn <- factanal(df.Original.MinMax, rotation = "varimax", factors = 2)
 factorAn  # SS is sum of squares 
 communality <- round(cbind(1 - factorAn$uniquenesses), 3)
@@ -400,6 +400,7 @@ coef.hclust(euroclust) # agglomerative coef.
 ```
 
 ```{r, echo=FALSE}
+options(width=200)
 #' Pseudo K-Means - first create wrong clustering and then replace it with the correct one 
 klust <- kmeans(dist(df.Original.MinMax, method = "euclidean"), 2, nstart = 25, iter.max = 100)
 dataWithCluster <- data.frame(df.Original.MinMax, klust$cluster)  # append cluster assignment df.Original.MinMax
@@ -453,6 +454,7 @@ Based on chapter 2.6, page 34ff.
 Based on chapter 2.6.1.1, page 36f. 
 
 ```{r}
+options(width=200)
 factor1SquaredLoadings <- factorAn$loadings[, 1]^2
 factor2SquaredLoadings <- factorAn$loadings[, 2]^2
 
@@ -491,9 +493,10 @@ df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC
 
 # Results
 
-# Positions in the ranking
+## Positions in the ranking
 
 ```{r}
+options(width=200)
 cbind(df.Original.MM.FA, df.Original.MM.EW, df.Original.MM.MyChoice)
 ```
 
@@ -676,7 +679,7 @@ me2
 
 ## Relationship between GDP and my Attractiveness Index (MM.FA)
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ###################
 # Sources: https://stackoverflow.com/questions/24954624/error-in-download-file-no-such-file-or-directory
 # gdp projections from 2015 IMF
@@ -700,8 +703,6 @@ df.Original.MM.FA.special <- df.Original.MM.FA
 df.Original.MM.FA.special$Country <- rownames(df.Original.MM.FA)
 
 gdpTiger <- dplyr::full_join(TigersGDP, df.Original.MM.FA.special, by = "Country")
-sapply(gdpTiger, class)
-
 
 f18 <- ggplot(data=gdpTiger, aes(x = Value, y = GDPinDollars, label=Country))
 f18 <- f18 + geom_point() + geom_text(aes(label=Country), hjust=0, vjust=0) + stat_smooth(method="lm", se=FALSE)
@@ -712,7 +713,7 @@ f18 <- f18 + xlab("Index Value, score between 35-90")
 f18 
 ```
 
-correlation ?
+Is there any correlation between two values
 
 ```{r}
 cor(gdpTiger$Value, gdpTiger$GDPinDollars) 
