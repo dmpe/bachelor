@@ -88,3 +88,9 @@ x.1[! x.1p %in% x.2p, ]
 }
 
 
+options(rstudio.markdownToHTML =
+          function(inputFile, outputFile) {     
+            require(markdown)
+            markdownToHTML(inputFile, outputFile, stylesheet='TheAttraIndexOfGlobEcon.css')  
+          }
+)

@@ -1,0 +1,14 @@
+/* https://stackoverflow.com/questions/24603003/changing-the-maximum-width-of-r-markdown-documents */
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+body .main-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,23 +1,25 @@
 ---
 title: "The Attractiveness Index of Global Economies (Oct. 2015)"
 author: "Dmitrij Petrov (@dmpe)"
-date: "September 30, 2015"
+date: "`r format(Sys.time(), '%b %d %Y')`"
 output: 
   html_document: 
+    css: TheAttraIndexOfGlobEcon.css
     fig_height: 7
     fig_width: 10
     number_sections: yes
     toc: yes
+    mathjax: null
 ---
 # Intro
 
 This is a short `code-summary`, which shows how I have created <i>The Attractiveness Index of Global Economies</i> in my [bachelor thesis](https://dmpe.github.io/PapersAndArticles/thesis/). The ONLY difference with the original text is that this summary uses (kind-of) latest data available as of October 2015 (the thesis was submitted in mid-July 2015).
 
-The source code can be found at GitHub: <https://github.com/dmpe/bachelor>
+The source code for the thesis can be found at GitHub: <https://github.com/dmpe/bachelor>
 
 # Libraries
 
-```{r, include=FALSE}
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
 library(grid)
 library(gridExtra)
 library(rvest)
@@ -34,7 +36,6 @@ library(cluster)
 library(ggplot2)
 library(clustrd)
 library(reshape2)
-
 
 set.seed(5154)
 ```
@@ -363,7 +364,6 @@ corelationMat2 <- cor(df.Original.MinMax)
 
 colorfun2 <- colorRampPalette(c("#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"))
 corrplot(corelationMat2, method = "number", type = "lower", order = "FPC", col = colorfun2(100)) 
-
 ```
 
 
@@ -491,7 +491,13 @@ df.Original.MM.MyChoice <- data.frame(Value = df.Original.MM.MyChoice, RankMM.MC
 
 # Results
 
-## Plot 1
+# Positions in the ranking
+
+```{r}
+cbind(df.Original.MM.FA, df.Original.MM.EW, df.Original.MM.MyChoice)
+```
+
+## Bar chart decomposition of the Attractiveness Index (MM.FA)
 
 ```{r}
 df.BackToDetails <- as.data.frame(minMaxMultiFA.Weights)
@@ -532,10 +538,10 @@ EducatValue <- cbind(df.BackToDetails$Education / (df.BackToDetails$Education + 
 BusinessValue <- cbind(df.BackToDetails$BussEcon / (df.BackToDetails$Education + df.BackToDetails$BussEcon))
 
 df.BackToDetails.table <- data.frame(cbind(df.BackToDetails$Country), EducatValue, BusinessValue)
-df.BackToDetails.table
+head(df.BackToDetails.table)
 ```
 
-## Plot 2
+## Comparison of 3 weighting methods (FA/EW/'my choice')
 
 ```{r, echo=FALSE}
 df.Original.MM.FA$Country <- rownames(df.Original.MM.FA) 
@@ -581,8 +587,7 @@ me1 <- me1 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + 
 me1 
 ```
 
-
-## Plot 3
+## Comparison of different weights based on Min-Max norm. method
 
 ```{r, echo=FALSE}
 # all lines are different, doens't have a straight one
@@ -608,35 +613,9 @@ me3 <- me3 + coord_cartesian(ylim = c(0, 30)) + scale_y_continuous(breaks = seq(
 me3 <- me3 + ggtitle("Comparison of different weights based on Min-Max norm. method") 
 me3 <- me3 + ylab("Position in Ranking") + xlab("Countries") + labs(color = "Weights")
 me3
-
 ```
 
-
-## Plot 4
-
-```{r, echo=FALSE}
-me2 <- ggplot()
-me2 <- me2 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
-me2 <- me2 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 3, shape=21, fill="white")
-me2 <- me2 + geom_boxplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
-me2 <- me2 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))# + scale_colour_manual(values=c("green - FA weights"))
-me2 <- me2 + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of 3 weighting methods")
-me2
-```
-
-## Plot 5
-
-```{r}
-
-p <- ggplot(meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
-p <- p + geom_boxplot() + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))
-p <- p + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
-p <- p + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of given 3 weighting methods")
-p
-
-```
-
-## Plot 6
+## Comparison of 3 weighting methods (FA/EW/'my choice')
 
 ```{r, echo=FALSE}
 qwer1 <- melt(df.Original.MM.FA[, c("Country", "Value")],  id = "Country")
@@ -646,7 +625,7 @@ qwer2$variable <- as.character(qwer2$variable)
 qwer3 <- melt(df.Original.MM.MyChoice[, c("Country", "Value")],  id = "Country")
 qwer3$variable <- as.character(qwer3$variable)
 
-sapply(qwer1, class)
+# sapply(qwer1, class)
 
 qwer1$variable[qwer1$variable == "Value"] <- as.character("RankMM.FA")
 qwer2$variable[qwer2$variable == "Value"] <- "RankMM.EW"
@@ -681,11 +660,21 @@ tyr2 <- tyr2 + geom_point(data=qwer3, aes(reorder(Country, value), value, group 
 tyr2 <- tyr2 + coord_cartesian(ylim = c(35, 85)) + scale_y_continuous(breaks = seq(30, 85, 2))
 tyr2 <- tyr2 + ggtitle("Comparison of 3 weighting methods (FA/EW/'my choice')") + ylab("Index Value") + xlab("Countries")
 tyr2 
-
 ```
 
-## Plot 7
+## Box Plot of 3 weighting methods
 
+```{r, echo=FALSE}
+me2 <- ggplot()
+me2 <- me2 + geom_line(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), colour="green")
+me2 <- me2 + geom_point(data=meltingOriginal.MM.FA.Subset, aes(reorder(Country, value), value, colour=variable, group = variable), size = 3, shape=21, fill="white")
+me2 <- me2 + geom_boxplot(data=meltingOriginal.MM.FAEWMC.Subset, aes(reorder(Country, value), value))
+me2 <- me2 + coord_cartesian(ylim = c(0, 35)) + scale_y_continuous(breaks = seq(0, 35, 1))# + scale_colour_manual(values=c("green - FA weights"))
+me2 <- me2 + ylab("Position in Ranking") + xlab("Countries") + ggtitle("Box Plot of 3 weighting methods")
+me2
+```
+
+## Relationship between GDP and my Attractiveness Index (MM.FA)
 
 ```{r, echo=FALSE}
 ###################
@@ -721,9 +710,11 @@ f18 <- f18 + coord_cartesian(xlim = c(35, 90)) + scale_x_continuous(breaks = seq
 f18 <- f18 + ggtitle("Relationship between GDP and my Attractiveness Index (MM.FA)") + ylab("GDP (PPP) per Capita, 2015")
 f18 <- f18 + xlab("Index Value, score between 35-90")
 f18 
+```
 
-# correlation
-cor(gdpTiger$Value, gdpTiger$GDPinDollars)
+correlation ?
 
+```{r}
+cor(gdpTiger$Value, gdpTiger$GDPinDollars) 
 ```
 
